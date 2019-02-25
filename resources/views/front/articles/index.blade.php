@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-{{$articles->title}}
+  {{ app('setting') ? app('setting')->name_site:''}} - {{ isset($articles->title)?$articles->title:''}}
 @endsection
 @section('content')
 
@@ -8,10 +8,10 @@
 <!--Page Banner-->
 <section class="page-banner" style="background-image:url({{url('/')}}/front/images/background/bg-banner.jpg);">
 	<div class="auto-container">
-    	<h1>{{$articles->title}}</h1>
+    	<h1>{{ isset($articles->title)?$articles->title:''}}</h1>
         <div class="bread-crumb">
         	<ul class="clearfix">
-                <li class="active">{{$articles->title}}</li>
+                <li class="active">{{ isset($articles->title)?$articles->title:''}}</li>
             </ul>
         </div>
     </div>
@@ -19,126 +19,103 @@
 <!--End Page Banner-->
     
     
-    <!--Sidebar Page-->
-    <div class="sidebar-page-container">
+<!--Sidebar Page-->
+<div class="sidebar-page-container">
         <div class="auto-container">
             <div class="row clearfix">
-				
                 <!--Content Side-->
                 <div class="content-side col-lg-8 col-md-8 col-sm-12 col-xs-12">
                 	<!--News Details-->
                     <section class="news-details">
                     	<!--News Block Two-->
-						<div class="news-block-two">
-							<div class="inner-box">
-								<div class="image">
-									<img src="{{Storage::url($articles->image)}}" alt="" />
-									<div class="post-date">{{$articles->created_at->diffForHumans()}}</div>
-								</div>
-								<div class="lower-box">
-									<h3>>{{$articles->title}}</h3>
-									<div class="text">
-                                    	{!! $articles->description !!}
+                        <div class="news-block-two">
+                        	<div class="inner-box">
+                        		<div class="image">
+
+                        		<img src="{{Storage::url($articles->image)}}" alt="" />
+
+                        	    <div class="post-date">{{ isset($articles->created_at) ? $articles->created_at->diffForHumans()  : '' }}</div>
+                        		</div>
+
+                        		<div class="lower-box">
+                        			<h3>>{{ isset($articles->title) ? $articles->title : '' }}</h3>
+
+                        			<div class="text">
+                                    	{!! isset($articles->description) ? $articles->description : '' !!}
                                     </div>
+
                                     <!--Options-->
                                     <div class="post-options">
                                         <div class="clearfix">
-                                            <div class="post-tags">
-                                                <strong>Tags:</strong>
-                                                @if(count($tagsArticles) > 0) 
-                                                    @foreach($tagsArticles as $tagsArticles)
-                                                     <a href="{{url('/')}}/tags/{{$tagsArticles->slug}}">{{$tagsArticles->name}}</a>
-                                                    @endforeach
-                                                @endif
-                                             </div>
                                             <div class="share-options">
-
-                                                   <ul>
+                                                <ul>
                                                     <li><strong>Share :</strong></li>
                                                     
-                                    <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{url('/')}}/article/{{ $articles->slug }}"><span class="fa fa-facebook-f"></span></a>
-                                    </li>
+                                                    <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{url('/')}}/article/{{ isset($articles->slug) ? $articles->slug : '' }}"><span class="fa fa-facebook-f"></span></a>
+                                                    </li>
                                                     
-                                                    <li><a target="_blank"   href="https://twitter.com/intent/tweet?text={{url('/')}}/article/{{ $articles->slug }}"><span class="fa fa-twitter"></span></a></li>
+                                                    <li><a target="_blank"   href="https://twitter.com/intent/tweet?text={{url('/')}}/article/{{ isset($articles->slug) ? $articles->slug : '' }}"><span class="fa fa-twitter"></span></a></li>
                                                     
-                                                    <li><a target="_blank"  href="https://plus.google.com/share?app=110&url={{url('/')}}/article/{{ $articles->slug }}"><span class="fa fa-google-plus"></span></a></li>
+                                                    <li><a target="_blank"  href="https://plus.google.com/share?app=110&url={{url('/')}}/article/{{ isset($articles->slug) ? $articles->slug : '' }}"><span class="fa fa-google-plus"></span></a></li>
                                                     
-                                                 <li><a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{url('/')}}/article/{{ $articles->slug }}
-                                                "><span class="fa fa-linkedin"></span></a></li>
+                                                     <li><a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{url('/')}}/article/{{ isset($articles->slug) ? $articles->slug : '' }}
+                                                    "><span class="fa fa-linkedin"></span></a></li>
                                                     
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-								</div>
-							</div>
-						</div>
-                        
-
-
-
-
+                        		</div>
+                        	</div>
+                        </div>
                         <!--Comments Area-->
                         <div class="comments-area">
-                        	<div class="group-title"><h2>{{count($commentsArticle)}} Comments</h2></div>
+                        	<div class="group-title"><h2>{{ $commentsArticle->count() }} Comments</h2></div>
                             
                             <div class="comment-box table">
                             	<!--Comment-->
-                            @if(count($commentsArticle) > 0)
+                            @if($commentsArticle->count() > 0)
                                 @foreach($commentsArticle as $commentArticle)
                                   @include('front.articles.comments');
                                 @endforeach
-                            @endif
-                            
-                               
-                                
+                            @endif 
                             </div>
                         </div>
-
-                                <div class="ajax-load2 text-center" style="display:none">
-                                 <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Wait</p>
-                                </div>
-
+                        <!-- demo Wait loader image -->
+                        <div class="ajax-load2 text-center" style="display:none">
+                          <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Wait</p>
+                        </div>
                         <!-- Comment Form -->
                         <div class="comment-form">
-    
                             <div class="group-title">
                             	<h2>Post A Comment</h2>
-                            </div>
-    
+                            </div> 
                             <!--Comment Form-->
                             <form method="post" action="blog.html">
-                            	
                                 <div class="row clearfix">
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
                                         <input type="text" name="name" placeholder="Name" >
                                     </div>
                                 </div>
-                                    
-                                    
                                 <div class="form-group">
                                     <textarea name="commet" placeholder="Comments"></textarea>
                                 </div>
-                                    
                                 <div class="form-group">
                                     <button   id="send" class="theme-btn btn-style-two" type="submit" name="submit-form">Post Comment</button>
                                 </div>
-                                
                             </form>
-    
                         </div><!--End Comment Form -->
                         
-                    </section>
+                     </section>
                 </div>
                 <!--Content Side-->
-                
                 <!--Sidebar-->
-                  {!! app('sidbar') !!}
+                   {!! app('sidbar') !!}
                 <!--Sidebar-->
-
             </div>
-        </div>
-    </div>
+     </div>
+</div>
+
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 
 <script type="text/javascript">
@@ -149,7 +126,7 @@ $(document).ready(function(){
                  //$('.dataTables_empty').remove();
                 var name         =  $('input[name="name"]').val();
                 var title        =  $('textarea[name="commet"]').val();
-                var article_id   =  {{$articles->id}};
+                var article_id   =  {{ $articles->id }};
                    
 
                 if((name == '') || (title == '') )

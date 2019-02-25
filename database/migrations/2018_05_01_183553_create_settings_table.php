@@ -19,11 +19,8 @@ class CreateSettingsTable extends Migration
             $table->string('email');
             $table->string('phone');
             $table->text('address');
-
             $table->string('logo',50);
             $table->string('fav',50);
-
-
             $table->text('brief_site');
             $table->text('meta_keywords');
             $table->text('meta_description');

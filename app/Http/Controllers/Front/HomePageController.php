@@ -12,9 +12,9 @@ use App\TagArticle;
 use App\Subscribe;
 use Validator;
 use App\CommentArticle;
+
 class HomePageController extends Controller
 {
-
     public function Welcome()
     {
       $articles        = Article::orderBy('created_at','desc')->paginate(10);
@@ -27,6 +27,7 @@ class HomePageController extends Controller
       $articles        = Article::where('categorie_id',$categorie->id)->orderBy('created_at','desc')->paginate(10);
       return view('front.categories.index',compact('categorie','articles'));
     }
+
 
     public function Article($slug)
     {
@@ -42,50 +43,6 @@ class HomePageController extends Controller
     }
 
 
-    public function Tags($slug)
-    {
-      $tag             = Tag::where('slug',$slug)->first();
-      $tagArticle      = TagArticle::where('tag_id',$tag->id)->get();
-      $articles        = [];
-      foreach ($tagArticle as $key => $value) 
-      {
-         $articles[] =  Article::where('id',$value->article_id)->orderBy('created_at','desc')->first();
-      }
-      return view('front.tags.index',compact('tag','articles'));
-    }
-
-
-
-    public function Search(Request $request)
-    {
-      $search          =  $request->get('search');
-	    $articles        =  Article::where('title','like','%'.$search.'%')->orderby('id')->paginate(2);
-      return view('front.search.index',compact('tag','articles'));
-    }
-
-
-
-    public function Subscribe(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
-         'email' => 'required',
-        ]);
-        if ($validator->fails()) {
-          return response()->json(['code'=>202]);  
-        }
-
-        $subscribe = Subscribe::get();
-         foreach ($subscribe as $value) 
-         {
-            if($request->email == $value->email)
-            {
-             return response()->json(['code'=>500]);      
-            }
-         }
-
-        Subscribe::create($request->all());
-        return response()->json(['code'=>200]);  
-    }
 
     public function Comments(Request $request)
   	{

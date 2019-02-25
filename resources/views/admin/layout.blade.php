@@ -207,7 +207,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             </li>
 
 
-                            <li class="nav-item  {{Request::is('dashboard/users*')?'active':''}}" >
+                            <li class="nav-item  {{ Request::is('dashboard/users*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/users" >
                                     <i class="fa fa-user"></i>
                                     <span class="title"> Users </span>
