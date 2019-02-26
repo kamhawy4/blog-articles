@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 
 class UsersController extends Controller
 {
@@ -24,7 +24,6 @@ class UsersController extends Controller
 	    $update =  User::findOrFail($id);
     	return view('admin.users.edit',compact('update'));
     }
-
 
 	public function store(Request $request)
 	{

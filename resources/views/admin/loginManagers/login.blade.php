@@ -21,7 +21,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
     <head>
         <meta charset="utf-8" />
-        <title>Metronic Admin Theme #2 | User Login 5</title>
+        <title>Metronic Admin Theme #2 | Managers Login 5</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="Preview page of Metronic Admin Theme #2 for " name="description" />
@@ -59,8 +59,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 </div>
                 <div class="col-md-6 login-container bs-reset mt-login-5-bsfix">
                     <div class="login-content">
-                        <h1>Metronic Admin Login</h1>
-                        <p> Lorem ipsum dolor sit amet, coectetuer adipiscing elit sed diam nonummy et nibh euismod aliquam erat volutpat. Lorem ipsum dolor sit amet, coectetuer adipiscing. </p>
+                        <h1>Managers Admin Login</h1>
                         <form  class="login-form" method="post" action="{{ url('dashboard/login') }}">
                             {{ csrf_field() }}
                             <div class="alert alert-danger display-hide">

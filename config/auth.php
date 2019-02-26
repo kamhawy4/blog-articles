@@ -72,12 +72,12 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => App\Models\User::class,
         ],
 
         'managers' => [
             'driver' => 'eloquent',
-            'model' => App\Mangaers::class,
+            'model' => App\Models\Mangaers::class,
         ],
 
         // 'users' => [

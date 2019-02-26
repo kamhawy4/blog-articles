@@ -4,12 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-use App\Settings;
-use App\Article;
-use App\Categories;
-use App\Tag;
 use Auth;
-use App\User;
+use App\Models\Settings,App\Models\Article,App\Models\Categories,App\Models\User;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**

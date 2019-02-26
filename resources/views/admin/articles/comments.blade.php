@@ -1,6 +1,6 @@
 @extends('admin.layout')
 @section("title")
-Articles Comment
+ Article Comment
 @endsection
 @section("content")
 
@@ -11,7 +11,7 @@ Articles Comment
             <div class="portlet-title">
                 <div class="caption font-dark">
                     <i class="fa fa-file-text-o font-dark"></i>
-                    <span class="caption-subject bold">Table of Articles Comment</span>
+                    <span class="caption-subject bold">Table of Article Comment</span>
                 </div>
             </div>
           {!! Form::open(['method' =>'POST']) !!}
@@ -30,25 +30,20 @@ Articles Comment
                         </tr>
                     </thead>
                     <tbody>
-                   @foreach($commentArticles as  $commentArticle) 
-                        <tr class="odd gradeX">
-                            <td>
-                                {{$commentArticle->id}}
-                            </td>
-                            <td> {{$commentArticle->title}} </td>
-
-                           <td>
-
-
-                            <div class="col-md-6">
-                               <a class=" btn btn-danger"  onclick='return confirm("Are you sure you want to delete this comment?")' href="{{url('/') }}/dashboard/comments/delete/{{$commentArticle->id}}" >Delete
-                               </a>
-                            </div> 
-                             
-                              
-                            </td>
-                        </tr>
-                        @endforeach
+                      @if($commentArticles->count() > 0)
+                           @foreach($commentArticles as  $commentArticle) 
+                                <tr class="odd gradeX">
+                                    <td>{{$commentArticle->id}}</td>
+                                    <td>{{$commentArticle->title}}</td>
+                                   <td>
+                                       <div class="col-md-6">
+                                           <a class=" btn btn-danger"  onclick='return confirm("Are you sure you want to delete this comment?")' href="{{url('/') }}/dashboard/comments/delete/{{$commentArticle->id}}" >Delete
+                                           </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                       @endif
 
                     </tbody>
                 </table>
@@ -57,7 +52,6 @@ Articles Comment
         </div>
         <!-- END EXAMPLE TABLE PORTLET-->
     </div>
-
 </div>
 
 @endsection

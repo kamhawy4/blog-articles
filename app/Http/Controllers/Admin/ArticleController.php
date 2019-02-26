@@ -5,14 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-use App\Categories;
-use App\Article;
-use App\CommentArticle;
-use Storage;
-use Session;
-use Image;
-use Auth;
-use DB;
+
+use App\Models\Categories,App\Models\Article,App\Models\CommentArticle;
+
+use Storage,Session,Image,Auth,DB;
 
 
 class ArticleController extends Controller
@@ -26,36 +22,25 @@ class ArticleController extends Controller
     public function create()
     {  
        $categorys =  Categories::get(); 
-       $tags      =  Tag::get(); 
-       return view('admin.articles.create',compact('categorys','tags'));   
+       return view('admin.articles.create',compact('categorys'));   
     }
 
     public function edit($id)
     {
 	   $update     =  Article::findOrFail($id);
 	   $categorys  =  Categories::get();
-       $tags       =  Tag::get(); 
-       $tagArticle =  TagArticle::where('article_id',$id)->get(); 
-       $arrayArtical = [];
-       foreach ($tagArticle as  $value) 
-       {
-       	 $arrayArtical[] = $value->tag_id;
-       }
-       return view('admin.articles.edit',compact('update','categorys','tags','tagArticle','arrayArtical'));
+       return view('admin.articles.edit',compact('update','categorys'));
     }
 
 
 	public function store(Request $request)
-	{	
-
-
-		$this   -> validate($request,[
+	{
+		$this->validate($request,[
 	      'title'        =>'required|max:255|unique:articles',
 	      'description'  =>'required',
 	      'categorie_id' =>'required',
 	      'img'          =>'required|image|mimes:jpg,jpeg,png,gif|max:22400',
 	    ]);
-
 
 	    if($request->hasFile('img'))
 	    {
@@ -76,17 +61,6 @@ class ArticleController extends Controller
         $request  -> merge(['author'=>Auth::guard('managers')->user()->username]); 
         $request  -> merge(['slug'=>$this->make_slug($request->title)]); 
 	    $article  =  Article::create($request->all());
-
-		if($request->has('tag_id')) 
-		{
-		  foreach($request->tag_id as $tag_id) 
-		  {
-           $tagArticle             = new TagArticle;
-           $tagArticle->article_id = $article->id;
-           $tagArticle->tag_id     = $tag_id;
-           $tagArticle->save();
-		  }	
-		}
 
 	    session()->flash('success','Article added successfully');
 	    return redirect()->to(url('dashboard/articles'));
@@ -121,18 +95,6 @@ class ArticleController extends Controller
 		}
 
 		$update    -> update($request->all());
-
-		if($request->has('tag_id')) 
-		{
-          DB::table('tag_articles')->where('article_id',$id)->delete();
-		  foreach($request->tag_id as $tag_id) 
-		  {
-           $tagArticle             = new TagArticle;
-           $tagArticle->article_id = $id;
-           $tagArticle->tag_id     = $tag_id;
-           $tagArticle->save();
-		  }	
-		}
 
 		session()  -> flash('success','Modified successfully');
 		return redirect()->to(url('dashboard/articles'));

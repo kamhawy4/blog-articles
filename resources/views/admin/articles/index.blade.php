@@ -1,6 +1,6 @@
 @extends('admin.layout')
-@section("title")
-Articles
+@section("title") 
+All Articles
 @endsection
 @section("content")
 
@@ -16,17 +16,13 @@ Articles
             </div>
             
           {!! Form::open(['method' =>'POST','action' => 'Admin\ArticleController@DeleteArticle']) !!}
+
             <div class="portlet-body">
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
-
-                    
                         	<a href="{{url('/')}}/dashboard/articles/create" class="btn btn-primary">Add a new Article</a>
-                       
-                          <button id="delete-delete" class="btn btn-danger">Delete selected
-                          </button>
-                      
+                            <button id="delete-delete" class="btn btn-danger">Delete selected</button>
                         </div>
                     </div>
                 </div>
@@ -39,56 +35,51 @@ Articles
                                     <span></span>
                                 </label>
                             </th>
-                            <th> Article Title </th>
+                            <th> Title </th>
                             <th> Image </th>
                             <th> Categorie </th>
                             <th> Options </th>
                         </tr>
                     </thead>
                     <tbody>
-                   @foreach($articles as $article) 
-                        <tr class="odd gradeX">
-                            <td>
-                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                    <input  type="checkbox"  name='check[]'  class="checkboxes" value="{{$article->id}}" />
-                                    <span></span>
-                                </label>
-                            </td>
-                            <td> {{$article->title}} </td>
+                        @if($articles->count() > 0)
+                           @foreach($articles as $article) 
+                                <tr class="odd gradeX">
+                                    <td>
+                                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
+                                            <input  type="checkbox"  name='check[]'  class="checkboxes" value="{{$article->id}}" />
+                                            <span></span>
+                                        </label>
+                                    </td>
 
-                            @if(count($article->image) > 0)
-                            <td class="info product-block">
+                                    <td>{{$article->title}} </td>
 
-                            <img src="{{Storage::url($article->image)}}" width="100" style="border:1px solid #c4c4c4" height="70">
-                            </td>
-                            @else
-                              <td class="info"><img src="" width="100" style="border:1px solid #c4c4c4" height="70">
-                              </td>
-                            @endif
+                                    @if(count($article->image) > 0)
+                                        <td class="info product-block"><img src="{{Storage::url($article->image)}}" width="100" style="border:1px solid #c4c4c4" height="70"></td>
+                                    @else
+                                        <td class="info"><img src="" width="100" style="border:1px solid #c4c4c4" height="70"></td>
+                                    @endif
 
-                            <td> {{$article->GetNameCategorie->name}} </td>
-                           <td>
+                                    <td> {{$article->GetNameCategorie->name}} </td>
 
-                            <div class="col-md-4">
-                               <a class=" btn btn-info"  href="{{url('/') }}/dashboard/articles/comments/{{$article->id}}" >Comments
-                               </a>
-                            </div> 
+                                    <td>
+                                        <div class="col-md-4">
+                                           <a class=" btn btn-info"  href="{{url('/') }}/dashboard/articles/comments/{{$article->id}}" >Comments
+                                           </a>
+                                        </div> 
 
-                            <div class="col-md-4">
-                               <a class=" btn btn-danger"  onclick='return confirm("Are you sure you want to delete this article?")' href="{{url('/') }}/dashboard/delete/articles/{{$article->id}}" >delete
-                               </a>
-                            </div> 
-                             
-                                  
-                            
-                            <div class="col-md-4">
-                                <a  href="{{url('/')}}/dashboard/articles/{{$article->id}}/edit"><li class="btn btn-primary">Edit</li></a>
-                            </div>
-                              
-                            </td>
-                        </tr>
-                        @endforeach
+                                        <div class="col-md-4">
+                                           <a class=" btn btn-danger"  onclick='return confirm("Are you sure you want to delete this article?")' href="{{url('/') }}/dashboard/delete/articles/{{$article->id}}">Delete
+                                           </a>
+                                        </div>
 
+                                        <div class="col-md-4">
+                                            <a  href="{{url('/')}}/dashboard/articles/{{$article->id}}/edit"><li class="btn btn-primary">Edit</li></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>
@@ -96,7 +87,6 @@ Articles
         </div>
         <!-- END EXAMPLE TABLE PORTLET-->
     </div>
-
 </div>
 
 @endsection

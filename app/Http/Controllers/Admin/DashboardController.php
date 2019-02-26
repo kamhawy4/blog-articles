@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Mangaers,App\Article,App\Categories;
+
+use App\Models\Mangaers,App\Models\Article,App\Models\Categories;
+
 class DashboardController extends Controller
 {
     public function index()
