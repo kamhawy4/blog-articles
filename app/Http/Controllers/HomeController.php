@@ -20,15 +20,10 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     *  logout user
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $users =  User::where('id','!=',Auth::user()->id)->get(); 
-        return view('home',compact('users'));
-    }
 
     public function logout()
     {

@@ -7,11 +7,13 @@ use App\Http\Controllers\Controller;
 use Auth;
 class LoginManagersController extends Controller
 {
+    // return page login Manager
     public function index()
     {
     	return view('admin.loginManagers.login');
     }
 
+    // Function login Manager
     public function LoginManagers()
     {
     	$email    = request('email');

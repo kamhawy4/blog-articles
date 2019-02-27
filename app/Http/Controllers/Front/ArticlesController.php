@@ -9,6 +9,9 @@ use App\Models\Settings,App\Models\Article,App\Models\Categories,App\Models\Comm
 class ArticlesController extends Controller
 {
     
+    /**
+    * @return Article by slug and Comments Article by article id 
+    */
     public function Article($slug)
     {
       $articles        = Article::where('slug',$slug)->first();
@@ -17,16 +20,21 @@ class ArticlesController extends Controller
     }
 
 
-
+    /** 
+    * create Comments Article
+    */
     public function Comments(Request $request)
   	{
   		$this->validate($request,[
   	      'name'   =>'required',
   	      'title'  =>'required',
   	    ]);
-          
+         
+        // create Comment Article 
   	    $commentArticle       =  CommentArticle::create($request->all());
-        $html                 =  view('front.articles.comments',compact('commentArticle'))->render();
+
+        // render page  article comments create and returm it
+        $html   =  view('front.articles.comments',compact('commentArticle'))->render();
   	    return response()->json(['status'=> true,'result'=>$html]);
   	}
 

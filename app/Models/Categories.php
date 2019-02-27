@@ -10,6 +10,9 @@ class Categories extends Model
 
     protected $fillable = ['name','slug'];
    
+    /**
+    * @return  Articls by categorie_id
+    */
     public function getArticls()
 	{
 	  return $this->hasMany('App\Models\Article','categorie_id');

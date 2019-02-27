@@ -12,24 +12,29 @@ use App\Http\Requests\Categories\UpdateCategoriesRequest;
 
 class CategoriesController extends Controller
 {
+
+   // Return view page index Categories And Return All Categories
    public function index()
     {
       $categorys =  Categories::get(); 
       return view('admin.category.index',compact('categorys'));
     }
-
+   
+	// Return view page create Categorys 
     public function create()
     {  
         return view('admin.category.create');   
     }
 
+	// Return view page Edit Categorie And Return categorie by id
     public function edit($id)
     {
 	    $update =  Categories::findOrFail($id);
         return view('admin.category.edit',compact('update'));
     }
 
-
+  
+	// Store Categorie 
 	public function store(StoreCategoriesRequest $request)
 	{
 	    $categorys =  Categories::get();
@@ -44,23 +49,28 @@ class CategoriesController extends Controller
 		    }
 		}
         
+        // Merge Slug and Categories Create  
         $request      -> merge(['slug'=>$this->make_slug($request->name)]); 
 	    $allCategory  =  Categories::create($request->all());
+
+        // render page  category create and returm it
         $html         =  view('admin.category.add',compact('allCategory'))->render();
 	    return response()->json([ 'status'=> true,'code'=>200,'result'=>$html]);
 	}
 
-
+	// update Article 
 	public function update($id,UpdateCategoriesRequest $request)
 	{
 		$update    =   Categories::findOrFail($id); 
 		$request   ->  merge(['slug'=>$this->make_slug($request->name)]); 
 		$update    ->  update($request->all());
+
+        // render page  category edit and returm it
         $html       =  view('admin.category.edit',compact('update'))->render();
 		return response()->json(['status'=>true,'code'=>200,'result'=>$html]);
 	}
 
-
+    // destroy Categories by id 
 	public function destroy($id)
 	{
 		$delete  =  Categories::findOrFail($id);
@@ -69,7 +79,7 @@ class CategoriesController extends Controller
 		return redirect()->to(url('dashboard/categorys'));
 	}
 
-
+    // destroy Multi Categories by id
 	public function deleteCategorys(Request $request)
 	{
         if($request->check != '')

@@ -9,6 +9,9 @@ use App\Models\Mangaers,App\Models\Article,App\Models\Categories;
 
 class DashboardController extends Controller
 {
+	/**
+	* @return count Mangaers and Article and Categories
+	*/
     public function index()
     {
         $mangaers       =  Mangaers::count();

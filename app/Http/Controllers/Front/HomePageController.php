@@ -9,12 +9,18 @@ use Validator;
 
 class HomePageController extends Controller
 {
+    /**
+    * @return all Articles ::  paginate 10 page 
+    */ 
     public function Welcome()
     {
       $articles        = Article::orderBy('created_at','desc')->paginate(10);
-    	return view('welcome',compact('settings','articles'));
+    	return view('welcome',compact('articles'));
     }
 
+   /**
+   * @return Categories by slug  Articles by id categorie : paginate 10 page 
+   */
     public function Categorie($slug)
     {
       $categorie       = Categories::where('slug',$slug)->first();

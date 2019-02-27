@@ -10,7 +10,10 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
+    
+    /**
+    * @return slug 
+    */  
     public function make_slug($string = null, $separator = "-") 
     {
         if (is_null($string)) {
