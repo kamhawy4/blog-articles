@@ -1,8 +1,6 @@
 ## Laravel 5 example ##
 
-For Laravel 5.3 improved version look at [this repository](https://github.com/bestmomo/laravel5-3-example).
-
-**Laravel 5 example** is a tutorial application for Laravel 5.2 (in french [there](http://laravel.sillo.org/laravel-5/)).
+For Laravel 5.5 [here](https://laravel.com/docs/5.5/).
 
 ### Installation ###
 
@@ -12,7 +10,6 @@ For Laravel 5.3 improved version look at [this repository](https://github.com/be
 * `php artisan key:generate`
 * Create a database and inform *.env*
 * `php artisan migrate --seed` to create and populate tables
-* Inform *config/mail.php* for email sends
 * `php artisan vendor:publish` to publish filemanager
 * `php artisan serve` to start the app on http://localhost:8000/
 
