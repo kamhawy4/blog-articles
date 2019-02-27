@@ -19,15 +19,4 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     *  logout user
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-    public function logout()
-    {
-        Auth::logout(); return back();
-    }
-
 }
