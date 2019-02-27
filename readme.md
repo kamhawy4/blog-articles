@@ -28,5 +28,5 @@ For Laravel 5.5 [here](https://laravel.com/docs/5.5/).
 ### Tricks ###
 
 To test application the database is seeding with users :
-
-* Administrator : email = admin@admin.com, password = 123456
+* Url BackEnd : http://localhost:8000/dashboard
+* Manager : email = admin@admin.com, password = 123456
