@@ -25,13 +25,13 @@
                 <!--News Posts-->
                 <section class="news-posts">
                     <!--News Block Two-->
-                     @if($articles->count() > 0)
+                     @if(!$articles->isEmpty())
                       @foreach($articles as $article)
                             <div class="news-block-two">
                                 <div class="inner-box">
                                     <div class="image">
 
-                                        <a href="{{url('/')}}/article/{{$article->slug}}"><img src="{{Storage::url($article->image)}}" alt="{{$article->title}}" /></a>
+                                        <a href="{{url('/')}}/article/{{$article->slug}}"><img src="{{url('/')}}/uploads/articles/{{$article->image}}" alt="{{$article->title}}" /></a>
 
                                         <a href="{{url('/')}}/article/{{$article->slug}}" class="overlay-link"><span class="txt">Read More <span class="icon flaticon-arrows-6"></span></span></a>
 
@@ -54,7 +54,7 @@
                     <!-- Styled Pagination -->
                     <div class="styled-pagination">
                         <ul>
-                            @if($articles->count() > 0)
+                            @if(!$articles->isEmpty())
                               <li>{{ $articles->links() }}</li>
                             @endif
                         </ul>

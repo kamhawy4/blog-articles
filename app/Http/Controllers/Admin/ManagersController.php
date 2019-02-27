@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
+use App\Http\Requests\Users\StoreUsersRequest;
+use App\Http\Requests\Users\UpdateUsersRequest;
 use App\Models\Mangaers;
 use Auth;
 
@@ -28,12 +31,10 @@ class ManagersController extends Controller
     }
 
 
-	public function store(Request $request)
+	public function store(StoreUsersRequest $request)
 	{
 	    $this->validate($request,[ 
-	    'name'      => 'required|max:255',
-	    'email'     => 'required|max:255|unique:mangaers|email',
-	    'password'  => 'required|min:6',
+
 	    ]);
 
     	$request   ->  merge(['password' => bcrypt($request->password)]); 
@@ -44,14 +45,8 @@ class ManagersController extends Controller
 	}
 
 
-	public function update($id,Request $request)
-	{
-
-		$this      -> validate($request,[ 
-		'name'     => 'required|max:255',
-		'email'    => 'required|max:255|email',
-		]);
-		
+	public function update($id,UpdateUsersRequest $request)
+	{	
 		$update    =  Mangaers::findOrFail($id); 
 	    if($request->has('password')){
     	$request   ->  merge(['password' => bcrypt($request->password)]);

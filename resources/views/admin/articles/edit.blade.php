@@ -53,11 +53,11 @@ Edit Article
                       </div>
 
                    
-                      @if(count($update) != 0 && $update->image != '')
+                      @if($update->count() != 0 && $update->image != '')
                         <div class="col-md-12" >
                           <div class="box box-success">
                             <div class="box-body text-center">
-                             <img style="max-width: 80%; border:1px solid #cecece" src="{{Storage::url($update->image)}}">
+                             <img style="max-width: 80%; border:1px solid #cecece" src="{{url('/')}}/uploads/articles/{{$update->image}}">
                             </div>
                           </div>
                         </div>

@@ -12,6 +12,6 @@ class Categories extends Model
    
     public function getArticls()
 	{
-	  return $this->hasMany('App\Article','categorie_id');
+	  return $this->hasMany('App\Models\Article','categorie_id');
 	}
 }

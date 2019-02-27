@@ -87,7 +87,7 @@ Categories
                     </tr>
                 </thead>
                 <tbody  class="alldata">
-                 @if($categorys->count() > 0)
+                 @if(!$categorys->isEmpty())
                    @foreach($categorys as $category) 
                         <tr  id="tr-type{{$category->id}}" class="odd gradeX">
                             <td>
@@ -132,28 +132,27 @@ Categories
 
 <script type="text/javascript">
      $(document).ready(function(){
-
-          $('#save-edit').click(function(e){
-            e.preventDefault();
+          $('#save-edit').click(function(e){ e.preventDefault();
             var name  =  $('#message-text2').val();
-
              if(name == '')
              {
                alert('You can not add empty values');
                return false;
              }
+            var category_id = $('input[name="idedit"]').val();
 
-            var category_id =  $('input[name="idedit"]').val();
             $.ajax({
               url:'{{url('/')}}/dashboard/categorys/'+category_id,
               type:'PUT',
               datatype:'json',
               data:{name,category_id,"_token":"{{csrf_token()}}"},
+
               success:function(data){
-                if(data.code == 200) {
-                  $('#tr-type'+category_id).replaceWith('<tr id="tr-type'+category_id+'" class="odd gradeX"><td><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input  type="checkbox"  name="check[]" class="checkboxes" value="'+category_id+'" /><span></span></label></td><td>'+name+'</td><td><div class="actions"><div class="btn-group"><a class="btn btn-sm green dropdown-toggle" href="javascript:;" data-toggle="dropdown"> Options <i class="fa fa-angle-down"></i></a><ul   class="dropdown-menu pull-right"><li><a data-id="'+category_id+'" data-ty='+name+'class="edit-items"  data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-pencil"></i> Edit </a></li></ul></div></div></td></tr>');
-                     $('input[name="type"]').val('');
-                     $("#msg").fadeIn().delay(3000).fadeOut(); 
+
+                 if(data.status == true){
+                    $('#tr-type'+category_id).replaceWith(data.result);
+                    $('input[name="categray"]').val(' ');
+                    $("#msg").fadeIn().delay(3000).fadeOut(); 
                   }
 
                   if(data.code == 404) {
@@ -161,7 +160,6 @@ Categories
                   $("#failed").fadeIn().delay(3000).fadeOut();
                   }       
               }
-
             });
           });
           });
@@ -183,44 +181,51 @@ Categories
 
 <script type="text/javascript">
 
-$(document).ready(function(){
-             $('#send').click(function(e){
-              e.preventDefault();
-                 $('.dataTables_empty').remove();
+  $(document).ready(function() {
+
+        $('#send').click(function(e){e.preventDefault();
+
+                $('.dataTables_empty').remove();
+                
                 var name   =  $('input[name="categray"]').val();
 
                 if(name == '')
                 {
-                	alert('You can not add empty values');
-                	return false;
+                  alert('You can not add empty values');
+                  return false;
                 }
 
-              $.ajax({
-                url:'{{url('/')}}/dashboard/categorys',
-                type:'post',
-                dataType:'json',
-                data:{name,"_token": "{{ csrf_token() }}"},
-                success:function(data)
-                {
-                  if(data.code == 300)
-                  { 
-                  	alert('This value already exists');
-                	  return false;
-                  }
+                $.ajax({
 
-                  if(data.code == 200) { 
-                  $("#msg").fadeIn().delay(3000).fadeOut();
-                  $(".alldata").append('<tr id="tr-type'+data.id_category+'"  class="odd gradeX"><td><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input  type="checkbox"  name="check[]" class="checkboxes" value="'+data.id_category+'" /><span></span></label></td><td>'+data.category+'</td><td><div class="actions"><div class="btn-group"><a class="btn btn-sm green dropdown-toggle" href="javascript:;" data-toggle="dropdown"> Options<i class="fa fa-angle-down"></i></a><ul   class="dropdown-menu pull-right"><li><a data-id="'+data.id_category+'" data-ty="'+data.category+'" class="edit-items"  data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-pencil"></i> Edit </a></li></ul></div></div></td></tr>');
-                   $('input[name="categray"]').val(' ');
+                  url:'{{url('/')}}/dashboard/categorys',
+                  type:'post',
+                  dataType:'json',
+                  data:{name,"_token": "{{ csrf_token() }}"},
+
+                  success:function(data)
+                  {
+                    if(data.code == 300)
+                    { 
+                      alert('This value already exists');
+                      return false;
+                    }
+
+                    if(data.status == true)
+                    {
+                      $('.table').prepend(data.result);
+                      $('input[name="categray"]').val(' ');
+                      $("#msg").fadeIn().delay(3000).fadeOut();
+                    }
+
+                    if(data.code == 404) 
+                    {
+                     $('input[name="categray"]').val(' ');
+                     $("#failed").fadeIn().delay(3000).fadeOut();
+                    }
                   }
-                  if(data.code == 404) {
-                   $('input[name="categray"]').val(' ');
-                   $("#failed").fadeIn().delay(3000).fadeOut();
-                  }
-                }
-               });
-               });
-              });  
+             });
+        });
+  });  
 </script>
 
 

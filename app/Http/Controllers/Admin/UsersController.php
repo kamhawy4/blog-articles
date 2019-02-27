@@ -1,9 +1,11 @@
- <?php
+<?php
 
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Users\StoreUsersRequest;
+use App\Http\Requests\Users\UpdateUsersRequest;
 use App\Models\User;
 
 class UsersController extends Controller
@@ -25,30 +27,17 @@ class UsersController extends Controller
     	return view('admin.users.edit',compact('update'));
     }
 
-	public function store(Request $request)
+	public function store(StoreUsersRequest $request)
 	{
-	    $this->validate($request,[ 
-	    'name'      => 'required|max:255',
-	    'email'     => 'required|max:255|unique:users|email',
-	    'password'  => 'required|min:6',
-	    ]);
-
     	$request   ->  merge(['password' => bcrypt($request->password)]); 
-
 	    User::create($request->all());
 	    session()->flash('save','The Users has been successfully added');
 	    return redirect()->to(url('dashboard/users'));
 	}
 
 
-	public function update($id,Request $request)
-	{
-
-		$this      -> validate($request,[ 
-		'name'     => 'required|max:255',
-		'email'    => 'required|max:255|email',
-		]);
-		
+	public function update($id,UpdateUsersRequest $request)
+	{	
 		$update    =  User::findOrFail($id); 
 	    if($request->has('password')){
     	$request   ->  merge(['password' => bcrypt($request->password)]);

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-
 use App\Models\Categories;
+
+use App\Http\Requests\Categories\StoreCategoriesRequest;
+use App\Http\Requests\Categories\UpdateCategoriesRequest;
 
 class CategoriesController extends Controller
 {
@@ -28,12 +30,8 @@ class CategoriesController extends Controller
     }
 
 
-	public function store(Request $request)
+	public function store(StoreCategoriesRequest $request)
 	{
-		$this->validate($request,[
-	      'name'  =>'required',
-	    ]);
-
 	    $categorys =  Categories::get();
 	    if(count($categorys) > 0) 
 	    {
@@ -46,24 +44,20 @@ class CategoriesController extends Controller
 		    }
 		}
         
-        $request   -> merge(['slug'=>$this->make_slug($request->name)]); 
-	    $category  = Categories::create($request->all());
-	    return response()->json([ 'status'     => true,'code'=>200,
-	    	                      'category'   => $category->name,
-	    	                      'id_category'=> $category->id]);
+        $request      -> merge(['slug'=>$this->make_slug($request->name)]); 
+	    $allCategory  =  Categories::create($request->all());
+        $html         =  view('admin.category.add',compact('allCategory'))->render();
+	    return response()->json([ 'status'=> true,'code'=>200,'result'=>$html]);
 	}
 
 
-	public function update($id,Request $request)
+	public function update($id,UpdateCategoriesRequest $request)
 	{
-		$this->validate($request,[
-	      'name'  =>'required',
-	    ]);
-   
 		$update    =   Categories::findOrFail($id); 
 		$request   ->  merge(['slug'=>$this->make_slug($request->name)]); 
 		$update    ->  update($request->all());
-		return response()->json(['status'=>true,'code'=>200]);
+        $html       =  view('admin.category.edit',compact('update'))->render();
+		return response()->json(['status'=>true,'code'=>200,'result'=>$html]);
 	}
 
 

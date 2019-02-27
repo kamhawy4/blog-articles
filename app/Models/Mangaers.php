@@ -11,7 +11,7 @@ class Mangaers extends Authenticatable
 	protected  $table   = 'mangaers';
 
     protected $fillable = [
-        'name', 'email', 'password','image','phone'
+        'name', 'email', 'password','phone'
     ];
 
     /**

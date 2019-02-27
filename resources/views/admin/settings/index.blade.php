@@ -59,7 +59,7 @@ Settings
                         <label for="address" class="col-md-1 control-label">Address</label>
                         <div class="col-md-4">
                             <div class="input-icon right">
-                                <input value="{{ ($setting  != null ? $setting->address: old('address') ) }} " name="address" type="text" class="form-control" id="address" placeholder="Address"> 
+                                <input value="{{ ($setting  != null ? $setting->address: old('address') ) }}" name="address" type="text" class="form-control" id="address" placeholder="Address"> 
                                 <span class="text-danger">{{ $errors->first('address') }}</span>
 
                             </div>
@@ -106,7 +106,7 @@ Settings
                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                 <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> 
                                        @if(!empty($setting->logo))
-                                        <img src="{{Storage::url($setting->logo)}}" alt="" title="">
+                                        <img src="{{url('/')}}/uploads/logo/{{$setting->logo}}" alt="" title="">
                                        @endif
                                 </div>
                                 <div>
@@ -131,9 +131,8 @@ Settings
                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                 <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> 
                                    @if(!empty($setting->fav))
-                                    <img src="{{Storage::url($setting->fav)}}" alt="" title="">
+                                    <img src="{{url('/')}}/uploads/fav/{{$setting->fav}}" alt="" title="">
                                   @endif
-
                                 </div>
                                 
                                 <div>

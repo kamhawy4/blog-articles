@@ -8,8 +8,8 @@
 <link href="{{url('/')}}/front/css/style.css" rel="stylesheet">
 <link href="{{url('/')}}/front/css/responsive.css" rel="stylesheet">
 
-<link rel="shortcut icon" href="{{Storage::url(app('setting') ? app('setting')->fav:'')}}" type="image/x-icon">
-<link rel="icon" href="{{Storage::url(app('setting') ? app('setting')->fav:'')}}" type="image/x-icon">
+<link rel="shortcut icon" href="{{url('/')}}/uploads/fav/{{ app('setting') ? app('setting')->fav:''}}" type="image/x-icon">
+
 <!-- Responsive -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -35,7 +35,7 @@
                 <div class="outer-container clearfix">
                     <!--Logo Box-->
                     <div class="logo-box">
-                        <div class="logo"><a href="{{url('/')}}"><img src="{{ app('setting') ? app('setting')->logo:''}}" alt=""></a></div>
+                        <div class="logo"><a href="{{url('/')}}"><img src="{{url('/')}}/uploads/logo/{{ app('setting') ? app('setting')->logo:''}}" alt=""></a></div>
                     </div>
                 </div>    
             </div>
@@ -64,7 +64,7 @@
                             <div class="footer-column col-md-10  col-sm-10 col-xs-12">
                                 <div class="footer-widget logo-widget">
                                     <div class="logo">
-                                        <a href="{{url('/')}}"><img src="{{Storage::url(app('setting') ? app('setting')->fav:'')}}" alt="" /></a>
+                                        <a href="{{url('/')}}"><img src="{{url('/')}}/uploads/fav/{{ app('setting') ? app('setting')->fav:''}}" alt="" /></a>
                                     </div>
                                     <div class="">{{ app('setting') ? app('setting')->brief_site:''}}</div>
                                    

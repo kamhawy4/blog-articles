@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('title')
-  {{ app('setting') ? app('setting')->name_site:''}} - {{ isset($articles->title)?$articles->title:''}}
+  {{ app('setting') ? app('setting')->name_site:''}} - {{ $articles->title ? $articles->title:''}}
 @endsection
 @section('content')
 
@@ -8,10 +8,10 @@
 <!--Page Banner-->
 <section class="page-banner" style="background-image:url({{url('/')}}/front/images/background/bg-banner.jpg);">
 	<div class="auto-container">
-    	<h1>{{ isset($articles->title)?$articles->title:''}}</h1>
-        <div class="bread-crumb">
+    	<h1>{{ $articles->title ? $articles->title:''}}</h1>
+        <div class="bread-crumb"> 
         	<ul class="clearfix">
-                <li class="active">{{ isset($articles->title)?$articles->title:''}}</li>
+                <li class="active">{{ $articles->title ? $articles->title : ''}}</li>
             </ul>
         </div>
     </div>
@@ -32,16 +32,16 @@
                         	<div class="inner-box">
                         		<div class="image">
 
-                        		<img src="{{Storage::url($articles->image)}}" alt="" />
+                        		<img src="{{url('/')}}/uploads/articles/{{$articles->image}}" alt="" />
 
-                        	    <div class="post-date">{{ isset($articles->created_at) ? $articles->created_at->diffForHumans()  : '' }}</div>
+                        	    <div class="post-date">{{ $articles->created_at ? $articles->created_at->diffForHumans()  : '' }}</div>
                         		</div>
 
                         		<div class="lower-box">
-                        			<h3>>{{ isset($articles->title) ? $articles->title : '' }}</h3>
+                        			<h3>>{{ $articles->title ? $articles->title : '' }}</h3>
 
                         			<div class="text">
-                                    	{!! isset($articles->description) ? $articles->description : '' !!}
+                                    	{!! $articles->description ? $articles->description : '' !!}
                                     </div>
 
                                     <!--Options-->
@@ -51,14 +51,14 @@
                                                 <ul>
                                                     <li><strong>Share :</strong></li>
                                                     
-                                                    <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{url('/')}}/article/{{ isset($articles->slug) ? $articles->slug : '' }}"><span class="fa fa-facebook-f"></span></a>
+                                                    <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{url('/')}}/article/{{ $articles->slug ? $articles->slug : '' }}"><span class="fa fa-facebook-f"></span></a>
                                                     </li>
                                                     
-                                                    <li><a target="_blank"   href="https://twitter.com/intent/tweet?text={{url('/')}}/article/{{ isset($articles->slug) ? $articles->slug : '' }}"><span class="fa fa-twitter"></span></a></li>
+                                                    <li><a target="_blank"   href="https://twitter.com/intent/tweet?text={{url('/')}}/article/{{ $articles->slug ? $articles->slug : '' }}"><span class="fa fa-twitter"></span></a></li>
                                                     
-                                                    <li><a target="_blank"  href="https://plus.google.com/share?app=110&url={{url('/')}}/article/{{ isset($articles->slug) ? $articles->slug : '' }}"><span class="fa fa-google-plus"></span></a></li>
+                                                    <li><a target="_blank"  href="https://plus.google.com/share?app=110&url={{url('/')}}/article/{{ $articles->slug ? $articles->slug : '' }}"><span class="fa fa-google-plus"></span></a></li>
                                                     
-                                                     <li><a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{url('/')}}/article/{{ isset($articles->slug) ? $articles->slug : '' }}
+                                                     <li><a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{url('/')}}/article/{{ $articles->slug ? $articles->slug : '' }}
                                                     "><span class="fa fa-linkedin"></span></a></li>
                                                     
                                                 </ul>
@@ -71,10 +71,9 @@
                         <!--Comments Area-->
                         <div class="comments-area">
                         	<div class="group-title"><h2>{{ $commentsArticle->count() }} Comments</h2></div>
-                            
-                            <div class="comment-box table">
+                             <div class="comment-box table">
                             	<!--Comment-->
-                            @if($commentsArticle->count() > 0)
+                            @if(!$commentsArticle->isEmpty())
                                 @foreach($commentsArticle as $commentArticle)
                                   @include('front.articles.comments');
                                 @endforeach
@@ -123,31 +122,24 @@
 $(document).ready(function(){
              $('#send').click(function(e){
               e.preventDefault();
-                 //$('.dataTables_empty').remove();
                 var name         =  $('input[name="name"]').val();
                 var title        =  $('textarea[name="commet"]').val();
                 var article_id   =  {{ $articles->id }};
-                   
 
-                if((name == '') || (title == '') )
-                {
-                    alert('You can not add empty values');
-                    return false;
+                if((name == '') || (title == '') ) {
+                   alert('You can not add empty values');
+                   return false;
                 }
-
-              $.ajax({
+                $.ajax({
                 url:'{{url('/')}}/dashboard/comments',
                 type:'get',
                 dataType:'json',
                 data:{name,title,article_id,"_token": "{{ csrf_token() }}"},
-                beforeSend: function()
-                {
+                beforeSend: function() {
                     $('.ajax-load2').show();
                 },
-                success:function(data)
-                {  
-                  if(data.status == true)
-                  {
+                success:function(data){  
+                  if(data.status == true){
                     $('.table').prepend(data.result);
                     $('.ajax-load2').hide();
                     $('input[name="categray"]').val(' ');
@@ -160,9 +152,9 @@ $(document).ready(function(){
 
 
                 },
-               });
-               });
-              });  
+            });
+        });
+    });  
 </script>
 
 

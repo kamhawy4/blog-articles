@@ -42,7 +42,7 @@ All Articles
                         </tr>
                     </thead>
                     <tbody>
-                        @if($articles->count() > 0)
+                        @if(!$articles->isEmpty())
                            @foreach($articles as $article) 
                                 <tr class="odd gradeX">
                                     <td>
@@ -54,8 +54,8 @@ All Articles
 
                                     <td>{{$article->title}} </td>
 
-                                    @if(count($article->image) > 0)
-                                        <td class="info product-block"><img src="{{Storage::url($article->image)}}" width="100" style="border:1px solid #c4c4c4" height="70"></td>
+                                    @if($article->image != '')
+                                        <td class="info product-block"><img src="{{url('/')}}/uploads/articles/100x100/{{$article->image}}" width="100" style="border:1px solid #c4c4c4" height="70"></td>
                                     @else
                                         <td class="info"><img src="" width="100" style="border:1px solid #c4c4c4" height="70"></td>
                                     @endif

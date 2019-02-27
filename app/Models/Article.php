@@ -3,7 +3,7 @@
 namespace  App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use File;
 class Article extends Model
 {
     protected  $table   = 'articles';
@@ -12,6 +12,14 @@ class Article extends Model
 
     public function GetNameCategorie()
     {
-    	return $this->belongsTo('App\Categories','categorie_id');
+    	return $this->belongsTo('App\Models\Categories','categorie_id');
+    }
+
+    public function delete()
+    {
+     $small  = public_path().'/uploads/articles'.'/100x100/'.$this->image;
+     $big    = public_path().'/uploads/articles'.'/'.$this->image;
+     File::delete($big,$small);
+     parent::delete();
     }
 }

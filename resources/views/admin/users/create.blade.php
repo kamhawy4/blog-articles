@@ -17,7 +17,7 @@ Add a new User
                 {!! Form::open(['action'=>'Admin\UsersController@store']) !!}
                     <div class="{{$errors->has('name')?'has-error':''}}" >
                         <div class="form-group form-md-line-input form-md-floating-label">
-                            <input type="text" class="form-control" name="name" id="form_control_1">
+                            <input type="text" value="{{old('name')}}" class="form-control" name="name" id="form_control_1">
                             <label for="form_control_1">Name</label>
                         <small class="text-danger">{{ $errors->first('name') }}</small>
                         </div>
@@ -25,7 +25,7 @@ Add a new User
 
                     <div class="{{$errors->has('email')?'has-error':''}}" >
                         <div class="form-group form-md-line-input form-md-floating-label">
-                            <input type="email" class="form-control" name="email" id="form_control_1">
+                            <input type="email" value="{{old('email')}}" class="form-control" name="email" id="form_control_1">
                             <label for="form_control_1">Email</label>
                         <small class="text-danger">{{ $errors->first('email') }}</small>
                         </div>
@@ -33,7 +33,7 @@ Add a new User
 
                     <div class="{{$errors->has('password')?'has-error':''}}" >
                         <div class="form-group form-md-line-input form-md-floating-label">
-                            <input type="password" class="form-control" name="password" id="form_control_1">
+                            <input type="password" value="{{old('password')}}" class="form-control" name="password" id="form_control_1">
                         <small class="text-danger">{{ $errors->first('password') }}</small>
                             <label for="form_control_1">Password</label>
                         </div>
@@ -41,7 +41,7 @@ Add a new User
 
                     <div class="{{$errors->has('phone')?'has-error':''}}" >
                         <div class="form-group form-md-line-input form-md-floating-label">
-                            <input type="text" class="form-control" name="phone" id="form_control_1">
+                            <input type="text" value="{{old('phone')}}" class="form-control" name="phone" id="form_control_1">
                             <label for="form_control_1">Phone</label>
                         <small class="text-danger">{{ $errors->first('phone') }}</small>
                         </div>

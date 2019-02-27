@@ -39,7 +39,8 @@ Managers
                     </tr>
                 </thead>
                 <tbody>
-             @if($mangaers->count() > 0)
+
+              @if(!$mangaers->isEmpty())
                @foreach($mangaers as $mangaer) 
                     <tr class="odd gradeX">
                         <td>

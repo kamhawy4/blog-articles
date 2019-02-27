@@ -30,7 +30,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                      @if($commentArticles->count() > 0)
+                     @if(!$commentArticles->isEmpty())
                            @foreach($commentArticles as  $commentArticle) 
                                 <tr class="odd gradeX">
                                     <td>{{$commentArticle->id}}</td>

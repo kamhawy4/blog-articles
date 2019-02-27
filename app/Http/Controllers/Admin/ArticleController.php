@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
-
+use Illuminate\Support\Facades\Input;
+use App\Http\Requests\Articles\StoreArticlesRequest;
+use App\Http\Requests\Articles\UpdateArticlesRequest;
 use App\Models\Categories,App\Models\Article,App\Models\CommentArticle;
-
-use Storage,Session,Image,Auth,DB;
-
+use Storage,Session,Image,Auth,DB,File;
 
 class ArticleController extends Controller
 {
@@ -33,32 +33,21 @@ class ArticleController extends Controller
     }
 
 
-	public function store(Request $request)
+	public function store(StoreArticlesRequest $request)
 	{
-		$this->validate($request,[
-	      'title'        =>'required|max:255|unique:articles',
-	      'description'  =>'required',
-	      'categorie_id' =>'required',
-	      'img'          =>'required|image|mimes:jpg,jpeg,png,gif|max:22400',
-	    ]);
-
 	    if($request->hasFile('img'))
-	    {
-            $image      = $request->file('img');
-            $fileName   = time() . '.' . $image->getClientOriginalExtension();
-            $img        = Image::make($image->getRealPath());
+		{
+			$img       	=  Input::file('img');
+			$ext       	=  $img->getClientOriginalExtension();
+			$path      	=  public_path().'/uploads/articles';
+			$fullename 	=  time().'.'.$ext;
+			$img		-> move($path,$fullename);
+			$imag     	=  Image::make($path.'/'.$fullename);
+			$imag	    -> resize(100,100)->save($path.'/100x100/'.$fullename);
+			$request 	-> merge(['image'=>$fullename]);
+		}
 
-            $img->resize(120, 120, function($constraint) {
-                $constraint->aspectRatio();                 
-            });
-            $img->stream(); // <-- Key point
-            Storage::put('article'.'/'.$fileName, $img, 'public');
-            Storage::put('article/100x100'.'/'.$fileName, $img, 'public');
-            $request->merge(['image'=>'article'.'/'.$fileName]);
-	    }
-
-
-        $request  -> merge(['author'=>Auth::guard('managers')->user()->username]); 
+        $request  -> merge(['author'=>Auth::guard('managers')->user()->name]); 
         $request  -> merge(['slug'=>$this->make_slug($request->title)]); 
 	    $article  =  Article::create($request->all());
 
@@ -67,35 +56,27 @@ class ArticleController extends Controller
 	}
 
 
-	public function update($id,Request $request)
+	public function update($id,UpdateArticlesRequest $request)
 	{
-		$this   -> validate($request,[
-	      'title'       =>'required|max:255',
-	      'description' =>'required',
-	      'img'         =>'image|mimes:jpg,jpeg,png,gif|max:22400',
-	      'categorie_id' =>'required',
-	    ]);
 		$update    =  Article::findOrFail($id); 
 		$request  -> merge(['slug'=>$this->make_slug($request->title)]); 
+
 		if($request->hasFile('img'))
 		{
-			!empty($update->image)?Storage::delete($update->image):'';
-
-			$image      = $request->file('img');
-			$fileName   = time() . '.' . $image->getClientOriginalExtension();
-			$img        = Image::make($image->getRealPath());
-
-			$img->resize(120, 120, function($constraint) {
-			$constraint->aspectRatio();                 
-			});
-			$img->stream(); // <-- Key point
-			Storage::put('article'.'/'.$fileName, $img, 'public');
-			Storage::put('article/100x100'.'/'.$fileName, $img, 'public');
-			$request->merge(['image'=>'article'.'/'.$fileName]);
+			$img       	=  Input::file('img');
+			$ext       	=  $img->getClientOriginalExtension();
+			$path      	=  public_path().'/uploads/articles';
+			$fullename 	=  time().'.'.$ext;
+			$img		-> move($path,$fullename);
+			$imag 	    =  Image::make($path.'/'.$fullename);
+			$imag	    -> resize(100,100)->save($path.'/100x100/'.$fullename);
+			$request 	-> merge(['image'=>$fullename]);
+			$small      =  public_path().'/uploads/articles'.'/100x100/'.$update->image;
+            $big        =  public_path().'/uploads/articles'.'/'.$update->image;
+            File::delete($big,$small);
 		}
 
 		$update    -> update($request->all());
-
 		session()  -> flash('success','Modified successfully');
 		return redirect()->to(url('dashboard/articles'));
 	}
