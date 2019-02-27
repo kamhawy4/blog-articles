@@ -4,7 +4,7 @@ For Laravel 5.5 [here](https://laravel.com/docs/5.5/).
 
 ### Installation ###
 
-* `git clone https://github.com/bestmomo/laravel5-example.git projectname`
+* `git clone https://github.com/kamhawy4/blog-articles.git
 * `cd projectname`
 * `composer install`
 * `php artisan key:generate`
