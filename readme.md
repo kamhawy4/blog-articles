@@ -18,7 +18,6 @@ For Laravel 5.5 [here](https://laravel.com/docs/5.5/).
 
 * Authentication (registration, login, logout, password reset)
 * Managers dashboard create users, Managers ,Articles , Categories , comments ,Settings
-* Users create comment in Articles Front End
 
 ### Packages included ###
 
