@@ -17,8 +17,8 @@ For Laravel 5.5 [here](https://laravel.com/docs/5.5/).
 * `php artisan migrate --seed` to create and populate tables
 
 
-if you run  single command seed
 
+if you run  single command seed
      * `php artisan db:seed --class="UsersTableSeeder`
 
      * `php artisan db:seed --class="SettingsTableSeeder`
