@@ -24,4 +24,10 @@ class LoginManagersController extends Controller
           return back();
         }
     }
+
+
+    public function Logout()
+    {
+        Auth::guard('managers')->logout(); return back();
+    }
 }

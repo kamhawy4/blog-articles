@@ -55,8 +55,8 @@ class ManagersController extends Controller
 		// get Mangaer by id
 		$update    =  Mangaers::findOrFail($id);
 
-		// check password empty and merge it 
-	    if($request->has('password')){
+		// check password empty and merge it
+       if($request->password != null ){
     	$request   ->  merge(['password' => bcrypt($request->password)]);
 	    }else{
     	$request   ->  merge(['password' => $update->password]);}

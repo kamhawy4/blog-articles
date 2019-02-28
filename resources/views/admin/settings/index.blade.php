@@ -106,7 +106,7 @@ Settings
                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                 <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> 
                                        @if(!empty($setting->logo))
-                                        <img src="{{url('/')}}/uploads/logo/{{$setting->logo}}" alt="" title="">
+                                        <img src="{{ explode(".",$setting->fav)[0] == 'http://lorempixel'? $setting->logo : url('/')/'uploads/logo'/$setting->logo }}" alt="" title="">
                                        @endif
                                 </div>
                                 <div>

@@ -147,7 +147,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                             <i class="icon-eye"></i> الموقع </a>
                                     </li>
                                     <li>
-                                        <a href="{{url('/')}}/logout">
+                                        <a href="{{url('/')}}/dashboard/logout">
                                         <i class="icon-key"></i> تسجيل خروج </a>
                                     </li>
                                 </ul>

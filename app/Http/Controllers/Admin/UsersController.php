@@ -51,9 +51,9 @@ class UsersController extends Controller
 		$update    =  User::findOrFail($id);
 
 		// check password empty and merge it  
-	    if($request->has('password')){
+        if($request->password != null ){
     	$request   ->  merge(['password' => bcrypt($request->password)]);
-	    }else{
+	      }else{
     	$request   ->  merge(['password' => $update->password]);}
 
 		$update    -> update($request->all());

@@ -28,6 +28,7 @@ Route::post('dashboard/login'   ,'Admin\LoginManagersController@LoginManagers');
 Route::group(['prefix'=>'dashboard'         ,'middleware'=>'admin:managers'],function(){
 
 	Route::resource('/'         			,'Admin\DashboardController'); // Home Page
+	Route::get('/logout'              	    ,'Admin\LoginManagersController@Logout'); // Home Page
 	Route::resource('settings'  			,'Admin\SettingsController'); //  Settings 
 
 	//////////////////////////// Route Category ////////////////////////////
