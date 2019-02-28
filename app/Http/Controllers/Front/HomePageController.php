@@ -14,6 +14,7 @@ class HomePageController extends Controller
     */ 
     public function Welcome()
     {
+
       $articles        = Article::orderBy('created_at','desc')->paginate(10);
     	return view('welcome',compact('articles'));
     }
