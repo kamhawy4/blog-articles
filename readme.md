@@ -5,7 +5,7 @@ For Laravel 5.5 [here](https://laravel.com/docs/5.5/).
 ### Installation ###
 
 * `git clone https://github.com/kamhawy4/blog-articles.git`
-* `cd projectname`
+* `cd blog-articles`
 * `composer install`
 * `php artisan key:generate`
 * Create a database and inform *.env*
