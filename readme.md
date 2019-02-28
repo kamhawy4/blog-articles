@@ -5,15 +5,10 @@ For Laravel 5.5 [here](https://laravel.com/docs/5.5/).
 ### Installation ###
 
 * `git clone https://github.com/kamhawy4/blog-articles.git`
-
 * `cd projectname`
-
 * `composer install`
-
 * `php artisan key:generate`
-
 * Create a database and inform *.env*
-
 * `php artisan migrate --seed` to create and populate tables
 
  * `php artisan db:seed --class="UsersTableSeeder`
