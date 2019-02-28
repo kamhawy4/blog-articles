@@ -130,8 +130,8 @@ Settings
                         <div class="col-md-9">
                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                 <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> 
-                                   @if(!empty($setting->fav))
-                                    <img src="{{url('/')}}/uploads/fav/{{$setting->fav}}" alt="" title="">
+                                 @if(!empty($setting->fav))
+                                    <img src="{{ explode(".",$setting->fav)[0] == 'http://lorempixel'? $setting->fav : url('/')/'uploads/fav'/$setting->fav }}" alt="" title="">
                                   @endif
                                 </div>
                                 
