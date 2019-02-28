@@ -8,8 +8,21 @@ For Laravel 5.5 [here](https://laravel.com/docs/5.5/).
 * `cd projectname`
 * `composer install`
 * `php artisan key:generate`
+
 * Create a database and inform *.env*
+
 * `php artisan migrate --seed` to create and populate tables
+
+ * `php artisan db:seed --class="UsersTableSeeder`
+
+ * `php artisan db:seed --class="SettingsTableSeeder`
+
+ * `php artisan db:seed --class="CategoriesTableSeeder`
+
+ * `php artisan db:seed --class="ArticlesTableSeeder`
+
+ * `php artisan db:seed --class="CommentsArticlesTableSeeder`
+
 * `php artisan vendor:publish` to publish filemanager
 * `php artisan serve` to start the app on http://localhost:8000/
 
