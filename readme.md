@@ -11,6 +11,7 @@ For Laravel 5.5 [here](https://laravel.com/docs/5.5/).
 * Create a database and inform *.env*
 * `php artisan migrate --seed` to create and populate tables
 * `php artisan vendor:publish` to publish filemanager
+
 * `php artisan serve` to start the app on http://localhost:8000/
 
 
