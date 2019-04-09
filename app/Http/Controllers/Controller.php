@@ -6,12 +6,51 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Input;
+use Session,Image,Auth,DB,File;
+
 
 class Controller extends BaseController
 {
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-    
+
+
+    // upload Image 
+    public function uploadIMage($path,$data)
+    {
+        if($data->hasFile('img'))
+        {
+            $img        =  Input::file('img');
+            $ext        =  $img->getClientOriginalExtension();
+            $path       =  public_path().$path;
+            $fullename  =  time().'.'.$ext;
+            $img        -> move($path,$fullename);
+            $imag       =  Image::make($path.'/'.$fullename);
+            $imag       -> resize(100,100)->save($path.'/100x100/'.$fullename);
+            $data       -> merge(['image'=>$fullename]);
+        }
+    }
+
+    // Update upload Image  
+    public function UpdateImage($path,$update,$data)
+    {
+        if($data->hasFile('img'))
+        {
+            $img        =  Input::file('img');
+            $ext        =  $img->getClientOriginalExtension();
+            $path       =  public_path().$path;
+            $fullename  =  time().'.'.$ext;
+            $img        -> move($path,$fullename);
+            $imag       =  Image::make($path.'/'.$fullename);
+            $imag       -> resize(100,100)->save($path.'/100x100/'.$fullename);
+            $data      -> merge(['image'=>$fullename]);
+            $small      =  public_path().$path.'/100x100/'.$update->image;
+            $big        =  public_path().$path.'/'.$update->image;
+            File::delete($big,$small);
+        }
+    }
+
     /**
     * @return slug 
     */  

@@ -57,7 +57,7 @@ Edit Article
                         <div class="col-md-12" >
                           <div class="box box-success">
                             <div class="box-body text-center">
-                             <img style="max-width: 80%; border:1px solid #cecece" src="{{ explode(".",$update->image)[0] == 'http://lorempixel'? $update->image : url('/')/'uploads/articles'/$update->image }}">
+                             <img style="max-width: 80%; border:1px solid #cecece" src="{{ explode(".",$update->image)[0] == 'http://lorempixel'? $update->image : url('/')}}/uploads/articles/{{$update->image }}">
                             </div>
                           </div>
                         </div>

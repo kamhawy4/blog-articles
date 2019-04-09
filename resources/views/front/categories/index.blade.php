@@ -36,7 +36,7 @@
         						<div class="news-block-two">
         							<div class="inner-box">
         								<div class="image">
-        									<a href="{{url('/')}}/article/{{$article->slug}}"><img src="{{ explode(".",$article->image)[0] == 'http://lorempixel'? $article->image : url('/')/'uploads/articles'/$article->image }}" /></a>
+        									<a href="{{url('/')}}/article/{{$article->slug}}"><img src="{{ explode(".",$article->image)[0] == 'http://lorempixel'? $article->image : url('/')}}/uploads/articles/{{$article->image }}" /></a>
         									<a href="{{url('/')}}/article/{{$article->slug}}" class="overlay-link"><span class="txt">Read More <span class="icon flaticon-arrows-6"></span></span></a>
         									<div class="post-date">{{$article->created_at->diffForHumans()}}</div>
         								</div>
