@@ -15,7 +15,6 @@ class Controller extends BaseController
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-
     // upload Image 
     public function uploadIMage($path,$data)
     {

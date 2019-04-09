@@ -32,15 +32,12 @@ class ArticleController extends Controller
 		$this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
 	}
 
-
-
 	// Return view page index articles And Return All Articles	 
     public function index()
     {
       $articles = $this->modelArticles->all();
       return view('admin.articles.index',compact('articles'));
     }
-
 
 
 	// Return view page create articles And Return All Categories
@@ -51,7 +48,6 @@ class ArticleController extends Controller
     }
 
 
-
 	// Return view page Edit Article And Return article by id and All Categories
     public function edit($id)
     {
@@ -59,7 +55,6 @@ class ArticleController extends Controller
        $categorys =  $this->modelCategories->all();
        return view('admin.articles.edit',compact('update','categorys'));
     }
-
 
  
 	// Store Article 
@@ -69,7 +64,7 @@ class ArticleController extends Controller
         $this->uploadIMage(self::PATH,$request);
 
 		//Merge Author And Slug
-        $request  -> merge(['author'=>Auth::guard('managers')->user()->username]); 
+        $request  -> merge(['author'=>Auth::guard('managers')->user()->name]); 
         $request  -> merge(['slug'=>$this->make_slug($request->title)]);
 
         // repo store data
@@ -109,8 +104,7 @@ class ArticleController extends Controller
     // Delete Comments by id
 	public function DeleteComments($id)
 	{
-	    $delete  =  CommentArticle::findOrFail($id);
-		$delete  -> delete();
+		$this->modelCommentArticle->delete($id);
 		session()->flash('success','Successfully deleted');
 		return back();
 	}
@@ -118,8 +112,7 @@ class ArticleController extends Controller
     // destroy Article by id 
 	public function destroy($id)
 	{
-		$delete  =  Article::findOrFail($id);
-		$delete  -> delete();
+		$this->modelArticles->delete($id);
 		session()->flash('success','Successfully deleted');
 		return redirect()->to(url('dashboard/articles'));
 	}
@@ -129,12 +122,12 @@ class ArticleController extends Controller
 	{
         if($request->check != '')
         {
-		  Article::destroy($request->check); 
-		  session()->flash('success','Successfully deleted');
-		  return back();
+		   $this->modelArticles->deleteArticalCheck($request->check);
+		   session()->flash('success','Successfully deleted');
+		   return back();
           }else{
-		  session()->flash('warning','Please select at least one article');
-		  return back();
+		   session()->flash('warning','Please select at least one article');
+		   return back();
         } 
     }
 }

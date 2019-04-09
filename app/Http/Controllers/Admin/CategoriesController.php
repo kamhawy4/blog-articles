@@ -9,27 +9,34 @@ use App\Models\Categories;
 
 use App\Http\Requests\Categories\StoreCategoriesRequest;
 use App\Http\Requests\Categories\UpdateCategoriesRequest;
+use App\Repositories\Categories\CategoriesRepositories;
 
 class CategoriesController extends Controller
 {
+    protected $modelCategories;
+
+	public function __construct(Categories $categories)
+	{
+		$this->modelCategories       = new CategoriesRepositories($categories);	   
+	}
 
    // Return view page index Categories And Return All Categories
-   public function index()
+    public function index()
     {
-      $categorys =  Categories::get(); 
+      $categorys =  $this->modelCategories->all();	  
       return view('admin.category.index',compact('categorys'));
     }
    
 	// Return view page create Categorys 
     public function create()
     {  
-        return view('admin.category.create');   
+       return view('admin.category.create');   
     }
 
 	// Return view page Edit Categorie And Return categorie by id
     public function edit($id)
     {
-	    $update =  Categories::findOrFail($id);
+		$update    =  $this->modelCategories->show($id);		
         return view('admin.category.edit',compact('update'));
     }
 
@@ -51,22 +58,20 @@ class CategoriesController extends Controller
         
         // Merge Slug and Categories Create  
         $request      -> merge(['slug'=>$this->make_slug($request->name)]); 
-	    $allCategory  =  Categories::create($request->all());
-
+        $allCategory  =  $this->modelCategories->store($request);
         // render page  category create and returm it
         $html         =  view('admin.category.add',compact('allCategory'))->render();
 	    return response()->json([ 'status'=> true,'code'=>200,'result'=>$html]);
 	}
 
 	// update Article 
-	public function update($id,UpdateCategoriesRequest $request)
+	public function update($id,Request $request)
 	{
-		$update    =   Categories::findOrFail($id); 
 		$request   ->  merge(['slug'=>$this->make_slug($request->name)]); 
-		$update    ->  update($request->all());
+		$update    = $this->modelCategories->update($request,$id);
 
         // render page  category edit and returm it
-        $html       =  view('admin.category.edit',compact('update'))->render();
+         $html       =  view('admin.category.edit',compact('update'))->render();
 		return response()->json(['status'=>true,'code'=>200,'result'=>$html]);
 	}
 

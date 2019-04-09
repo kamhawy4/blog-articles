@@ -29,7 +29,10 @@ class CommentArticleRepositories implements RepositoryInterface
 
     public function update($data,$id){}
 
-    public function delete($id){}
+    public function delete($id){
+        $delete = $this->model->findOrFail($id);
+        return $delete->delete();
+    }
 
 }
 
