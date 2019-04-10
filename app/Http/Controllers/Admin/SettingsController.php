@@ -9,14 +9,23 @@ use Illuminate\Support\Facades\Input;
 use App\Http\Requests\Settings\StoreSettingsRequest;
 use App\Models\Settings;
 use Storage,Session,Image,File;
+use App\Repositories\Settings\SettingsRepositories;
+
 
 class SettingsController extends Controller
 {
 
+    protected $modelSettings;
+
+    function __construct(Settings $settings)
+    {
+      $this->modelSettings     = new SettingsRepositories($settings);
+    }
+
   // Return view page settings And Return first Settings
   public function index()
   {
-  	$setting =  Settings::first();
+    $setting =  $this->modelSettings->all();
   	return view('admin.settings.index',compact('setting'));
   }
 
@@ -50,7 +59,8 @@ class SettingsController extends Controller
     }
     
     // create data
-    $settings  =  Settings::create($request->all());
+    $settings  =  $this->modelSettings->store($request);
+
     Session::flash('success','Update  Successfully');
     return back();
   }

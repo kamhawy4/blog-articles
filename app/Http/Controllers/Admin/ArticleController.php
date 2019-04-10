@@ -125,7 +125,7 @@ class ArticleController extends Controller
 		   $this->modelArticles->deleteArticalCheck($request->check);
 		   session()->flash('success','Successfully deleted');
 		   return back();
-          }else{
+            }else{
 		   session()->flash('warning','Please select at least one article');
 		   return back();
         } 

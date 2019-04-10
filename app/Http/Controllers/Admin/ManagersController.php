@@ -8,16 +8,24 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\StoreUsersRequest;
 use App\Http\Requests\Users\UpdateUsersRequest;
 use App\Models\Mangaers;
+use App\Repositories\Managers\ManagersRepositories;
 use Auth;
 
 
 class ManagersController extends Controller
 {	
 
+	protected $modelArticles;
+
+    function __construct(Mangaers $mangaers)
+    {
+        $this->modelManagers       = new ManagersRepositories($mangaers);
+    }
+
     // Return view page index Mangaers And Return All Mangaers without Manager Auth
     public function index()
     {
-    	$mangaers =  Mangaers::where('id','!=',Auth::guard('managers')->user()->id)->get(); 
+    	$mangaers =  $this->modelManagers->all();
     	return view('admin.managers.index',compact('mangaers'));
     }
 
@@ -30,38 +38,33 @@ class ManagersController extends Controller
 	// Return view page Edit Mangaer And Return Mangaer by id
     public function edit($id)
     {
-	    $update =  Mangaers::findOrFail($id);
+		$update    =  $this->modelManagers->show($id);			    
     	return view('admin.managers.edit',compact('update'));
     }
 
 	// Store Mangaer 
 	public function store(StoreUsersRequest $request)
-	{
-	    $this->validate($request,[ 
-
-	    ]);
-        
+	{ 
         // Merge password and Mangaers Create   
-    	$request   ->  merge(['password' => bcrypt($request->password)]); 
-	    Mangaers::create($request->all());
-
+    	$request   ->  merge(['password' => bcrypt($request->password)]);	    
+        $this->modelManagers->store($request);
 	    session()->flash('save','The manager has been successfully added');
 	    return redirect()->to(url('dashboard/managers'));
 	}
 
-	// update Mangaers 
+	// update Mangaers
 	public function update($id,UpdateUsersRequest $request)
 	{	
-		// get Mangaer by id
-		$update    =  Mangaers::findOrFail($id);
+		$update    =  $this->modelManagers->show($id);			    
 
 		// check password empty and merge it
        if($request->password != null ){
     	$request   ->  merge(['password' => bcrypt($request->password)]);
-	    }else{
+	     }else{
     	$request   ->  merge(['password' => $update->password]);}
 
-		$update    -> update($request->all());
+		$this->modelManagers->update($request,$id);
+
 		session()->flash('success','Data modified successfully');
 		return redirect()->to(url('dashboard/managers'));
 	}
@@ -71,12 +74,10 @@ class ManagersController extends Controller
 	{
 		if($id != Auth::guard('managers')->user()->id)
 	  	{
-		 $delete  =  Mangaers::findOrFail($id);
-		 $delete  -> delete();
+		 $this->modelManagers->delete($id);
 		 session()->flash('success','The manager was successfully deleted');
 		 return redirect()->to(url('dashboard/managers'));	
-	    }else
-	    {
+	    }else{
          return back();
 	    }
 	}
@@ -86,7 +87,7 @@ class ManagersController extends Controller
 	{
 	  if($request->check != '')
 	  {
-		Mangaers::destroy($request->check); 
+		$this->modelManagers->deleteMangaersCheck($request->check);
 		session()->flash('success','Data deleted successfully');
 		return back();
 	  	session()->flash('warning','Please select a manager at least');

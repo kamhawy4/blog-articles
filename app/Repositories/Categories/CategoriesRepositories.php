@@ -27,7 +27,7 @@ class CategoriesRepositories implements RepositoryInterface
 
     public function update($data,$id){
       $update = $this->show($id);
-      $update->update($data->all());
+      return $update->update($data->all());
     }
 
 
@@ -37,7 +37,7 @@ class CategoriesRepositories implements RepositoryInterface
       return $delete->delete();
     }
 
-    public function deleteArticalCheck($data)
+    public function deleteCategoriesCheck($data)
     {
 	   return $this->model->destroy($data);        
     }
@@ -45,6 +45,11 @@ class CategoriesRepositories implements RepositoryInterface
     public function show($id)
     {
      return $this->model->findOrFail($id);
+    }
+
+    public function count()
+    {
+        return $this->model->count();
     }
 
 

@@ -43,12 +43,16 @@ class ArticlesRepositories implements RepositoryInterface
       return $delete->delete();
     }
 
-    public function deleteArticalCheck($data)
+    public function deleteCategoriesCheck($data)
     {
 		 return $this->model->destroy($data);        
     }
 
-
+    public function count()
+    {
+        return $this->model->count();
+    }
+    
 }
 
 

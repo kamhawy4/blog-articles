@@ -68,28 +68,29 @@ class CategoriesController extends Controller
 	public function update($id,Request $request)
 	{
 		$request   ->  merge(['slug'=>$this->make_slug($request->name)]); 
-		$update    = $this->modelCategories->update($request,$id);
+		$update     = $this->modelCategories->update($request,$id);
 
-        // render page  category edit and returm it
-         $html       =  view('admin.category.edit',compact('update'))->render();
+        //render page  category edit and returm it
+        $html   =  view('admin.category.edit',compact('update'))->render();
 		return response()->json(['status'=>true,'code'=>200,'result'=>$html]);
 	}
+	
 
     // destroy Categories by id 
 	public function destroy($id)
 	{
-		$delete  =  Categories::findOrFail($id);
-		$delete  -> delete();
+		$this->modelCategories->delete($id);
 		session()->flash('save','Successfully deleted');
 		return redirect()->to(url('dashboard/categorys'));
 	}
+
 
     // destroy Multi Categories by id
 	public function deleteCategorys(Request $request)
 	{
         if($request->check != '')
         {
-		  Categories::destroy($request->check); 
+		   $this->modelCategories->deleteCategoriesCheck($request->check);
 		  session()->flash('save','Successfully deleted');
 		  return back();
           }else{
@@ -97,4 +98,5 @@ class CategoriesController extends Controller
 		  return back();
         }
     } 
+
 }
