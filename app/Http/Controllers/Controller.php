@@ -16,35 +16,43 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     // upload Image 
-    public function uploadIMage($path,$data)
+    public function uploadIMage($data,$path,$subPath,$size,$nameFile,$nameMerge)
     {
-        if($data->hasFile('img'))
+        
+        $explode =  explode(',',$size);
+        if($data->hasFile($nameFile))
         {
-            $img        =  Input::file('img');
+            $img        =  Input::file($nameFile);
             $ext        =  $img->getClientOriginalExtension();
             $path       =  public_path().$path;
             $fullename  =  time().'.'.$ext;
             $img        -> move($path,$fullename);
             $imag       =  Image::make($path.'/'.$fullename);
-            $imag       -> resize(100,100)->save($path.'/100x100/'.$fullename);
-            $data       -> merge(['image'=>$fullename]);
+             if($subPath && $size  != null)
+             {
+                $imag->resize($explode[0],$explode[1])->save($path.$subPath.$fullename);
+             }elseif($subPath  == null && $size != null ){
+                $imag->resize($explode[0],$explode[1])->save($path.'/'.$fullename);
+             }
+            $data       -> merge([$nameMerge=>$fullename]);
         }
     }
 
     // Update upload Image  
-    public function UpdateImage($path,$update,$data)
+    public function UpdateImage($update,$data,$path,$subPath,$size,$nameFile,$nameMerge)
     {
-        if($data->hasFile('img'))
+        $explode =  explode(',',$size);
+        if($data->hasFile($nameFile))
         {
-            $img        =  Input::file('img');
+            $img        =  Input::file($nameFile);
             $ext        =  $img->getClientOriginalExtension();
             $path       =  public_path().$path;
             $fullename  =  time().'.'.$ext;
             $img        -> move($path,$fullename);
             $imag       =  Image::make($path.'/'.$fullename);
-            $imag       -> resize(100,100)->save($path.'/100x100/'.$fullename);
-            $data      -> merge(['image'=>$fullename]);
-            $small      =  public_path().$path.'/100x100/'.$update->image;
+            $imag       -> resize($explode[0],$explode[1])->save($path.$subPath.$fullename);
+            $data       -> merge([$nameMerge=>$fullename]);
+            $small      =  public_path().$path.$subPath.$update->image;
             $big        =  public_path().$path.'/'.$update->image;
             File::delete($big,$small);
         }

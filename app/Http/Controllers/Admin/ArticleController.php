@@ -17,19 +17,23 @@ use App\Repositories\Categories\CategoriesRepositories;
 
 class ArticleController extends Controller
 {
-
+	//PROPRTE Upload
+    const PATH      = '/uploads/articles';
+    const SUBPATH   = '/100x100/';
+    const SIZE      = '100,100';
+    const NAMEFILE  = 'img';
+	const NAMEMERGE = 'image';
+	
 	// space that we can use the repository from
-
-    const PATH  = '/uploads/articles';
     protected $modelArticles;
     protected $modelCategories;
     protected $modelCommentArticle;
 
 	function __construct(Article $article,Categories $categories,CommentArticle $commentArticle)
 	{
-		$this->modelArticles       = new ArticlesRepositories($article);
-		$this->modelCategories     = new CategoriesRepositories($categories);
-		$this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
+	  $this->modelArticles       = new ArticlesRepositories($article);
+	  $this->modelCategories     = new CategoriesRepositories($categories);
+	  $this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
 	}
 
 	// Return view page index articles And Return All Articles	 
@@ -47,7 +51,6 @@ class ArticleController extends Controller
        return view('admin.articles.create',compact('categorys'));   
     }
 
-
 	// Return view page Edit Article And Return article by id and All Categories
     public function edit($id)
     {
@@ -61,7 +64,7 @@ class ArticleController extends Controller
 	public function store(StoreArticlesRequest $request)
 	{
 		//uploade image
-        $this->uploadIMage(self::PATH,$request);
+        $this->uploadIMage($request,self::PATH,self::SUBPATH,self::SIZE,self::NAMEFILE,self::NAMEMERGE);
 
 		//Merge Author And Slug
         $request  -> merge(['author'=>Auth::guard('managers')->user()->name]); 
@@ -83,7 +86,7 @@ class ArticleController extends Controller
 		$request  ->  merge(['slug'=>$this->make_slug($request->title)]);
          
         //upload image  
-        $this->UpdateImage(self::PATH,$update,$request);
+        $this->UpdateImage($update,$request,self::PATH,self::SUBPATH,self::SIZE,self::NAMEFILE,self::NAMEMERGE);
         
         //update data
         $this->modelArticles->update($request,$id);

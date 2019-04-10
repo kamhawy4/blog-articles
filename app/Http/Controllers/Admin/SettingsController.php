@@ -15,12 +15,26 @@ use App\Repositories\Settings\SettingsRepositories;
 class SettingsController extends Controller
 {
 
+  	//PROPRTE Upload
+    const PATHLOGO      = '/uploads/logo';
+    const SUBPATHLOGO   =  null;
+    const SIZELOGO      =  null;
+    const NAMEFILELOGO  = 'logo_main';
+    const NAMEMERGELOGO = 'logo';
+
+    const PATHFAV      = '/uploads/fav';
+    const SUBPATHFAV   =  null;
+    const SIZEFAV      =  '50,50';
+    const NAMEFILEFAV  =  'fav_main';
+    const NAMEMERGEFAV =  'fav';
+
+
     protected $modelSettings;
 
-    function __construct(Settings $settings)
-    {
-      $this->modelSettings     = new SettingsRepositories($settings);
-    }
+  function __construct(Settings $settings)
+  {
+    $this->modelSettings     = new SettingsRepositories($settings);
+  }
 
   // Return view page settings And Return first Settings
   public function index()
@@ -33,30 +47,11 @@ class SettingsController extends Controller
   // Store Settings 
   public function store(StoreSettingsRequest $request)
   {
-
      // upload logo
-    if($request->hasFile('logo_main'))
-    {
-      $fav        =   Input::file('logo_main');
-      $ext        =   $fav->getClientOriginalExtension();
-      $path       =   public_path().'/uploads/logo';
-      $fullename  =   time().'.'.$ext;
-      $fav       ->   move($path,$fullename);
-      $imaglogo   =   Image::make($path.'/'.$fullename);
-      $request    ->  merge(['logo'=>$fullename]);
-    }
+     $this->uploadIMage($request,self::PATHLOGO,self::SUBPATHLOGO,self::SIZELOGO,self::NAMEFILELOGO,self::NAMEMERGELOGO);
     
     // upload favicon
-    if($request->hasFile('fav_main')) {
-      $fav        =   Input::file('fav_main');
-      $ext        =   $fav->getClientOriginalExtension();
-      $path       =   public_path().'/uploads/fav';
-      $fullename  =   time().'.'.$ext;
-      $fav        ->  move($path,$fullename);
-      $imagfav    =   Image::make($path.'/'.$fullename);
-      $imagfav    ->  resize(50,50)->save($path.'/'.$fullename);
-      $request    ->  merge(['fav'=>$fullename]);
-    }
+    $this->uploadIMage($request,self::PATHFAV,self::SUBPATHFAV,self::SIZEFAV,self::NAMEFILEFAV,self::NAMEMERGEFAV);
     
     // create data
     $settings  =  $this->modelSettings->store($request);
@@ -70,9 +65,8 @@ class SettingsController extends Controller
   public function update($id,StoreSettingsRequest $request)
   {
     // get data Settings by id 
-   	$settings = Settings::find($id);
-  
-    // upload logo
+		 $update    =  $this->modelSettings->show($id);
+
     if($request->hasFile('logo_main'))
     {
       $fav        =   Input::file('logo_main');
@@ -84,7 +78,7 @@ class SettingsController extends Controller
       $request    ->  merge(['logo'=>$fullename]);
       
       // delete old logo after update new logo
-      $deleteimage = public_path().'/uploads/logo'.'/'.$settings->logo;
+      $deleteimage = public_path().'/uploads/logo'.'/'.$update->logo;
       File::delete($deleteimage);
     }
 
@@ -106,7 +100,7 @@ class SettingsController extends Controller
     }
    
     // update data
-  	$settings->update($request->all());
+		$this->modelSettings->update($request,$id);    
     Session::flash('success','Update  Successfully');
   	return back();
   }

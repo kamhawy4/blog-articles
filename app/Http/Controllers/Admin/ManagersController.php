@@ -11,15 +11,13 @@ use App\Models\Mangaers;
 use App\Repositories\Managers\ManagersRepositories;
 use Auth;
 
-
 class ManagersController extends Controller
-{	
-
+{
 	protected $modelArticles;
 
     function __construct(Mangaers $mangaers)
     {
-        $this->modelManagers       = new ManagersRepositories($mangaers);
+       $this->modelManagers       = new ManagersRepositories($mangaers);
     }
 
     // Return view page index Mangaers And Return All Mangaers without Manager Auth
