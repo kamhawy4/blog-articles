@@ -28,15 +28,15 @@ class SettingsController extends Controller
     const NAMEFILEFAV  =  'fav_main';
     const NAMEMERGEFAV =  'fav';
 
-
     protected $modelSettings;
+
 
   function __construct(Settings $settings)
   {
-    $this->modelSettings     = new SettingsRepositories($settings);
+    $this->modelSettings  = new SettingsRepositories($settings);
   }
 
-  // Return view page settings And Return first Settings
+  //Return view page settings And Return first Settings
   public function index()
   {
     $setting =  $this->modelSettings->all();
@@ -47,8 +47,8 @@ class SettingsController extends Controller
   // Store Settings 
   public function store(StoreSettingsRequest $request)
   {
-     // upload logo
-     $this->uploadIMage($request,self::PATHLOGO,self::SUBPATHLOGO,self::SIZELOGO,self::NAMEFILELOGO,self::NAMEMERGELOGO);
+    // upload logo
+    $this->uploadIMage($request,self::PATHLOGO,self::SUBPATHLOGO,self::SIZELOGO,self::NAMEFILELOGO,self::NAMEMERGELOGO);
     
     // upload favicon
     $this->uploadIMage($request,self::PATHFAV,self::SUBPATHFAV,self::SIZEFAV,self::NAMEFILEFAV,self::NAMEMERGEFAV);
@@ -65,39 +65,11 @@ class SettingsController extends Controller
   public function update($id,StoreSettingsRequest $request)
   {
     // get data Settings by id 
-		 $update    =  $this->modelSettings->show($id);
+		$update    =  $this->modelSettings->show($id);
 
-    if($request->hasFile('logo_main'))
-    {
-      $fav        =   Input::file('logo_main');
-      $ext        =   $fav->getClientOriginalExtension();
-      $path       =   public_path().'/uploads/logo';
-      $fullename  =   time().'.'.$ext;
-      $fav        ->  move($path,$fullename);
-      $imaglogo   =   Image::make($path.'/'.$fullename);
-      $request    ->  merge(['logo'=>$fullename]);
-      
-      // delete old logo after update new logo
-      $deleteimage = public_path().'/uploads/logo'.'/'.$update->logo;
-      File::delete($deleteimage);
-    }
+    $this->updateImage($update,$request,self::PATHLOGO,self::SUBPATHLOGO,self::SIZELOGO,self::NAMEFILELOGO,self::NAMEMERGELOGO);
 
-    // upload favicon
-    if($request->hasFile('fav_main'))
-    {
-      $fav        =   Input::file('fav_main');
-      $ext        =   $fav->getClientOriginalExtension();
-      $path       =   public_path().'/uploads/fav';
-      $fullename  =   time().'.'.$ext;
-      $fav        ->  move($path,$fullename);
-      $imagfav    =   Image::make($path.'/'.$fullename);
-      $imagfav    ->  resize(50,50)->save($path.'/'.$fullename);
-      $request    ->  merge(['fav'=>$fullename]);
-      
-      // delete old favicon after update new favicon
-      $deleteimage = public_path().'/uploads/fav'.'/'.$settings->fav;
-      File::delete($deleteimage);
-    }
+    $this->updateImage($update,$request,self::PATHFAV,self::SUBPATHFAV,self::SIZEFAV,self::NAMEFILEFAV,self::NAMEMERGEFAV);
    
     // update data
 		$this->modelSettings->update($request,$id);    
