@@ -14,7 +14,7 @@ Modify the User
                         <span class="caption-subject font-red sbold uppercase">Modify the User </span>
                     </div>                                    
                 </div>
-                  {!! Form::model($update,['method'=>'PATCH','action'=>['Admin\UsersController@update',$update->id],'novalidate'=>'novalidate']) !!}
+                  {!! Form::model($update,['method'=>'PATCH','action'=>['Admin\User\UsersController@update',$update->id],'novalidate'=>'novalidate']) !!}
           
                         <div class="{{$errors->has('name')?'has-error':''}}" >
                             <div class="form-group form-md-line-input form-md-floating-label">

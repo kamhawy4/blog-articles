@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -72,6 +72,7 @@ class UsersController extends Controller
     // destroy Users by id
 	public function destroy($id)
 	{
+		dd($id);
 	   $this->modelUsers->delete($id);
 	   session()->flash('success','The manager was successfully deleted');
 	   return redirect()->to(url('dashboard/users'));

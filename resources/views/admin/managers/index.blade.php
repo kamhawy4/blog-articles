@@ -14,7 +14,7 @@ Managers
                  <span class="caption-subject bold">Table of Managers</span>
              </div>  
          </div>
-       {!! Form::open(['method' =>'POST','action' => 'Admin\ManagersController@DeleteMangaers']) !!}
+       {!! Form::open(['method' =>'POST','action' => 'Admin\Managers\ManagersController@DeleteMangaers']) !!}
         <div class="portlet-body">
             <div class="table-toolbar">
                 <div class="row">

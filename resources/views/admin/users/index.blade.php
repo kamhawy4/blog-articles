@@ -13,7 +13,7 @@ All Users
                  <span class="caption-subject bold   ">Table of Users</span>
              </div>  
          </div>
-        {!! Form::open(['method' =>'POST','action' => 'Admin\UsersController@DeleteUsers']) !!}
+        {!! Form::open(['method' =>'POST','action' => 'Admin\User\UsersController@DeleteUsers']) !!}
         <div class="portlet-body">
             <div class="table-toolbar">
                 <div class="row">
@@ -64,14 +64,16 @@ All Users
                                               <a href="{{url('/')}}/dashboard/users/{{$user->id}}/edit">
                                                   <i class="fa fa-pencil"></i> Edit </a>
                                           </li>
-                                          <li>
-                                              <a onclick='return confirm("Are you sure you want to delete this users?")' href="{{url('/') }}/dashboard/delete/users/{{$user->id}}">
-                                                  <i class="fa fa-trash-o"></i> Delete </a>
-                                          </li>
                                       </ul>
+
                                   </div>
                               </div>
-                          
+
+                              <div>
+                                {!! Form::open(['method'  => 'DELETE', 'action' => ['Admin\User\UsersController@destroy', $user->id]]) !!}
+                                   <button onclick='return confirm("Are you sure you want to delete this users?")' type="button">Delete</button>
+                                {!! Form::close() !!}  
+                              </div>                       
                         </td>
                     </tr>
                     @endforeach

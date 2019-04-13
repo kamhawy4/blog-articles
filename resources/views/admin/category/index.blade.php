@@ -63,7 +63,7 @@ Categories
                  <span class="caption-subject bold ">Categories table</span>
               </div>
         </div>  
-        {!! Form::open(['method' =>'POST','action' => 'Admin\CategoriesController@deleteCategorys']) !!}
+        {!! Form::open(['method' =>'POST','action' => 'Admin\Categories\CategoriesController@deleteCategorys']) !!}
         <div class="portlet-body">
             <div class="table-toolbar">
                 <div class="row">

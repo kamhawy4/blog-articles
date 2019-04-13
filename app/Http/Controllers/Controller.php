@@ -18,7 +18,6 @@ class Controller extends BaseController
     // upload Image 
     public function uploadIMage($data,$path,$subPath,$size,$nameFile,$nameMerge)
     {
-        
         $explode =  explode(',',$size);
         if($data->hasFile($nameFile))
         {
@@ -39,7 +38,7 @@ class Controller extends BaseController
     }
 
     // Update upload Image  
-    public function UpdateImage($update,$data,$path,$subPath,$size,$nameFile,$nameMerge)
+    public function updateImage($update,$data,$path,$subPath,$size,$nameFile,$nameMerge)
     {
         $explode =  explode(',',$size);
         if($data->hasFile($nameFile))
@@ -50,11 +49,21 @@ class Controller extends BaseController
             $fullename  =  time().'.'.$ext;
             $img        -> move($path,$fullename);
             $imag       =  Image::make($path.'/'.$fullename);
-            $imag       -> resize($explode[0],$explode[1])->save($path.$subPath.$fullename);
             $data       -> merge([$nameMerge=>$fullename]);
-            $small      =  public_path().$path.$subPath.$update->image;
-            $big        =  public_path().$path.'/'.$update->image;
-            File::delete($big,$small);
+
+            if($subPath && $size != null)
+             {
+                $imag->resize($explode[0],$explode[1])->save($path.$subPath.$fullename);
+             }elseif($subPath  == null && $size != null ){
+                $imag->resize($explode[0],$explode[1])->save($path.'/'.$fullename);
+             }
+
+            if($subPath != null){
+                $small     =  $path.$subPath.$update->$nameMerge;
+                File::delete($small);
+            }
+            $big        =  $path.'/'.$update->$nameMerge;
+            File::delete($big);
         }
     }
 

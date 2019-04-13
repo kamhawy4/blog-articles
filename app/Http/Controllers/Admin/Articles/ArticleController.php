@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\Articles;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -86,7 +86,7 @@ class ArticleController extends Controller
 		$request  ->  merge(['slug'=>$this->make_slug($request->title)]);
          
         //upload image  
-        $this->UpdateImage($update,$request,self::PATH,self::SUBPATH,self::SIZE,self::NAMEFILE,self::NAMEMERGE);
+        $this->updateImage($update,$request,self::PATH,self::SUBPATH,self::SIZE,self::NAMEFILE,self::NAMEMERGE);
         
         //update data
         $this->modelArticles->update($request,$id);

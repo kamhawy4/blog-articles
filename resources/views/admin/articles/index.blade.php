@@ -15,7 +15,7 @@ All Articles
                 </div>
             </div>
             
-          {!! Form::open(['method' =>'POST','action' => 'Admin\ArticleController@DeleteArticle']) !!}
+          {!! Form::open(['method' =>'POST','action' => 'Admin\Articles\ArticleController@DeleteArticle']) !!}
 
             <div class="portlet-body">
                 <div class="table-toolbar">

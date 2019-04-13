@@ -172,7 +172,8 @@ return [
          
          ////// start my packge
          Collective\Html\HtmlServiceProvider::class,
-          Intervention\Image\ImageServiceProvider::class,
+         Intervention\Image\ImageServiceProvider::class,
+         App\Providers\HelperServiceProvider::class,
          ////// end my packge
         /*
          * Application Service Providers...

@@ -14,7 +14,7 @@ Add a new User
                     <span class="caption-subject font-red sbold uppercase">Add a new User</span>
                 </div>
             </div>
-                {!! Form::open(['action'=>'Admin\UsersController@store']) !!}
+                {!! Form::open(['action'=>'Admin\User\UsersController@store']) !!}
                     <div class="{{$errors->has('name')?'has-error':''}}" >
                         <div class="form-group form-md-line-input form-md-floating-label">
                             <input type="text" value="{{old('name')}}" class="form-control" name="name" id="form_control_1">

@@ -18,9 +18,9 @@ Settings
         </div>
         <div class="portlet-body">
                     @if($setting == null)
-                      {!! Form::open(['method'=>'post','action'=>'Admin\SettingsController@store','class'=>'form-horizontal form-horizontal form-bordered','files'=>true,]) !!}
+                      {!! Form::open(['method'=>'post','action'=>'Admin\Settings\SettingsController@store','class'=>'form-horizontal form-horizontal form-bordered','files'=>true,]) !!}
                     @else
-                    {!! Form::model($setting,['method'=>'PATCH','action'=>['Admin\SettingsController@update',$setting->id],'files'=>true,'class'=>'form-horizontal form-horizontal form-bordered']) !!}
+                    {!! Form::model($setting,['method'=>'PATCH','action'=>['Admin\Settings\SettingsController@update',$setting->id],'files'=>true,'class'=>'form-horizontal form-horizontal form-bordered']) !!}
                     @endif
 
                     <div class="form-group {{ $errors->has('name_site') ? 'has-error' : '' }}">
