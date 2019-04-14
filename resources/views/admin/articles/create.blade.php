@@ -16,7 +16,7 @@ Add Article
             </div>
 
                 <!-- BEGIN FORM-->
-                {!! Form::open(['action'=>'Admin\ArticleController@store','files'=>'true']) !!}
+                {!! Form::open(['action'=>'Admin\Articles\ArticleController@store','files'=>'true']) !!}
           
                     <div class="{{$errors->has('title')?'has-error':''}}" >
                         <div class="form-group form-md-line-input form-md-floating-label">

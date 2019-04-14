@@ -15,7 +15,7 @@ Edit Article
                 </div>
 
                 <!-- BEGIN FORM-->
-                {!!  Form::model($update,['method'=>'PATCH','action'=>['Admin\ArticleController@update',$update->id],'novalidate'=>'novalidate','files'=>'true']) !!}
+                {!!  Form::model($update,['method'=>'PATCH','action'=>['Admin\Articles\ArticleController@update',$update->id],'novalidate'=>'novalidate','files'=>'true']) !!}
           
                       <div class="{{$errors->has('title')?'has-error':''}}" >
                         <div class="form-group form-md-line-input form-md-floating-label">

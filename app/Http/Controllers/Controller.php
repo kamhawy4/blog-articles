@@ -52,21 +52,11 @@ class Controller extends BaseController
             $imag       =  Image::make($path.'/'.$fullename);
             $data       -> merge([$nameMerge=>$fullename]);
 
-            if($subPath && $size != null)
-
-            $img        =   Input::file($nameFile);
-            $ext        =   $img->getClientOriginalExtension();
-            $path       =   public_path().$path;
-            $fullename  =   time().'.'.$ext;
-            $img        ->  move($path,$fullename);
-            $imag       =   Image::make($path.'/'.$fullename);
-            if($subPath && $size  != null)
-             {
+            if($subPath && $size  != null) {
                 $imag->resize($explode[0],$explode[1])->save($path.$subPath.$fullename);
-             }elseif($subPath  == null && $size != null ){
+            }elseif($subPath  == null && $size != null ) {
                 $imag->resize($explode[0],$explode[1])->save($path.'/'.$fullename);
-             }
-
+            }
 
             if($subPath !=  null) {
               $small     =  $path.$subPath.$update->$nameMerge;
