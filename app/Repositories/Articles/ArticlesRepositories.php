@@ -52,6 +52,21 @@ class ArticlesRepositories implements RepositoryInterface
     {
         return $this->model->count();
     }
+
+    public function orderByDesc($coleman)
+    {
+        return $this->model->orderBy('created_at',$coleman);
+    }
+
+    public function whereSlug($slug)
+    {
+        return $this->model->where('slug',$slug)->first();
+    }
+
+    public function ArticleWhereCategorieId($categorieId)
+    {
+        return $this->model->where('categorie_id',$categorieId);
+    }
     
 }
 

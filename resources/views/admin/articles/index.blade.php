@@ -69,11 +69,6 @@ All Articles
                                         </div> 
 
                                         <div class="col-md-4">
-                                           <a class=" btn btn-danger"  onclick='return confirm("Are you sure you want to delete this article?")' href="{{url('/') }}/dashboard/delete/articles/{{$article->id}}">Delete
-                                           </a>
-                                        </div>
-
-                                        <div class="col-md-4">
                                             <a  href="{{url('/')}}/dashboard/articles/{{$article->id}}/edit"><li class="btn btn-primary">Edit</li></a>
                                         </div>
                                     </td>

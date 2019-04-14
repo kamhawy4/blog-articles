@@ -22,17 +22,23 @@ class CommentArticleRepositories implements RepositoryInterface
     {
        return $this->model->where('article_id',$id)->get();
     }
-
-    public function all(){}
-
-    public function store($data){}
-
-    public function update($data,$id){}
-
     public function delete($id){
         $delete = $this->model->findOrFail($id);
         return $delete->delete();
     }
+
+    public function store($data)
+    {
+        return $this->model->create($data->all());
+    }
+    
+    public function all(){}
+
+
+    public function update($data,$id){}
+
+
+
 
 }
 

@@ -67,13 +67,7 @@ All Users
                                       </ul>
 
                                   </div>
-                              </div>
-
-                              <div>
-                                {!! Form::open(['method'  => 'DELETE', 'action' => ['Admin\User\UsersController@destroy', $user->id]]) !!}
-                                   <button onclick='return confirm("Are you sure you want to delete this users?")' type="button">Delete</button>
-                                {!! Form::close() !!}  
-                              </div>                       
+                              </div>                      
                         </td>
                     </tr>
                     @endforeach

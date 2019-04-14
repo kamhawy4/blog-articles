@@ -43,7 +43,7 @@ class Controller extends BaseController
         $explode =  explode(',',$size);
         if($data->hasFile($nameFile))
         {
-<<<<<<< HEAD
+
             $img        =  Input::file($nameFile);
             $ext        =  $img->getClientOriginalExtension();
             $path       =  public_path().$path;
@@ -53,7 +53,7 @@ class Controller extends BaseController
             $data       -> merge([$nameMerge=>$fullename]);
 
             if($subPath && $size != null)
-=======
+
             $img        =   Input::file($nameFile);
             $ext        =   $img->getClientOriginalExtension();
             $path       =   public_path().$path;
@@ -61,25 +61,18 @@ class Controller extends BaseController
             $img        ->  move($path,$fullename);
             $imag       =   Image::make($path.'/'.$fullename);
             if($subPath && $size  != null)
->>>>>>> 64455a33abb6865944a53ecb91e4f4218e123b1d
              {
                 $imag->resize($explode[0],$explode[1])->save($path.$subPath.$fullename);
              }elseif($subPath  == null && $size != null ){
                 $imag->resize($explode[0],$explode[1])->save($path.'/'.$fullename);
              }
-<<<<<<< HEAD
 
-            if($subPath != null){
-                $small     =  $path.$subPath.$update->$nameMerge;
-                File::delete($small);
-=======
-             
-            $data       ->  merge([$nameMerge=>$fullename]);
+
             if($subPath !=  null) {
               $small     =  $path.$subPath.$update->$nameMerge;
               File::delete($small);
->>>>>>> 64455a33abb6865944a53ecb91e4f4218e123b1d
             }
+
             $big        =  $path.'/'.$update->$nameMerge;
             File::delete($big);
         }

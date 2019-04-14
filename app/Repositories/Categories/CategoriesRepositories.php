@@ -52,6 +52,15 @@ class CategoriesRepositories implements RepositoryInterface
         return $this->model->count();
     }
 
+    public function whereSlug($slug)
+    {
+        return $this->model->where('slug',$slug)->first();
+    }
+
+    public function orderByDesc($coleman)
+    {
+        return $this->model->orderBy('created_at',$coleman);
+    }
 
 }
 

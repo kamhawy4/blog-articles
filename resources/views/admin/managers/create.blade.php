@@ -15,7 +15,7 @@ Add a new Manager
                 </div>
             </div>
 
-            {!! Form::open(['action'=>'Admin\ManagersController@store']) !!}
+            {!! Form::open(['action'=>'Admin\Managers\ManagersController@store']) !!}
                 <div class="{{$errors->has('name')?'has-error':''}}" >
                     <div class="form-group form-md-line-input form-md-floating-label">
                         <input type="text" value="{{old('name')}}" class="form-control" name="name" id="form_control_1">

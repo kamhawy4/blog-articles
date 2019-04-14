@@ -67,10 +67,6 @@ Managers
                                               <a href="{{url('/')}}/dashboard/managers/{{$mangaer->id}}/edit">
                                                   <i class="fa fa-pencil"></i> Edit </a>
                                           </li>
-                                          <li>
-                                              <a onclick='return confirm("Are you sure you want to delete this manager?")' href="{{url('/') }}/dashboard/delete/managers/{{$mangaer->id}}">
-                                                  <i class="fa fa-trash-o"></i> Delete </a>
-                                          </li>
                                       </ul>
 
                                   </div>
