@@ -33,11 +33,12 @@ class HtmlHelper
      * @param       $url
      * @param array $attributes
      * @param null  $secure
-     *
      * @return mixed
      */
+
     public function style($url, $attributes = [], $secure = null)
     {
+        
         $defaults = ['media' => 'all', 'type' => 'text/css', 'rel' => 'stylesheet'];
 
         $attributes = $attributes + $defaults;

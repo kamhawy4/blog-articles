@@ -67,8 +67,8 @@
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-(function webpackMissingModule() { throw new Error("Cannot find module \"/var/www/html/blog-articles/src/app.js\""); }());
-(function webpackMissingModule() { throw new Error("Cannot find module \"/var/www/html/blog-articles/src/app.scss\""); }());
+(function webpackMissingModule() { throw new Error("Cannot find module \"/var/www/html/blog-articles/css/app.js\""); }());
+(function webpackMissingModule() { throw new Error("Cannot find module \"/var/www/html/blog-articles/js/app.scss\""); }());
 
 
 /***/ })

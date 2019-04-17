@@ -4,9 +4,11 @@
 <meta charset="utf-8">
 <title>{{ app('setting') ? app('setting')->name_site:''}}</title>
 <!-- Stylesheets -->
-<link href="{{url('/')}}/front/css/bootstrap.css" rel="stylesheet">
-<link href="{{url('/')}}/front/css/style.css" rel="stylesheet">
-<link href="{{url('/')}}/front/css/responsive.css" rel="stylesheet">
+
+{{style('front/css/responsive.css') }}
+{{style('front/css/style.css') }}
+{{style('front/css/bootstrap.css') }}
+
 
 @if(app('setting') != null)
   <link rel="shortcut icon" href="{{ explode(".",app('setting')->fav)[0] == 'http://lorempixel' ?  app('setting') ? app('setting')->fav:'' : url('/')}}/uploads/fav/{{app('setting')->fav }}" type="image/x-icon">
@@ -17,6 +19,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta charset="utf-8"  name="keywords"    content="{{ app('setting') ? app('setting')->meta_keywords:''}}" >
 <meta charset="utf-8"  name="description" content=" {{ app('setting') ? app('setting')->meta_description:''}}">
+
+
 <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
 <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
 </head>
@@ -99,15 +103,16 @@
 
 <!--Scroll to top-->
 <div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-angle-double-up"></span></div>
-<script src="{{url('/')}}/front/js/jquery.js"></script>
-<script src="{{url('/')}}/front/js/bootstrap.min.js"></script>
-<script src="{{url('/')}}/front/js/jquery.fancybox.pack.js"></script>
-<script src="{{url('/')}}/front/js/owl.js"></script>
-<script src="{{url('/')}}/front/js/wow.js"></script>
-<script src="{{url('/')}}/front/js/appear.js"></script>
-<script src="{{url('/')}}/front/js/script.js"></script>
 
 
+{{script('front/js/jquery.js') }}
+{{script('front/js/bootstrap.min.js') }}
+{{script('front/js/jquery.fancybox.pack.js') }}
+{{script('front/js/owl.js') }}
+{{script('front/js/wow.js') }}
+{{script('front/js/appear.js') }}
+{{script('front/js/script.js') }}
+ 
 
 <script type="text/javascript">
    $(document).ready(function(){
