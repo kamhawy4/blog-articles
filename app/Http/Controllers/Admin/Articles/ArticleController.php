@@ -24,10 +24,12 @@ class ArticleController extends Controller
     const NAMEFILE  = 'img';
 	const NAMEMERGE = 'image';
 	
+
 	// space that we can use the repository from
     protected $modelArticles;
     protected $modelCategories;
     protected $modelCommentArticle;
+    
 
 	function __construct(Article $article,Categories $categories,CommentArticle $commentArticle)
 	{

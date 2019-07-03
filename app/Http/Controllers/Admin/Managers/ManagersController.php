@@ -50,6 +50,7 @@ class ManagersController extends Controller
 	    return redirect()->to(url('dashboard/managers'));
 	}
 
+
 	// update Mangaers
 	public function update($id,UpdateUsersRequest $request)
 	{	

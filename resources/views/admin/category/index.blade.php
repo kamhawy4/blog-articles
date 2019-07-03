@@ -146,7 +146,6 @@ Categories
               type:'PUT',
               datatype:'json',
               data:{name,category_id,"_token":"{{csrf_token()}}"},
-
               success:function(data){
 
                  if(data.status == true){
