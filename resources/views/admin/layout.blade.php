@@ -207,6 +207,14 @@ License: You must have a valid license purchased only from themeforest(the above
                             </li>
 
 
+                            <li class="nav-item  {{Request::is('dashboard/social*')?'active':''}}" >
+                                <a href="{{url('/')}}/dashboard/social" >
+                                    <i class="fa fa-link"></i>
+                                    <span class="title"> Social Links </span>
+                                </a>
+                            </li>
+
+
                             <li class="nav-item  {{ Request::is('dashboard/users*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/users" >
                                     <i class="fa fa-user"></i>

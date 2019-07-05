@@ -27,7 +27,8 @@ class CategoriesRepositories implements RepositoryInterface
 
     public function update($data,$id){
       $update = $this->show($id);
-      return $update->update($data->all());
+      $update->update($data->all());
+      return $update;
     }
 
 

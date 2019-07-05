@@ -63,15 +63,15 @@ class CategoriesController extends Controller
         $html         =  view('admin.category.add',compact('allCategory'))->render();
 	    return response()->json([ 'status'=> true,'code'=>200,'result'=>$html]);
 	}
+	
 
 	// update Article 
 	public function update($id,Request $request)
 	{
 		$request   ->  merge(['slug'=>$this->make_slug($request->name)]); 
-		$update     = $this->modelCategories->update($request,$id);
-
+		$update    = $this->modelCategories->update($request,$id);
         //render page  category edit and returm it
-        $html   =  view('admin.category.edit',compact('update'))->render();
+        $html      =  view('admin.category.edit',compact('update'))->render();
 		return response()->json(['status'=>true,'code'=>200,'result'=>$html]);
 	}
 	

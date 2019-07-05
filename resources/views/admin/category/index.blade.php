@@ -143,7 +143,7 @@ Categories
 
             $.ajax({
               url:'{{url('/')}}/dashboard/categorys/'+category_id,
-              type:'PUT',
+              type:'post',
               datatype:'json',
               data:{name,category_id,"_token":"{{csrf_token()}}"},
               success:function(data){

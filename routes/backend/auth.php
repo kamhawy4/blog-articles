@@ -31,6 +31,24 @@ Route::group(['middleware' => 'admin:managers'  ],function () {
     });
 
 
+     // social Management
+    Route::group(['namespace' => 'Social'], function () {
+        Route::get('social'         , 'SocialController@index')->name('social.index');
+        Route::get('social/create'  , 'SocialController@create')->name('social.create');
+        Route::post('social'        , 'SocialController@store')->name('social.store');
+        Route::post('delete/social' , 'SocialController@deleteSocial')->name('social.DeleteMuiltsocial');
+        // Specific social
+        Route::group(['prefix' => 'social/{social}'], function () {
+            // social
+            Route::get('/'             , 'SocialController@show')->name('social.show');
+            Route::get('edit'          , 'SocialController@edit')->name('social.edit');
+            Route::post('/'            , 'SocialController@update')->name('social.update');
+            Route::delete('/'          , 'SocialController@destroy')->name('social.destroy');
+        });
+    });
+
+
+
     // categorys Management
     Route::group(['namespace' => 'Categories'], function () {
         Route::get('categorys'         , 'CategoriesController@index')->name('categorys.index');
@@ -42,7 +60,7 @@ Route::group(['middleware' => 'admin:managers'  ],function () {
             // categorys
             Route::get('/'             , 'CategoriesController@show')->name('categorys.show');
             Route::get('edit'          , 'CategoriesController@edit')->name('categorys.edit');
-            Route::patch('/'           , 'CategoriesController@update')->name('categorys.update');
+            Route::post('/'            , 'CategoriesController@update')->name('categorys.update');
             Route::delete('/'          , 'CategoriesController@destroy')->name('categorys.destroy');
         });
     });
