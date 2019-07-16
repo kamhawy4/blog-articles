@@ -64,7 +64,7 @@ All Articles
 
                                     <td>
                                         <div class="col-md-4">
-                                           <a class=" btn btn-info"  href="{{url('/') }}/dashboard/articles/comments/{{$article->id}}" >Comments
+                                           <a class=" btn btn-info"  href="{{url('/') }}/dashboard/article/comments/{{$article->id}}" >Comments
                                            </a>
                                         </div> 
 

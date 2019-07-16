@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Repositories\Articles\CommentArticle;
+namespace App\Repositories\CommentArticle;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Repositories\RepositoryInterface;
 use Auth;
-
 
 class CommentArticleRepositories implements RepositoryInterface
 {	
@@ -22,6 +21,7 @@ class CommentArticleRepositories implements RepositoryInterface
     {
        return $this->model->where('article_id',$id)->get();
     }
+
     public function delete($id){
         $delete = $this->model->findOrFail($id);
         return $delete->delete();

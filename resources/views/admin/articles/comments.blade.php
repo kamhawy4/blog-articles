@@ -37,7 +37,7 @@
                                     <td>{{$commentArticle->title}}</td>
                                    <td>
                                        <div class="col-md-6">
-                                           <a class=" btn btn-danger"  onclick='return confirm("Are you sure you want to delete this comment?")' href="{{url('/') }}/dashboard/comments/delete/{{$commentArticle->id}}" >Delete
+                                           <a class=" btn btn-danger"  onclick='return confirm("Are you sure you want to delete this comment?")' href="{{url('/') }}/dashboard/article/comments/{{$commentArticle->id}}/delete" >Delete
                                            </a>
                                         </div>
                                     </td>

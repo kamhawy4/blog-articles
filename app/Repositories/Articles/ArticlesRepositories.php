@@ -18,6 +18,7 @@ class ArticlesRepositories implements RepositoryInterface
 
 	public function all()
 	{
+        
        return $this->model->all();
 	}
 

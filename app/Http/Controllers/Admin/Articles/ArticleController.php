@@ -11,7 +11,7 @@ use App\Http\Requests\Articles\UpdateArticlesRequest;
 use App\Models\Categories,App\Models\Article,App\Models\CommentArticle;
 use Storage,Session,Image,Auth,DB,File;
 use App\Repositories\Articles\ArticlesRepositories;
-use App\Repositories\Articles\CommentArticle\CommentArticleRepositories;
+use App\Repositories\CommentArticle\CommentArticleRepositories;
 use App\Repositories\Categories\CategoriesRepositories;
 
 
@@ -33,6 +33,7 @@ class ArticleController extends Controller
 
 	function __construct(Article $article,Categories $categories,CommentArticle $commentArticle)
 	{
+
 	  $this->modelArticles       = new ArticlesRepositories($article);
 	  $this->modelCategories     = new CategoriesRepositories($categories);
 	  $this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
@@ -98,21 +99,6 @@ class ArticleController extends Controller
 		return redirect()->to(url('dashboard/articles'));
 	}
 
-
-    // return  Comments by article_id
-	public function CommentsArticle($id)
-	{
-      $commentArticles = $this->modelCommentArticle->show($id);
-	  return view('admin.articles.comments',compact('commentArticles'));
-	}
-   
-    // Delete Comments by id
-	public function DeleteComments($id)
-	{
-		$this->modelCommentArticle->delete($id);
-		session()->flash('success','Successfully deleted');
-		return back();
-	}
     
     // destroy Article by id 
 	public function destroy($id)
@@ -121,6 +107,7 @@ class ArticleController extends Controller
 		session()->flash('success','Successfully deleted');
 		return redirect()->to(url('dashboard/articles'));
 	}
+
 
     // destroy Multi Article by id 
 	public function DeleteArticle(Request $request)
@@ -135,4 +122,5 @@ class ArticleController extends Controller
 		   return back();
         } 
     }
+
 }

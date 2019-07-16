@@ -237,7 +237,15 @@ License: You must have a valid license purchased only from themeforest(the above
                             </li> 
 
 
-                             <li class="nav-item  {{Request::is('dashboard/articles*')?'active':''}}" >
+                            <li class="nav-item  {{Request::is('dashboard/tags*')?'active':''}}" >
+                                <a href="{{url('/')}}/dashboard/tags" >
+                                    <i class="fa fa-tags"></i>
+                                    <span class="title"> Tags </span>
+                                </a>
+                            </li> 
+
+
+                             <li class="nav-item  {{Request::is('dashboard/articles*')?'active':''}} {{Request::is('dashboard/article*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/articles" >
                                     <i class="fa fa-newspaper-o"></i>
                                     <span class="title"> Articles </span>

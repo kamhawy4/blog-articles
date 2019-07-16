@@ -67,6 +67,23 @@ Route::group(['middleware' => 'admin:managers'  ],function () {
 
 
 
+    // tags Management
+    Route::group(['namespace' => 'Tags'], function () {
+        Route::get('tags'         , 'TagsController@index')->name('tags.index');
+        Route::get('tags/create'  , 'TagsController@create')->name('tags.create');
+        Route::post('tags'        , 'TagsController@store')->name('tags.store');
+        Route::post('delete/tags' , 'TagsController@deleteTgas')->name('tags.DeleteMuiltTags');
+        // Specific tags
+        Route::group(['prefix' => 'tags/{category}'], function () {
+            // tags
+            Route::get('/'             , 'TagsController@show')->name('tags.show');
+            Route::get('edit'          , 'TagsController@edit')->name('tags.edit');
+            Route::post('/'            , 'TagsController@update')->name('tags.update');
+            Route::delete('/'          , 'TagsController@destroy')->name('tags.destroy');
+        });
+    });
+
+
     // Managers Management
     Route::group(['namespace' => 'Managers'], function () {
         Route::get('managers'         , 'ManagersController@index')->name('managers.index');
@@ -84,7 +101,7 @@ Route::group(['middleware' => 'admin:managers'  ],function () {
     });
 
 
-    // Articles Management
+    // Articles Managementdashboard
     Route::group(['namespace' => 'Articles'], function () {
         Route::get('articles'         , 'ArticleController@index')->name('articles.index');
         Route::get('articles/create'  , 'ArticleController@create')->name('articles.create');
@@ -100,7 +117,18 @@ Route::group(['middleware' => 'admin:managers'  ],function () {
         });
     });
 
+    // Articles Comments Management
+    Route::group(['namespace' => 'Comments','prefix' => 'article/comments/{article_id}'], function () {
+        // Articles
+        Route::get('/'          ,'CommentsController@CommentsArticle')->name('Comments.CommentsArticle');
+        Route::get('/delete'    ,'CommentsController@DeleteComments')->name('Comments.destroy');
+    });
 
-    Route::get('/logout','LoginManagersController@Logout'); //Logout
+
+    // Logout
+    Route::group(['namespace' => 'Login'], function () {
+        Route::get('/logout','LoginManagersController@Logout'); //Logout
+    });
+
 
 });
