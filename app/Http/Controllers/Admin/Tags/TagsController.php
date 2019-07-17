@@ -6,10 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\Tags;
-
-use App\Http\Requests\Tags\StoreTagsRequest;
-use App\Http\Requests\Tags\UpdateTagsRequest;
 use App\Repositories\Tags\TagsRepositories;
+
+use Validator;
 
 class TagsController extends Controller
 {
@@ -42,37 +41,42 @@ class TagsController extends Controller
 
   
 	// Store tags 
-	public function store(StoreTagsRequest $request)
+	public function store(Request $request)
 	{
-	    $tags =  Tags::get();
-	    if(count($tags) > 0) 
-	    {
-		   foreach ($tags as  $value) 
-		    {
-		    	if($value->name == $request->name)
-		    	{
-		    	  return response()->json(['status'=>false,'code'=>300]);
-		    	}
-		    }
-		}
-        
+	   $validator = Validator::make($request->all(), [
+           'name'  =>'required|max:150|unique:tags',
+       ]);   
+
+     if ($validator->passes()) {
         // Merge Slug and tags Create  
         $request      -> merge(['slug'=>$this->make_slug($request->name)]); 
         $allTags       =  $this->modelTags->store($request);
         // render page  tags create and returm it
         $html         =  view('admin.tags.add',compact('allTags'))->render();
 	    return response()->json([ 'status'=> true,'code'=>200,'result'=>$html]);
+	  }
+
+       return response()->json(['error'=>$validator->errors()->all()]);
+
 	}
 	
 
 	// update tags 
 	public function update($id,Request $request)
 	{
-		$request   ->  merge(['slug'=>$this->make_slug($request->name)]); 
-		$update    = $this->modelTags->update($request,$id);
-        //render page  tags edit and returm it
-        $html      =  view('admin.tags.edit',compact('update'))->render();
-		return response()->json(['status'=>true,'code'=>200,'result'=>$html]);
+		$validator = Validator::make($request->all(),[
+           'name'  =>'required|max:150',
+        ]); 
+
+	    if($validator->passes()) {
+			$request   ->  merge(['slug'=>$this->make_slug($request->name)]); 
+			$update    = $this->modelTags->update($request,$id);
+	        //render page  tags edit and returm it
+	        $html      =  view('admin.tags.edit',compact('update'))->render();
+			return response()->json(['status'=>true,'code'=>200,'result'=>$html]);
+		}
+
+      return response()->json(['error'=>$validator->errors()->all()]);
 	}
 	
 
@@ -88,7 +92,7 @@ class TagsController extends Controller
     // destroy Multi tags by id
 	public function deleteTgas(Request $request)
 	{
-        if($request->check != '')
+        if(!empty($request->check))
         {
 		   $this->modelTags->deleteTagsCheck($request->check);
 		  session()->flash('save','Successfully deleted');

@@ -8,11 +8,11 @@ use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use App\Http\Requests\Articles\StoreArticlesRequest;
 use App\Http\Requests\Articles\UpdateArticlesRequest;
-use App\Models\Categories,App\Models\Article,App\Models\CommentArticle;
-use Storage,Session,Image,Auth,DB,File;
 use App\Repositories\Articles\ArticlesRepositories;
 use App\Repositories\CommentArticle\CommentArticleRepositories;
 use App\Repositories\Categories\CategoriesRepositories;
+use App\Models\Categories,App\Models\Article,App\Models\CommentArticle;
+use Storage,Session,Image,Auth,DB,File;
 
 
 class ArticleController extends Controller
@@ -112,7 +112,7 @@ class ArticleController extends Controller
     // destroy Multi Article by id 
 	public function DeleteArticle(Request $request)
 	{
-        if($request->check != '')
+        if(!empty($request->check))
         {
 		   $this->modelArticles->deleteArticalCheck($request->check);
 		   session()->flash('success','Successfully deleted');

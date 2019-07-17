@@ -6,10 +6,9 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\Categories;
-
-use App\Http\Requests\Categories\StoreCategoriesRequest;
-use App\Http\Requests\Categories\UpdateCategoriesRequest;
 use App\Repositories\Categories\CategoriesRepositories;
+
+use Validator;
 
 class CategoriesController extends Controller
 {
@@ -17,7 +16,7 @@ class CategoriesController extends Controller
 
 	public function __construct(Categories $categories)
 	{
-		$this->modelCategories       = new CategoriesRepositories($categories);	   
+		$this->modelCategories  = new CategoriesRepositories($categories);	   
 	}
 
    // Return view page index Categories And Return All Categories
@@ -42,37 +41,41 @@ class CategoriesController extends Controller
 
   
 	// Store Categorie 
-	public function store(StoreCategoriesRequest $request)
+	public function store(Request $request)
 	{
-	    $categorys =  Categories::get();
-	    if(count($categorys) > 0) 
-	    {
-		   foreach ($categorys as  $value) 
-		    {
-		    	if($value->name == $request->name)
-		    	{
-		    	  return response()->json(['status'=>false,'code'=>300]);
-		    	}
-		    }
-		}
-        
-        // Merge Slug and Categories Create  
-        $request      -> merge(['slug'=>$this->make_slug($request->name)]); 
-        $allCategory  =  $this->modelCategories->store($request);
-        // render page  category create and returm it
-        $html         =  view('admin.category.add',compact('allCategory'))->render();
-	    return response()->json([ 'status'=> true,'code'=>200,'result'=>$html]);
+		$validator = Validator::make($request->all(), [
+            'name'  =>'required|max:150|unique:categories',
+        ]);
+
+		if ($validator->passes()) {
+	        // Merge Slug and Categories Create  
+	        $request      -> merge(['slug'=>$this->make_slug($request->name)]); 
+	        $allCategory  =  $this->modelCategories->store($request);
+	        // render page  category create and returm it
+	        $html         =  view('admin.category.add',compact('allCategory'))->render();
+		    return response()->json([ 'status'=> true,'code'=>200,'result'=>$html]);
+        }
+
+    	return response()->json(['error'=>$validator->errors()->all()]);
 	}
 	
 
-	// update Article 
+	// Update Categories 
 	public function update($id,Request $request)
 	{
-		$request   ->  merge(['slug'=>$this->make_slug($request->name)]); 
-		$update    = $this->modelCategories->update($request,$id);
-        //render page  category edit and returm it
-        $html      =  view('admin.category.edit',compact('update'))->render();
-		return response()->json(['status'=>true,'code'=>200,'result'=>$html]);
+		$validator = Validator::make($request->all(), [
+            'name'  =>'required|max:150',
+        ]);
+
+		if ($validator->passes()) {
+			$request   ->  merge(['slug'=>$this->make_slug($request->name)]); 
+			$update    = $this->modelCategories->update($request,$id);
+	        //render page  category edit and returm it
+	        $html      =  view('admin.category.edit',compact('update'))->render();
+			return response()->json(['status'=>true,'code'=>200,'result'=>$html]);
+        }
+
+    	return response()->json(['error'=>$validator->errors()->all()]);
 	}
 	
 
@@ -88,7 +91,7 @@ class CategoriesController extends Controller
     // destroy Multi Categories by id
 	public function deleteCategorys(Request $request)
 	{
-        if($request->check != '')
+        if(!empty($request->check))
         {
 		   $this->modelCategories->deleteCategoriesCheck($request->check);
 		  session()->flash('save','Successfully deleted');

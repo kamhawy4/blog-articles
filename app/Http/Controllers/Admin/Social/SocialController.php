@@ -73,7 +73,7 @@ class SocialController extends Controller
     // destroy Multi Social by id
 	public function deleteSocial(Request $request)
 	{
-        if($request->check != '')
+        if(!empty($request->check))
         {
 		   $this->modelSocialLinks->deleteSocialCheck($request->check);
 		  session()->flash('save','Successfully deleted');

@@ -27,6 +27,9 @@ Categories
   </div>
 </div>
 
+<div class="alert alert-danger print-error-msg" style="display:none">
+    <ul></ul>
+</div>
 
 <p id="msg" style="padding: 20px;display: none;" class="bg-success">   Has been Successfully Added </p>
 
@@ -134,13 +137,7 @@ Categories
      $(document).ready(function(){
           $('#save-edit').click(function(e){ e.preventDefault();
             var name  =  $('#message-text2').val();
-             if(name == '')
-             {
-               alert('You can not add empty values');
-               return false;
-             }
             var category_id = $('input[name="idedit"]').val();
-
             $.ajax({
               url:'{{url('/')}}/dashboard/categorys/'+category_id,
               type:'post',
@@ -152,15 +149,22 @@ Categories
                     $('#tr-type'+category_id).replaceWith(data.result);
                     $('input[name="categray"]').val(' ');
                     $("#msg").fadeIn().delay(3000).fadeOut(); 
-                  }
-
-                  if(data.code == 404) {
-                  $('input[name="categray"]').val(' ');
-                  $("#failed").fadeIn().delay(3000).fadeOut();
-                  }       
+                  }else{
+                      printErrorMsg(data.error);
+                    }
               }
             });
           });
+
+          function printErrorMsg (msg) {
+            $(".print-error-msg").find("ul").html('');
+            $(".print-error-msg").css('display','block');
+            $.each( msg, function( key, value ) {
+                $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+                $(".print-error-msg").fadeIn().delay(3000).fadeOut();
+            });
+          }
+
           });
 </script>
 
@@ -175,55 +179,40 @@ Categories
     });
 </script>
 
-
-
-
 <script type="text/javascript">
-
   $(document).ready(function() {
-
         $('#send').click(function(e){e.preventDefault();
 
                 $('.dataTables_empty').remove();
-                
                 var name   =  $('input[name="categray"]').val();
-
-                if(name == '')
-                {
-                  alert('You can not add empty values');
-                  return false;
-                }
-
                 $.ajax({
-
                   url:'{{url('/')}}/dashboard/categorys',
                   type:'post',
                   dataType:'json',
                   data:{name,"_token": "{{ csrf_token() }}"},
-
                   success:function(data)
                   {
-                    if(data.code == 300)
-                    { 
-                      alert('This value already exists');
-                      return false;
-                    }
-
                     if(data.status == true)
                     {
                       $('.table').prepend(data.result);
                       $('input[name="categray"]').val(' ');
                       $("#msg").fadeIn().delay(3000).fadeOut();
+                    }else{
+                      printErrorMsg(data.error);
                     }
-
-                    if(data.code == 404) 
-                    {
-                     $('input[name="categray"]').val(' ');
-                     $("#failed").fadeIn().delay(3000).fadeOut();
-                    }
+                    
                   }
              });
         });
+
+       function printErrorMsg (msg) {
+          $(".print-error-msg").find("ul").html('');
+          $(".print-error-msg").css('display','block');
+          $.each( msg, function( key, value ) {
+              $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+              $(".print-error-msg").fadeIn().delay(3000).fadeOut();
+          });
+        }
   });  
 </script>
 

@@ -27,6 +27,9 @@ Tags
   </div>
 </div>
 
+<div class="alert alert-danger print-error-msg" style="display:none">
+    <ul></ul>
+</div>
 
 <p id="msg" style="padding: 20px;display: none;" class="bg-success">   Has been Successfully Added </p>
 
@@ -134,13 +137,7 @@ Tags
      $(document).ready(function(){
           $('#save-edit').click(function(e){ e.preventDefault();
             var name  =  $('#message-text2').val();
-             if(name == '')
-             {
-               alert('You can not add empty values');
-               return false;
-             }
             var tag_id = $('input[name="idedit"]').val();
-
             $.ajax({
               url:'{{url('/')}}/dashboard/tags/'+tag_id,
               type:'post',
@@ -152,16 +149,22 @@ Tags
                     $('#tr-type'+tag_id).replaceWith(data.result);
                     $('input[name="tag"]').val(' ');
                     $("#msg").fadeIn().delay(3000).fadeOut(); 
-                  }
-
-                  if(data.code == 404) {
-                  $('input[name="tag"]').val(' ');
-                  $("#failed").fadeIn().delay(3000).fadeOut();
-                  }       
+                  }else{
+                      printErrorMsg(data.error);
+                  }  
               }
             });
           });
-          });
+
+          function printErrorMsg (msg) {
+            $(".print-error-msg").find("ul").html('');
+            $(".print-error-msg").css('display','block');
+            $.each( msg, function( key, value ) {
+                $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+                $(".print-error-msg").fadeIn().delay(3000).fadeOut();
+            });
+          }
+    });
 </script>
 
 
@@ -181,21 +184,10 @@ Tags
 <script type="text/javascript">
 
   $(document).ready(function() {
-
         $('#send').click(function(e){e.preventDefault();
-
                 $('.dataTables_empty').remove();
-                
                 var name   =  $('input[name="tag"]').val();
-
-                if(name == '')
-                {
-                  alert('You can not add empty values');
-                  return false;
-                }
-
                 $.ajax({
-
                   url:'{{url('/')}}/dashboard/tags',
                   type:'post',
                   dataType:'json',
@@ -203,27 +195,26 @@ Tags
 
                   success:function(data)
                   {
-                    if(data.code == 300)
-                    { 
-                      alert('This value already exists');
-                      return false;
-                    }
-
                     if(data.status == true)
                     {
                       $('.table').prepend(data.result);
                       $('input[name="tag"]').val(' ');
                       $("#msg").fadeIn().delay(3000).fadeOut();
-                    }
-
-                    if(data.code == 404) 
-                    {
-                     $('input[name="tag"]').val(' ');
-                     $("#failed").fadeIn().delay(3000).fadeOut();
+                    }else{
+                      printErrorMsg(data.error);
                     }
                   }
              });
         });
+
+        function printErrorMsg (msg) {
+            $(".print-error-msg").find("ul").html('');
+            $(".print-error-msg").css('display','block');
+            $.each( msg, function( key, value ) {
+                $(".print-error-msg").find("ul").append('<li>'+value+'</li>');
+                $(".print-error-msg").fadeIn().delay(3000).fadeOut();
+            });
+          }
   });  
 </script>
 

@@ -29,8 +29,8 @@ class ArticlesRepositories implements RepositoryInterface
 
     public function update($data,$id)
     {
-        $update = $this->show($id);
-        $update->update($data->all());
+      $update = $this->show($id);
+      $update->update($data->all());
     }
 
     public function show($id)

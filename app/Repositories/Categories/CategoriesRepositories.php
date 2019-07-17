@@ -22,7 +22,7 @@ class CategoriesRepositories implements RepositoryInterface
 
     public function store($data)
     {
-        return $this->model->create($data->all());
+       return $this->model->create($data->all());
     }
 
     public function update($data,$id){
@@ -30,7 +30,6 @@ class CategoriesRepositories implements RepositoryInterface
       $update->update($data->all());
       return $update;
     }
-
 
     public function delete($id)
     {

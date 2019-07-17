@@ -84,11 +84,12 @@ class ManagersController extends Controller
     // destroy Multi Mangaers by id
 	public function DeleteMangaers(Request $request)
 	{
-	  if($request->check != '')
-	  {
+	  if(!empty($request->check))
+      {
 		$this->modelManagers->deleteMangaersCheck($request->check);
 		session()->flash('success','Data deleted successfully');
 		return back();
+	  }else{
 	  	session()->flash('warning','Please select a manager at least');
 	  	return back();
 	  }	

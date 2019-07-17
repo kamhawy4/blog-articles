@@ -72,7 +72,6 @@ class UsersController extends Controller
     // destroy Users by id
 	public function destroy($id)
 	{
-		dd($id);
 	   $this->modelUsers->delete($id);
 	   session()->flash('success','The manager was successfully deleted');
 	   return redirect()->to(url('dashboard/users'));
@@ -81,8 +80,8 @@ class UsersController extends Controller
     // destroy Multi Users by id
 	public function DeleteUsers(Request $request)
 	{
-	  if($request->check != '')
-	  {
+	  if(!empty($request->check))
+      {
 		$this->modelUsers->deleteUsersCheck($request->check);
 		session()->flash('success','Data deleted successfully');
 		return back();
