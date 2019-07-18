@@ -3,7 +3,7 @@
 // All route names are prefixed with 'dashboard'.
 Route::group(['middleware' => 'admin:managers'  ],function () {
 
-    // Settings
+    // Dashboard
     Route::group(['namespace' => 'Dashboard'], function () {
         Route::resource('/'  ,'DashboardController'); // Dashboard 
     });
