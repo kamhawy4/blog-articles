@@ -9,9 +9,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Input;
 use Session,Image,Auth,DB,File;
 
-
 class Controller extends BaseController
 {
+
 
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 

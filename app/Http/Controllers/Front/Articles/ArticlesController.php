@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Settings,App\Models\Article,App\Models\Categories,App\Models\CommentArticle;
 use App\Repositories\Articles\ArticlesRepositories;
-use App\Repositories\Articles\CommentArticle\CommentArticleRepositories;
+use App\Repositories\CommentArticle\CommentArticleRepositories;
 
 class ArticlesController extends Controller
 {
@@ -19,6 +19,7 @@ class ArticlesController extends Controller
     {
       $this->modelArticles       = new ArticlesRepositories($article);
       $this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
+      
     }
 
     /**
