@@ -127,7 +127,8 @@ Route::group(['middleware' => 'auth:api' ],function () {
 
     // Logout
     Route::group(['namespace' => 'Login'], function () {
-        Route::get('/logout','LoginManagersController@Logout'); //Logout
+        Route::get('logout', 'AuthController@logout');
+        Route::get('user'  , 'AuthController@user');
     });
 
 
