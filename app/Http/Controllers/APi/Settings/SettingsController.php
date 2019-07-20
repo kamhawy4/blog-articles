@@ -19,7 +19,7 @@ class SettingsController extends Controller
     $this->modelSettings     = new SettingsRepositories($settings);
   }
 
-  // Return view page settings And Return first Settings
+  // Return Settings
   public function index()
   {
     $setting =  $this->modelSettings->all();

@@ -17,10 +17,14 @@ class ArticlesRepositories implements RepositoryInterface
 	}
 
 	public function all()
-	{
-        
+	{   
        return $this->model->all();
 	}
+
+    public function pagination($count)
+    {   
+       return $this->model->paginate($count);
+    }
 
     public function store($data)
     {

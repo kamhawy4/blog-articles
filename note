@@ -1,8 +1,21 @@
 1 = charts in dashboard
 
 
-2 = EdIT CODE -> check exits name in tageConreoller and CategoryConreoller
 
+/////////////////////
 
-3 = try work by name route 
+1 = get all social links ::  xxxxxxxxxxxxxxx
 
+2 = get all artical by Pagination -> 10 :: xxxxxxxxxxxxxxx
+
+3 = get artical ::  Recent artical -> 5 :: xxxxxxxxxxxxxxx
+
+4 = get all tags :: xxxxxxxxxxxxxxx
+
+6 = get all categroy with count artical Located inside the categroy :: xxxxxxxxxxxxxxxxx
+
+7 = get all  artical by categroy by Pagination :: ....................
+
+5 = get all  artical by tag by Pagination 
+
+8 = get single artical by id with tags and comments and count comments and can post comment

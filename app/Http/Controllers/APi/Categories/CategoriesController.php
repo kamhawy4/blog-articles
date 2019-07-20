@@ -18,10 +18,15 @@ class CategoriesController extends Controller
 		$this->modelCategories  = new CategoriesRepositories($categories);	   
 	}
 
-   // Return api Categories And Return All Categories
+   // Return All Categories  
     public function index()
     {
       $categorys = $this->modelCategories->all();
+      if(!$categorys->isEmpty()){
+      foreach ($categorys as  $category) {
+        $category->count_artical =  $category->getArticls->count();
+       }
+      }
       return response()->json(['status'=>true,'code'=>200,'response'=>$categorys]);
     }
 

@@ -28,7 +28,7 @@ return array(
     'App\\Http\\Controllers\\Api\\Categories\\CategoriesController' => $baseDir . '/app/Http/Controllers/APi/Categories/CategoriesController.php',
     'App\\Http\\Controllers\\Api\\Comments\\CommentsController' => $baseDir . '/app/Http/Controllers/APi/Comments/CommentsController.php',
     'App\\Http\\Controllers\\Api\\Dashboard\\DashboardController' => $baseDir . '/app/Http/Controllers/APi/Dashboard/DashboardController.php',
-    'App\\Http\\Controllers\\Api\\Login\\LoginManagersController' => $baseDir . '/app/Http/Controllers/APi/Login/LoginManagersController.php',
+    'App\\Http\\Controllers\\Api\\Login\\AuthController' => $baseDir . '/app/Http/Controllers/APi/Login/AuthController.php',
     'App\\Http\\Controllers\\Api\\Managers\\ManagersController' => $baseDir . '/app/Http/Controllers/APi/Managers/ManagersController.php',
     'App\\Http\\Controllers\\Api\\Settings\\SettingsController' => $baseDir . '/app/Http/Controllers/APi/Settings/SettingsController.php',
     'App\\Http\\Controllers\\Api\\Social\\SocialController' => $baseDir . '/app/Http/Controllers/APi/Social/SocialController.php',

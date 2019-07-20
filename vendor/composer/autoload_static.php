@@ -499,7 +499,7 @@ class ComposerStaticInit185c63e858feb130c744bbf67439d711
         'App\\Http\\Controllers\\Api\\Categories\\CategoriesController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Categories/CategoriesController.php',
         'App\\Http\\Controllers\\Api\\Comments\\CommentsController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Comments/CommentsController.php',
         'App\\Http\\Controllers\\Api\\Dashboard\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Dashboard/DashboardController.php',
-        'App\\Http\\Controllers\\Api\\Login\\LoginManagersController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Login/LoginManagersController.php',
+        'App\\Http\\Controllers\\Api\\Login\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Login/AuthController.php',
         'App\\Http\\Controllers\\Api\\Managers\\ManagersController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Managers/ManagersController.php',
         'App\\Http\\Controllers\\Api\\Settings\\SettingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Settings/SettingsController.php',
         'App\\Http\\Controllers\\Api\\Social\\SocialController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Social/SocialController.php',
