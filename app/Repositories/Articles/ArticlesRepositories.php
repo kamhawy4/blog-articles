@@ -10,14 +10,16 @@ class ArticlesRepositories implements RepositoryInterface
 {	
 	// model property on class instances
     protected $model;
+    protected $articleTags;
 
-	function __construct(Model $model)
+	function __construct(Model $model,Model $articleTags)
 	{
-		$this->model = $model;
+    $this->model = $model;
+		$this->articleTags  = $articleTags;
 	}
 
 	public function all()
-	{   
+	{
        return $this->model->all();
 	}
 
@@ -31,10 +33,35 @@ class ArticlesRepositories implements RepositoryInterface
         return $this->model->create($data->all());
     }
 
+    public function storeTgas($tags_id,$article_id)
+    {
+        foreach($tags_id as $tag_id) {
+          $this->articleTags->create(['tag_id'=>$tag_id,'article_id'=>$article_id]);
+        }
+        return;
+    }
+
+    public function whereTagsArticalId($id)
+    {
+       $tagsArticle = $this->articleTags->where('article_id',$id)->get(); 
+       $arrayArtical = [];
+       foreach ($tagsArticle as  $tagArticle) 
+       {
+         $arrayArtical[] = $tagArticle->tag_id;
+       }
+       return $arrayArtical;
+    }
+
     public function update($data,$id)
     {
       $update = $this->show($id);
       $update->update($data->all());
+    }
+
+    public function updateTgasArticles($tags_id,$article_id)
+    {
+      $article = $this->model->findOrFail($article_id);
+      $article->GetTags()->sync($tags_id);
     }
 
     public function show($id)

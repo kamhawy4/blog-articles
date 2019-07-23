@@ -18,6 +18,13 @@ class Article extends Model
     	return $this->belongsTo('App\Models\Categories','categorie_id');
     }
 
+    public function GetTags()
+    {
+    // We have already created pivot table for articles and tags
+    return $this->belongsToMany(ArticleTags::class,'article_tags','article_id','tag_id');
+    }
+    
+
     /*
     *  delete article image in folder uploads  When delete Articles data
     */

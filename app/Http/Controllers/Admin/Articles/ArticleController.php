@@ -11,7 +11,8 @@ use App\Http\Requests\Articles\UpdateArticlesRequest;
 use App\Repositories\Articles\ArticlesRepositories;
 use App\Repositories\CommentArticle\CommentArticleRepositories;
 use App\Repositories\Categories\CategoriesRepositories;
-use App\Models\Categories,App\Models\Article,App\Models\CommentArticle;
+use App\Repositories\Tags\TagsRepositories;
+use App\Models\Categories,App\Models\Article,App\Models\CommentArticle,App\Models\Tags,App\Models\ArticleTags;
 use Storage,Session,Image,Auth,DB,File;
 
 
@@ -27,16 +28,17 @@ class ArticleController extends Controller
 
 	// space that we can use the repository from
     protected $modelArticles;
+    protected $modelTags;
     protected $modelCategories;
     protected $modelCommentArticle;
     
 
-	function __construct(Article $article,Categories $categories,CommentArticle $commentArticle)
+	function __construct(Article $article,Tags $tags,Categories $categories,CommentArticle $commentArticle,ArticleTags $articleTags)
 	{
-
-	  $this->modelArticles       = new ArticlesRepositories($article);
+	  $this->modelArticles       = new ArticlesRepositories($article,$articleTags);
 	  $this->modelCategories     = new CategoriesRepositories($categories);
 	  $this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
+	  $this->modelTags           = new TagsRepositories($tags);
 	}
 
 	// Return view page index articles And Return All Articles	 
@@ -51,15 +53,19 @@ class ArticleController extends Controller
     public function create()
     {  
        $categorys = $this->modelCategories->all();
-       return view('admin.articles.create',compact('categorys'));   
+       $tags      = $this->modelTags->all();
+       return view('admin.articles.create',compact('categorys','tags'));   
     }
 
 	// Return view page Edit Article And Return article by id and All Categories
     public function edit($id)
     {
-	   $update    =  $this->modelArticles->show($id);
-       $categorys =  $this->modelCategories->all();
-       return view('admin.articles.edit',compact('update','categorys'));
+	   $update       =  $this->modelArticles->show($id);
+       $categorys    =  $this->modelCategories->all();
+       $tags         =  $this->modelTags->all();
+       $tagsArticle  =  $this->modelArticles->whereTagsArticalId($id);
+
+       return view('admin.articles.edit',compact('update','categorys','tags','tagsArticle'));
     }
 
  
@@ -73,8 +79,12 @@ class ArticleController extends Controller
         $request  -> merge(['author'=>Auth::guard('managers')->user()->name]); 
         $request  -> merge(['slug'=>$this->make_slug($request->title)]);
 
-        // repo store data
-        $this->modelArticles->store($request);
+
+        // repo store data artical
+        $data =  $this->modelArticles->store($request);
+
+        // repo store data tags  
+        $this->modelArticles->storeTgas($request->tags,$data->id);
 
 	    session()->flash('success','Article added successfully');
 	    return redirect()->to(url('dashboard/articles'));
@@ -83,7 +93,7 @@ class ArticleController extends Controller
 
 	// update Article 
 	public function update($id,UpdateArticlesRequest $request)
-	{
+	{  
 		// Get Article by id And Merge Slug  
 	    $update    =  $this->modelArticles->show($id);
 		$request  ->  merge(['slug'=>$this->make_slug($request->title)]);
@@ -93,6 +103,9 @@ class ArticleController extends Controller
         
         //update data
         $this->modelArticles->update($request,$id);
+
+        // repo Update data tags
+        $this->modelArticles->updateTgasArticles($request->tags,$id);
 
         // Message success After Update
 		session()  -> flash('success','Modified successfully');

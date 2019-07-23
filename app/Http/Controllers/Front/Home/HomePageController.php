@@ -37,7 +37,7 @@ class HomePageController extends Controller
     public function Categorie($slug)
     {
       $categorie       = $this->modelCategories->whereSlug($slug);
-      $articles        = $this->modelArticles->ArticleWhereCategorieId($categorie->id)->orderByDesc('desc')->paginate(10);
+      $articles        = $this->modelArticles->ArticleWhereCategorieId($categorie->id)->paginate(10);
       return view('front.categories.index',compact('categorie','articles'));
     }
     

@@ -17,6 +17,13 @@ Route::group(['middleware' => 'auth:api' ],function () {
     Route::group(['namespace' => 'Articles'], function () {
          Route::get('articles','ArticleController@index'); //Articles 
          Route::get('recent/artical','ArticleController@RecentArtical'); //Recent Artical 
+         // Specific Articles
+        Route::group(['prefix' => 'articles/{id}'], function () {
+            Route::get('/'            , 'ArticleController@ArticleById'); // Article by id
+        });
+        Route::group(['prefix' => 'articles/categroy/{id}'], function () {
+            Route::get('/'            , 'ArticleController@ArticlesByCategroy'); // Articles by Categroy
+        });
     });
 
     // Categories

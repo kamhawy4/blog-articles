@@ -14,8 +14,14 @@
 
 6 = get all categroy with count artical Located inside the categroy :: xxxxxxxxxxxxxxxxx
 
-7 = get all  artical by categroy by Pagination :: ....................
+7 = get all  artical by categroy by Pagination :: xxxxxxxxxxxxxxxxx
 
-5 = get all  artical by tag by Pagination 
+8 = add option tags when craete article  :: xxxxxxxxxxxxxxxxx
 
-8 = get single artical by id with tags and comments and count comments and can post comment
+9 = get all artical by tag by Pagination  :: ....................
+
+10 = can post comment :: ....................
+
+11 = get single artical by id with [tags] and [comments] and [count comments]  :: ....................
+
+

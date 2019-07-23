@@ -7,18 +7,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use App\Repositories\Articles\ArticlesRepositories;
-use App\Models\Article;
-
+use App\Models\Article,App\Models\ArticleTags;
 
 class ArticleController extends Controller
 {
 	// space that we can use the repository from
     protected $modelArticles;
 
-	function __construct(Article $article)
+	function __construct(Article $article,ArticleTags $articleTags)
 	{
 
-	  $this->modelArticles       = new ArticlesRepositories($article);
+	  $this->modelArticles       = new ArticlesRepositories($article,$articleTags);
 	}
 
 	// Return 10 Articles
@@ -26,6 +25,21 @@ class ArticleController extends Controller
     {
       $articles = $this->modelArticles->pagination(10);
       return response()->json(['status'=>true,'code'=>200,'response'=>$articles]);
+    }
+
+    // Return 10 Articles by Categroy
+    public function ArticlesByCategroy($categorieId)
+    {
+      $articles  = $this->modelArticles->ArticleWhereCategorieId($categorieId)->paginate(10);
+      return response()->json(['status'=>true,'code'=>200,'response'=>$articles]);
+    }
+
+
+    // Return single Article by id
+    public function ArticleById($id)
+    {
+      $article = $this->modelArticles->show($id);
+      return response()->json(['status'=>true,'code'=>200,'response'=>$article]);      
     }
 
 
