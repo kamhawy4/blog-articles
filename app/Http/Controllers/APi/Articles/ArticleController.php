@@ -34,11 +34,20 @@ class ArticleController extends Controller
       return response()->json(['status'=>true,'code'=>200,'response'=>$articles]);
     }
 
+    // Return 10 Articles by Tag
+    public function ArticlesByTag($tagId)
+    {
+      $tags = $this->modelArticles->ArticleWhereTagId($tagId);
+      return response()->json(['status'=>true,'code'=>200,'response'=>$tags]);
+    }
+
 
     // Return single Article by id
     public function ArticleById($id)
     {
-      $article = $this->modelArticles->show($id);
+      $article       = $this->modelArticles->show($id);
+      $tagsArtical   = $this->modelArticles->whereTagsArticalId($id);
+      $article->tags = $tagsArtical;
       return response()->json(['status'=>true,'code'=>200,'response'=>$article]);      
     }
 

@@ -10,7 +10,7 @@ use App\Models\Mangaers,App\Models\Article,App\Models\Categories;
 use App\Repositories\Articles\ArticlesRepositories;
 use App\Repositories\Managers\ManagersRepositories;
 use App\Repositories\Categories\CategoriesRepositories;
-
+use App\Models\ArticleTags;
 class DashboardController extends Controller
 {
 
@@ -18,9 +18,9 @@ class DashboardController extends Controller
     protected $modelCategories;
     protected $modelCommentArticle;
 
-    function __construct(Article $article,Categories $categories,Mangaers $mangaers)
+    function __construct(Article $article,Categories $categories,Mangaers $mangaers,ArticleTags $articleTags)
     {
-        $this->modelArticles       = new ArticlesRepositories($article);
+        $this->modelArticles       = new ArticlesRepositories($article,$articleTags);
         $this->modelCategories     = new CategoriesRepositories($categories);
         $this->modelManagers       = new ManagersRepositories($mangaers);
     }

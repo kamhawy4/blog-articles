@@ -12,16 +12,16 @@ class ArticlesRepositories implements RepositoryInterface
     protected $model;
     protected $articleTags;
 
-	function __construct(Model $model,Model $articleTags)
-	{
-    $this->model = $model;
-		$this->articleTags  = $articleTags;
-	}
+  	function __construct(Model $model,Model $articleTags)
+  	{
+      $this->model        = $model;
+  		$this->articleTags  = $articleTags;
+  	}
 
-	public function all()
-	{
-       return $this->model->all();
-	}
+  	public function all()
+  	{
+         return $this->model->all();
+  	}
 
     public function pagination($count)
     {   
@@ -45,8 +45,7 @@ class ArticlesRepositories implements RepositoryInterface
     {
        $tagsArticle = $this->articleTags->where('article_id',$id)->get(); 
        $arrayArtical = [];
-       foreach ($tagsArticle as  $tagArticle) 
-       {
+       foreach ($tagsArticle as  $tagArticle) {
          $arrayArtical[] = $tagArticle->tag_id;
        }
        return $arrayArtical;
@@ -66,7 +65,7 @@ class ArticlesRepositories implements RepositoryInterface
 
     public function show($id)
     {
-     return $this->model->findOrFail($id);
+      return  $this->model->findOrFail($id);
     }
 
     public function delete($id)
@@ -98,6 +97,16 @@ class ArticlesRepositories implements RepositoryInterface
     public function ArticleWhereCategorieId($categorieId)
     {
         return $this->model->where('categorie_id',$categorieId);
+    }
+
+    public function ArticleWhereTagId($tagId)
+    {
+      $tags = $this->articleTags->where('tag_id',$tagId)->get();
+      $allTagsId = [];
+      foreach ($tags as $tag) {
+        $allTagsId[] = $tag->article_id;
+      }
+      return $this->model->whereIn('id',$allTagsId)->paginate(10);
     }
     
 }

@@ -24,6 +24,17 @@ Route::group(['middleware' => 'auth:api' ],function () {
         Route::group(['prefix' => 'articles/categroy/{id}'], function () {
             Route::get('/'            , 'ArticleController@ArticlesByCategroy'); // Articles by Categroy
         });
+        Route::group(['prefix' => 'articles/tag/{id}'], function () {
+            Route::get('/'            , 'ArticleController@ArticlesByTag'); // Articles by Tag
+        });
+    });
+
+    // Comments Article
+    Route::group(['prefix' => '/article/comments/','namespace' => 'Comments'], function () {
+         Route::post('/store'      ,'CommentsController@StoreComments'); // store Comments 
+         Route::post('/update/{id}','CommentsController@UpdateComments'); // update Comments 
+         Route::get('/show/{id}'   ,'CommentsController@ShowComments'); // store Comments 
+         Route::get('/delete/{id}' ,'CommentsController@DeleteComments'); // Delete Comments 
     });
 
     // Categories

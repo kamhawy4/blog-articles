@@ -5,6 +5,7 @@ namespace App\Repositories\CommentArticle;
 use Illuminate\Database\Eloquent\Model;
 use App\Repositories\RepositoryInterface;
 use Auth;
+use DB;
 
 class CommentArticleRepositories implements RepositoryInterface
 {	
@@ -22,7 +23,7 @@ class CommentArticleRepositories implements RepositoryInterface
        return $this->model->where('article_id',$id)->get();
     }
 
-    public function delete($id){
+    public function delete($id){        
         $delete = $this->model->findOrFail($id);
         return $delete->delete();
     }
@@ -35,10 +36,11 @@ class CommentArticleRepositories implements RepositoryInterface
     public function all(){}
 
 
-    public function update($data,$id){}
-
-
-
+    public function update($data,$id)
+    {
+        DB::table('comment_articles')->where('id', $id)->update(['title' => $data->title,'name' => $data->name]);
+        return  $this->model->findOrFail($id);     
+    }
 
 }
 
