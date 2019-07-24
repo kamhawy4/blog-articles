@@ -1,6 +1,6 @@
 ## Laravel 5 example ##
 
-For Laravel 5.8.0 [here](https://laravel.com/docs/5.5/).
+For Laravel 5.5 [here](https://laravel.com/docs/5.5/).
 
 ### Installation ###
 
