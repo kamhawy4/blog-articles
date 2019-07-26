@@ -29,7 +29,6 @@ Route::group(['middleware' => 'auth:api' ],function () {
          Route::resource('tags','TagsController'); //Tags 
     });
 
-
     // Logout
     Route::group(['namespace' => 'Login'], function () {
         Route::get('logout', 'AuthController@logout');

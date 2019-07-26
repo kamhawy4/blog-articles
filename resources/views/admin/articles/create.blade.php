@@ -29,6 +29,7 @@ Add Article
 
                     <div class="{{$errors->has('categorie_id')?'has-error':''}}" >
                         <div class="form-group form-md-line-input form-md-floating-label">
+                            <label for="form_control_1">Categorys</label>
                                <select class="form-control" name="categorie_id" >
                                 <option value="" >Select Category</option>
                                   @if($categorys->count() > 0)
@@ -37,7 +38,6 @@ Add Article
                                      @endforeach
                                   @endif
                                </select>
-                            <label for="form_control_1">Categorys</label>
                         <small class="text-danger">{{ $errors->first('categorie_id') }}</small>
                         </div>
                     </div>
