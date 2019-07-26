@@ -43,6 +43,20 @@ Add Article
                     </div>
 
 
+                    <div class="form-group">
+                        <label for="multiple" class="control-label">Tags</label>
+                        <select id="multiple" class="form-control select2-multiple select2-hidden-accessible" multiple="" tabindex="-1" aria-hidden="true" name="tags[]">
+                            <optgroup label="All Tags">
+                                @if($tags->count() > 0)
+                                     @foreach($tags as $tag)
+                                        <option value="{{$tag->id}}" >{{$tag->name}}</option>
+                                     @endforeach
+                                  @endif
+                            </optgroup>
+                    </select>
+                    </div>
+
+
                     <div class="{{$errors->has('description')?'has-error':''}}" >
                         <div class="form-group form-md-line-input form-md-floating-label">
                             <textarea  name="description" class="form-control" id="editor">{{old('description')}}</textarea>
@@ -79,6 +93,5 @@ Add Article
         <!-- END VALIDATION STATES-->
     </div>
 </div>
-
 
 @endsection

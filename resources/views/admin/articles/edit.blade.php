@@ -40,6 +40,20 @@ Edit Article
                         </div>
                       </div>
 
+
+                      <div class="form-group">
+                        <label for="multiple" class="control-label">Tags</label>
+                        <select id="multiple" class="form-control select2-multiple select2-hidden-accessible" multiple="" tabindex="-1" aria-hidden="true" name="tags[]">
+                            <optgroup label="All Tags">
+                                @if($tags->count() > 0)
+                                     @foreach($tags as $tag)
+                                        <option  {{(in_array($tag->id,$tagsArticle))?'selected':''}} value="{{$tag->id}}" >{{$tag->name}}</option>
+                                     @endforeach
+                                  @endif
+                            </optgroup>
+                       </select>
+                     </div>
+
                       <div class="{{$errors->has('description')?'has-error':''}}" >
                           <div class="form-group form-md-line-input form-md-floating-label">
                               {{ Form::textarea('description',null,['class'=>'form-control','id'=>'editor']) }}
@@ -83,5 +97,4 @@ Edit Article
         </div>
     </div>
 </div>
-
 @endsection

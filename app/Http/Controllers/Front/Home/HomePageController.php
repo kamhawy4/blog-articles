@@ -8,6 +8,7 @@ use App\Models\Settings,App\Models\Article,App\Models\Categories,App\Models\Comm
 use Validator;
 use App\Repositories\Articles\ArticlesRepositories;
 use App\Repositories\Categories\CategoriesRepositories;
+use App\Models\ArticleTags;
 
 class HomePageController extends Controller
 {
@@ -15,9 +16,9 @@ class HomePageController extends Controller
     protected $modelArticles;
     protected $modelCategories;
 
-    public function __construct(Article $article,Categories $categories)
+    public function __construct(Article $article,Categories $categories,ArticleTags $articleTags)
     {
-      $this->modelArticles       = new ArticlesRepositories($article);    
+      $this->modelArticles       = new ArticlesRepositories($article,$articleTags);
       $this->modelCategories     = new CategoriesRepositories($categories);
     }
 
@@ -37,7 +38,7 @@ class HomePageController extends Controller
     public function Categorie($slug)
     {
       $categorie       = $this->modelCategories->whereSlug($slug);
-      $articles        = $this->modelArticles->ArticleWhereCategorieId($categorie->id)->orderByDesc('desc')->paginate(10);
+      $articles        = $this->modelArticles->ArticleWhereCategorieId($categorie->id)->paginate(10);
       return view('front.categories.index',compact('categorie','articles'));
     }
     
