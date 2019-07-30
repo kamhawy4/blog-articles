@@ -85,6 +85,17 @@ Dashboard
         </div>
     </div>
 
+
+</div>
+
+<div>
+    {!! $chart->container() !!}
+    {!! $chart->script() !!}
+</div>
+
+<div>
+    {!! $articlesChart->container() !!}
+    {!! $articlesChart->script() !!}
 </div>
 
 @endsection

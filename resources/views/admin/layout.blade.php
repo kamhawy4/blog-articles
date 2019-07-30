@@ -90,6 +90,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
         <link href="{{url('/')}}/style/style.css" rel="stylesheet"> 
         <link href="{{url('/')}}/style/content_style.css" rel="stylesheet"> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 
         <link rel="shortcut icon" href="favicon.ico" /> </head>
         <!-- END HEAD -->
@@ -340,7 +341,6 @@ License: You must have a valid license purchased only from themeforest(the above
 
 
         <script src="{{url('/')}}/admin/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
-
         
 
         <script src="{{url('/')}}/admin/global/plugins/morris/morris.min.js" type="text/javascript"></script>
