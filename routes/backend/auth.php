@@ -12,6 +12,13 @@ Route::group(['middleware' => 'admin:managers'  ],function () {
     Route::group(['namespace' => 'Settings'], function () {
          Route::resource('settings'  ,'SettingsController'); //Settings 
     });
+
+
+    // Send mail
+    Route::group(['namespace' => 'SendMail'], function () {
+         Route::get('sendmail'   ,'SendMailController@index'); 
+         Route::post('send/email', 'SendMailController@mail');
+    });
     
 
     // User Management

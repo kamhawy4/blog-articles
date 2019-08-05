@@ -252,6 +252,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <span class="title"> Articles </span>
                                 </a>
                             </li> 
+
+
+                             <li class="nav-item  {{Request::is('dashboard/sendmail*')?'active':''}} {{Request::is('dashboard/sendmail*')?'active':''}}" >
+                                <a href="{{url('/')}}/dashboard/sendmail" >
+                                    <i class="fa fa-paper-plane"></i>
+                                    <span class="title"> Send Mails </span>
+                                </a>
+                            </li> 
   
 
                         </ul>

@@ -11,8 +11,6 @@ use Session,Image,Auth,DB,File;
 
 class Controller extends BaseController
 {
-
-
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     // upload Image 
@@ -67,6 +65,7 @@ class Controller extends BaseController
             File::delete($big);
         }
     }
+
 
     /**
     * @return slug 

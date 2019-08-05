@@ -48,8 +48,6 @@
                          <table>
                               <tr>
                                    <td>
-                                     
-
                                     <p> New Message </p>
                                     <p> Name Site  : {!! $namesite !!}   </p>
                                     <p> Title      : {!! $subject  !!} </p>
