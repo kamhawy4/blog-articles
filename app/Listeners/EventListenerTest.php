@@ -5,6 +5,10 @@ namespace App\Listeners;
 use App\Events\EventTest;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Log;
+use App\Events\Event;
+use App\Jobs\sendMailJob;
+
 
 class EventListenerTest
 {
@@ -26,6 +30,7 @@ class EventListenerTest
      */
     public function handle(EventTest $event)
     {
-        //
+      dispatch(new sendMailJob());
+      Log::info('=== TestEventListener  ========');
     }
 }

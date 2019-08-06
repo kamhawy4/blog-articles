@@ -10,6 +10,9 @@
 |
 */
 
+Route::get('event/test'  ,'HomeController@testEvent'); //Settings 
+
+
 Route::group(['namespace' => 'Admin', 'prefix' => 'dashboard', 'as' => 'dashboard.'], function () {
     /*
      * These routes need view-backend permission
