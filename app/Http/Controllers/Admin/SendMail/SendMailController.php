@@ -31,6 +31,8 @@ class SendMailController extends Controller
         $title = $request->title;
         $desc  = $request->message;         
         Mail::to($request->users)->send(new SendMailable($title,$desc));
+
+        $this->SendNotification();
         session()->flash('success','Email was sent');
         return back();
     }

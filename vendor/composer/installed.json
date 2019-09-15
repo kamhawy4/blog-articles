@@ -45,6 +45,74 @@
         ]
     },
     {
+        "name": "brozot/laravel-fcm",
+        "version": "v1.2.6",
+        "version_normalized": "1.2.6.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/brozot/Laravel-FCM.git",
+            "reference": "418dc96ede3b44acca73b2b2c60f83159f21bb79"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/brozot/Laravel-FCM/zipball/418dc96ede3b44acca73b2b2c60f83159f21bb79",
+            "reference": "418dc96ede3b44acca73b2b2c60f83159f21bb79",
+            "shasum": ""
+        },
+        "require": {
+            "guzzlehttp/guzzle": "~6.0",
+            "illuminate/support": "5.*",
+            "monolog/monolog": "^1.19",
+            "php": ">=5.5.9"
+        },
+        "require-dev": {
+            "laravel/laravel": "5.2.*",
+            "mockery/mockery": "0.9.*",
+            "phpunit/phpunit": "4.7.*",
+            "satooshi/php-coveralls": "dev-master"
+        },
+        "time": "2019-08-07T06:27:39+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "LaravelFCM\\FCMServiceProvider"
+                ],
+                "aliases": {
+                    "FCM": "LaravelFCM\\Facades\\FCM",
+                    "FCMGroup": "LaravelFCM\\Facades\\FCMGroup"
+                }
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "LaravelFCM\\": "src/",
+                "LaravelFCM\\Mocks\\": "tests/mocks"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Brosy",
+                "email": "nicolas.brosy@gmail.com"
+            }
+        ],
+        "description": "Laravel / Lumen package for Firebase Cloud Messaging ",
+        "keywords": [
+            "FCM",
+            "Firebase Cloud Messaging",
+            "firebase",
+            "laravel",
+            "lumen",
+            "notification",
+            "push"
+        ]
+    },
+    {
         "name": "consoletvs/charts",
         "version": "6.5.1",
         "version_normalized": "6.5.1.0",

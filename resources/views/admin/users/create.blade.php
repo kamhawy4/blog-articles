@@ -19,7 +19,7 @@ Add a new User
                         <div class="form-group form-md-line-input form-md-floating-label">
                             <input type="text" value="{{old('name')}}" class="form-control" name="name" id="form_control_1">
                             <label for="form_control_1">Name</label>
-                        <small class="text-danger">{{ $errors->first('name') }}</small>
+                           <small class="text-danger">{{ $errors->first('name') }}</small>
                         </div>
                      </div>
 

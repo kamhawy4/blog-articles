@@ -23,7 +23,7 @@ class ArticleController extends Controller
     const SUBPATH   = '/100x100/';
     const SIZE      = '100,100';
     const NAMEFILE  = 'img';
-	const NAMEMERGE = 'image';
+	const NAMEMERGE = 'file';
 	
 
 	// space that we can use the repository from

@@ -174,6 +174,7 @@ return [
          Collective\Html\HtmlServiceProvider::class,
          Intervention\Image\ImageServiceProvider::class,
          App\Providers\HelperServiceProvider::class,
+         LaravelFCM\FCMServiceProvider::class,
          ////// end my packge
         /*
          * Application Service Providers...
@@ -239,9 +240,8 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
-
-
-
+        'FCM'      => LaravelFCM\Facades\FCM::class,
+        'FCMGroup' => LaravelFCM\Facades\FCMGroup::class, // Optional
         ///// end My Packge
 
 

@@ -23,6 +23,29 @@
 
 <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
 <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCHmU5v5xonxaLZJHryXVyqQbtXF0f4E2U",
+    authDomain: "test-3efc9.firebaseapp.com",
+    databaseURL: "https://test-3efc9.firebaseio.com",
+    projectId: "test-3efc9",
+    storageBucket: "test-3efc9.appspot.com",
+    messagingSenderId: "1013908535553",
+    appId: "1:1013908535553:web:83e95fc8ea4acef633c300"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+
 </head>
 
 <body>

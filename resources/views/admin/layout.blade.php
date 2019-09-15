@@ -317,7 +317,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- END CONTENT -->
             <div class="page-footer">
                 <div class="page-footer-inner"> Copyright &copy;
-                    <a target="_blank" href="http://glowapps.com.eg">Abdo</a> &nbsp;|&nbsp; {{ date("Y") }}
+                    <a target="_blank" href="#">Abdo</a> &nbsp;|&nbsp; {{ date("Y") }}
                 </div>
                 <div class="scroll-to-top">
                     <i class="icon-arrow-up"></i>
