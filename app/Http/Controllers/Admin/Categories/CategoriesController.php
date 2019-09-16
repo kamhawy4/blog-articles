@@ -52,9 +52,15 @@ class CategoriesController extends Controller
 	        $request      -> merge(['slug'=>$this->make_slug($request->name)]); 
 	        $allCategory  =  $this->modelCategories->store($request);
 	        // render page  category create and returm it
+
 	        $html         =  view('admin.category.add',compact('allCategory'))->render();
+
+	        // Log Activity
+            \LogActivity::addToLog('Add New Categorie'.' : '.$request->name);
+            
 		    return response()->json([ 'status'=> true,'code'=>200,'result'=>$html]);
         }
+
 
     	return response()->json(['error'=>$validator->errors()->all()]);
 	}
@@ -71,6 +77,10 @@ class CategoriesController extends Controller
 			$request   ->  merge(['slug'=>$this->make_slug($request->name)]); 
 			$update    = $this->modelCategories->update($request,$id);
 	        //render page  category edit and returm it
+
+	        // Log Activity
+            \LogActivity::addToLog('Update Categorie'.' : '.$request->name);
+
 	        $html      =  view('admin.category.edit',compact('update'))->render();
 			return response()->json(['status'=>true,'code'=>200,'result'=>$html]);
         }
@@ -94,7 +104,11 @@ class CategoriesController extends Controller
         if(!empty($request->check))
         {
 		   $this->modelCategories->deleteCategoriesCheck($request->check);
-		  session()->flash('save','Successfully deleted');
+
+	       // Log Activity
+           \LogActivity::addToLog('Delete Categories');
+
+		   session()->flash('save','Successfully deleted');
 		  return back();
           }else{
 		  session()->flash('warning','Please select a section at least');

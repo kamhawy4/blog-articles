@@ -19,7 +19,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    // upload Image 
+    // upload Image
     public function uploadIMage($data,$path,$subPath,$size,$nameFile,$nameMerge)
     {
         $explode =  explode(',',$size);
@@ -70,6 +70,7 @@ class Controller extends BaseController
             $big        =  $path.'/'.$update->$nameMerge;
             File::delete($big);
         }
+
     }
 
 

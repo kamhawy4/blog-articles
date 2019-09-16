@@ -44,8 +44,13 @@ class ManagersController extends Controller
 	public function store(StoreUsersRequest $request)
 	{ 
         // Merge password and Mangaers Create   
-    	$request   ->  merge(['password' => bcrypt($request->password)]);	    
+    	$request   ->  merge(['password' => bcrypt($request->password)]);
+
         $this->modelManagers->store($request);
+
+        // Log Activity 
+        \LogActivity::addToLog('Add New Manager'.' : '.$request->name);
+
 	    session()->flash('save','The manager has been successfully added');
 	    return redirect()->to(url('dashboard/managers'));
 	}
@@ -63,6 +68,9 @@ class ManagersController extends Controller
     	$request   ->  merge(['password' => $update->password]);}
 
 		$this->modelManagers->update($request,$id);
+
+        // Log Activity 
+        \LogActivity::addToLog('Update Manager'.' : '.$update->name);
 
 		session()->flash('success','Data modified successfully');
 		return redirect()->to(url('dashboard/managers'));
@@ -87,6 +95,10 @@ class ManagersController extends Controller
 	  if(!empty($request->check))
       {
 		$this->modelManagers->deleteMangaersCheck($request->check);
+
+		 // Log Activity 
+        \LogActivity::addToLog('Delete Managers');
+
 		session()->flash('success','Data deleted successfully');
 		return back();
 	  }else{

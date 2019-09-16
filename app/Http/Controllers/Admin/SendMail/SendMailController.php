@@ -29,10 +29,14 @@ class SendMailController extends Controller
     public function mail(SendMailRequest $request)
     {
         $title = $request->title;
-        $desc  = $request->message;         
+        $desc  = $request->message;
         Mail::to($request->users)->send(new SendMailable($title,$desc));
 
         $this->SendNotification();
+
+        // Log Activity
+        \LogActivity::addToLog('Send Mail'.' : '.$title);
+
         session()->flash('success','Email was sent');
         return back();
     }

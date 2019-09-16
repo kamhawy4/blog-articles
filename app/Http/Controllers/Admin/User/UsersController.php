@@ -15,6 +15,7 @@ class UsersController extends Controller
 
     function __construct(User $user)
     {
+    	
        $this->modelUsers = new UsersRepositories($user);
 	}
 	
@@ -28,6 +29,7 @@ class UsersController extends Controller
 	// Return view page create Users 
     public function create()
     {
+
     	return view('admin.users.create');
     }
 
@@ -44,7 +46,10 @@ class UsersController extends Controller
         // Merge password and Users Create   
 		$request   ->  merge(['password' => bcrypt($request->password)]); 
 		
-        $this->modelUsers->store($request);		
+        $this->modelUsers->store($request);
+
+        // Log Activity
+        \LogActivity::addToLog('Add New User'.' : '.$request->name);
 
 	    session()->flash('save','The Users has been successfully added');
 	    return redirect()->to(url('dashboard/users'));
@@ -65,6 +70,9 @@ class UsersController extends Controller
 
 		$this->modelUsers->update($request,$id);
 
+		// Log Activity
+        \LogActivity::addToLog('Update User'.' : '.$update->name);
+
 		session()->flash('success','Data modified successfully');
 		return redirect()->to(url('dashboard/users'));
 	}
@@ -83,7 +91,12 @@ class UsersController extends Controller
 	  if(!empty($request->check))
       {
 		$this->modelUsers->deleteUsersCheck($request->check);
+
 		session()->flash('success','Data deleted successfully');
+
+		// Log Activity
+        \LogActivity::addToLog('Delete Users');
+
 		return back();
 	  }else{
 	  	session()->flash('warning','Please select a manager at least');

@@ -23,7 +23,7 @@ class ArticleController extends Controller
     const SUBPATH   = '/100x100/';
     const SIZE      = '100,100';
     const NAMEFILE  = 'img';
-	const NAMEMERGE = 'file';
+	const NAMEMERGE = 'image';
 	
 
 	// space that we can use the repository from
@@ -79,13 +79,17 @@ class ArticleController extends Controller
         $request  -> merge(['author'=>Auth::guard('managers')->user()->name]); 
         $request  -> merge(['slug'=>$this->make_slug($request->title)]);
 
-
         // repo store data artical
         $data =  $this->modelArticles->store($request);
 
         // repo store data tags  
         $this->modelArticles->storeTgas($request->tags,$data->id);
 
+        // Log Activity
+        \LogActivity::addToLog('Add New Artical'.' : '.$data->title);
+
+
+        // Message success After Add
 	    session()->flash('success','Article added successfully');
 	    return redirect()->to(url('dashboard/articles'));
 	}
@@ -107,13 +111,16 @@ class ArticleController extends Controller
         // repo Update data tags
         $this->modelArticles->updateTgasArticles($request->tags,$id);
 
+        // Log Activity
+        \LogActivity::addToLog('Update Artical'.' : '.$request->title);
+
         // Message success After Update
 		session()  -> flash('success','Modified successfully');
 		return redirect()->to(url('dashboard/articles'));
 	}
 
     
-    // destroy Article by id 
+    // destroy Article by id
 	public function destroy($id)
 	{
 		$this->modelArticles->delete($id);
@@ -127,7 +134,11 @@ class ArticleController extends Controller
 	{
         if(!empty($request->check))
         {
-		   $this->modelArticles->deleteArticalCheck($request->check);
+		  $data = $this->modelArticles->deleteArticalCheck($request->check);
+
+           // Log Activity
+           \LogActivity::addToLog('Delete Articals');
+
 		   session()->flash('success','Successfully deleted');
 		   return back();
             }else{

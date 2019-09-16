@@ -53,6 +53,10 @@ class TagsController extends Controller
         $allTags       =  $this->modelTags->store($request);
         // render page  tags create and returm it
         $html         =  view('admin.tags.add',compact('allTags'))->render();
+
+	    // Log Activity
+        \LogActivity::addToLog('Add New Tag'.' : '.$request->name);
+
 	    return response()->json([ 'status'=> true,'code'=>200,'result'=>$html]);
 	  }
 
@@ -73,6 +77,10 @@ class TagsController extends Controller
 			$update    = $this->modelTags->update($request,$id);
 	        //render page  tags edit and returm it
 	        $html      =  view('admin.tags.edit',compact('update'))->render();
+
+	        // Log Activity
+            \LogActivity::addToLog('Update Tag'.' : '.$request->name);
+
 			return response()->json(['status'=>true,'code'=>200,'result'=>$html]);
 		}
 
@@ -94,7 +102,11 @@ class TagsController extends Controller
 	{
         if(!empty($request->check))
         {
-		   $this->modelTags->deleteTagsCheck($request->check);
+		  $this->modelTags->deleteTagsCheck($request->check);
+
+		  // Log Activity
+          \LogActivity::addToLog('Delete Tags');
+
 		  session()->flash('save','Successfully deleted');
 		  return back();
           }else{

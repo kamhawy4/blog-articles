@@ -46,6 +46,10 @@ class SocialController extends Controller
 	{   
         $allSocial  =  $this->modelSocialLinks->store($request);
         // render page  social create and returm it
+
+        // Log Activity
+        \LogActivity::addToLog('Add New Social Link'.' : '.$allSocial->name);
+
         $html       =  view('admin.social.add',compact('allSocial'))->render();
 	    return response()->json([ 'status'=> true,'code'=>200,'result'=>$html]);
 	}
@@ -56,6 +60,11 @@ class SocialController extends Controller
 	{
 		$update    = $this->modelSocialLinks->update($request,$id);
         //render page  social edit and returm it
+
+        // Log Activity
+        \LogActivity::addToLog('Update Social Link'.' : '.$update->name);
+
+
         $html      =  view('admin.social.edit',compact('update'))->render();
 		return response()->json(['status'=>true,'code'=>200,'result'=>$html]);
 	}
@@ -75,9 +84,14 @@ class SocialController extends Controller
 	{
         if(!empty($request->check))
         {
-		   $this->modelSocialLinks->deleteSocialCheck($request->check);
+		  $this->modelSocialLinks->deleteSocialCheck($request->check);
 		  session()->flash('save','Successfully deleted');
+
+		  // Log Activity
+          \LogActivity::addToLog('Delete Social Links');
+
 		  return back();
+		  
           }else{
 		  session()->flash('warning','Please select a section at least');
 		  return back();

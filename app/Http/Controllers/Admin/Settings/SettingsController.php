@@ -55,6 +55,10 @@ class SettingsController extends Controller
     // create data
     $settings  =  $this->modelSettings->store($request);
 
+
+    // Log Activity
+    \LogActivity::addToLog('Add Data Settings');
+
     Session::flash('success','Update  Successfully');
     return back();
   }
@@ -73,7 +77,11 @@ class SettingsController extends Controller
      $this->updateImage($update,$request,self::PATHFAV,self::SUBPATHFAV,self::SIZEFAV,self::NAMEFILEFAV,self::NAMEMERGEFAV);
    
     // update data
-		$this->modelSettings->update($request,$id);    
+		$this->modelSettings->update($request,$id);
+
+    // Log Activity
+    \LogActivity::addToLog('Update Data Settings');
+
     Session::flash('success','Update  Successfully');
   	return back();
   }

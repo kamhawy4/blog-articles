@@ -242,7 +242,10 @@ return [
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         'FCM'      => LaravelFCM\Facades\FCM::class,
         'FCMGroup' => LaravelFCM\Facades\FCMGroup::class, // Optional
+        'LogActivity' => App\Helpers\LogActivity::class,
         ///// end My Packge
+
+
 
 
     ],

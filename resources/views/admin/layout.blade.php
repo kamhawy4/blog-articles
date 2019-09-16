@@ -246,12 +246,14 @@ License: You must have a valid license purchased only from themeforest(the above
                             </li> 
 
 
-                             <li class="nav-item  {{Request::is('dashboard/articles*')?'active':''}} {{Request::is('dashboard/article*')?'active':''}}" >
+                            <li class="nav-item  {{Request::is('dashboard/articles*')?'active':''}} {{Request::is('dashboard/article*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/articles" >
                                     <i class="fa fa-newspaper-o"></i>
                                     <span class="title"> Articles </span>
                                 </a>
-                            </li> 
+                            </li>
+
+
 
 
                              <li class="nav-item  {{Request::is('dashboard/sendmail*')?'active':''}} {{Request::is('dashboard/sendmail*')?'active':''}}" >
@@ -261,6 +263,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </a>
                             </li> 
   
+
+                            <li class="nav-item {{Request::is('dashboard/log*')?'active':''}}" >
+                                <a href="{{url('/')}}/dashboard/log" >
+                                    <i    class="fa fa-info"></i>
+                                    <span class="title"> Log </span>
+                                </a>
+                            </li>
 
                         </ul>
                         <!-- END SIDEBAR MENU -->
