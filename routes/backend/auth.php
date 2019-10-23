@@ -13,6 +13,12 @@ Route::group(['middleware' => 'admin:managers'  ],function () {
          Route::resource('settings'  ,'SettingsController'); //Settings 
     });
 
+    // roles
+    Route::group(['namespace' => 'Role'], function () {
+      Route::resource('roles','RoleController'); 
+    });
+
+    
     // log
     Route::group(['namespace' => 'Log'], function () {
          Route::get('log'  ,'LogController@GetAllLog'); //log

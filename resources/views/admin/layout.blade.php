@@ -222,6 +222,14 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <span class="title"> Users </span>
                                 </a>
                             </li>
+
+
+                            <li class="nav-item  {{ Request::is('dashboard/roles*')?'active':''}}" >
+                                <a href="{{url('/')}}/dashboard/roles" >
+                                    <i class="fa fa-tasks"></i>
+                                    <span class="title"> Roles </span>
+                                </a>
+                            </li>
                           
                             <li class="nav-item  {{Request::is('dashboard/managers*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/managers" >

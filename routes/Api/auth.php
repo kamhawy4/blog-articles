@@ -8,6 +8,9 @@ Route::group(['middleware' => 'auth:api' ],function () {
          Route::resource('settings','SettingsController'); //Settings 
     });
 
+   
+
+
     // Social
     Route::group(['namespace' => 'Social'], function () {
          Route::resource('social','SocialController'); //Social 
