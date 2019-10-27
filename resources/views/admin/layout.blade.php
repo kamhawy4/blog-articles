@@ -134,13 +134,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                     <img alt="" class="img-circle" src="{{url('/')}}/admin/layouts/layout/img/avatar3_small.jpg" />
                                     <span class="username username-hide-on-mobile">
-                                     {{ Auth::guard('managers')->user()->name }}
+                                     {{ Auth::user()->name }}
                                      </span>
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-default">
                                     <li>
-                                        <a href="{{url('/')}}/dashboard/managers/{{ Auth::guard('managers')->user()->id }}/edit">
+                                        <a href="{{url('/')}}/dashboard/managers/{{ Auth::user()->id }}/edit">
                                             <i class="icon-user"></i> ملفي الشخصي </a>
                                     </li>
                                     <li>
@@ -231,12 +231,12 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </a>
                             </li>
                           
-                            <li class="nav-item  {{Request::is('dashboard/managers*')?'active':''}}" >
+                            {{-- <li class="nav-item  {{Request::is('dashboard/managers*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/managers" >
                                     <i class="fa fa-users"></i>
                                     <span class="title"> Managers </span>
                                 </a>
-                            </li>
+                            </li> --}}
 
                             <li class="nav-item  {{Request::is('dashboard/categorys*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/categorys" >

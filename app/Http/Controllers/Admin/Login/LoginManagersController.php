@@ -18,7 +18,7 @@ class LoginManagersController extends Controller
     {
     	$email    = request('email');
     	$password = request('password');
-    	if (Auth::guard('managers')->attempt(['email' => $email, 'password' => $password])) {
+    	if (Auth::attempt(['email' => $email, 'password' => $password])) {
             return redirect()->intended('dashboard');
         }else {
           return back();
@@ -28,6 +28,6 @@ class LoginManagersController extends Controller
 
     public function Logout()
     {
-        Auth::guard('managers')->logout(); return back();
+        Auth::logout(); return back();
     }
 }

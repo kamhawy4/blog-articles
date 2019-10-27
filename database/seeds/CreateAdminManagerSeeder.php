@@ -1,24 +1,23 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
+use App\Models\Mangaers;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
-class UsersTableSeeder extends Seeder
+class CreateAdminManagerSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
+     public function run()
     {
-        $user = User::create([
-            'name' => 'Hardik Savani', 
-            'email' => 'adminlast@gmail.com',
-            'phone'      => mt_rand(100000000,999999999),
-            'password' => bcrypt('123456')
+        $user = Mangaers::create([
+        	'name' => 'Hardik Savani', 
+        	'email' => 'admin@gmail.com',
+        	'password' => bcrypt('123456')
         ]);
   
         $role = Role::create(['name' => 'Admin']);
@@ -30,5 +29,3 @@ class UsersTableSeeder extends Seeder
         $user->assignRole([$role->id]);
     }
 }
-
-

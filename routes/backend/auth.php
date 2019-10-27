@@ -1,7 +1,7 @@
 <?php
 
 // All route names are prefixed with 'dashboard'.
-Route::group(['middleware' => 'admin:managers'  ],function () {
+Route::group(['middleware' => 'admin'  ],function () {
 
     // Dashboard
     Route::group(['namespace' => 'Dashboard'], function () {

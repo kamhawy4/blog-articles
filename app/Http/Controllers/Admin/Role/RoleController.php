@@ -10,17 +10,17 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use DB;
 
-
 class RoleController extends Controller
 {
-    /**
+
+        /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     function __construct()
     {
-         //$this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
          $this->middleware('permission:role-create', ['only' => ['create','store']]);
          $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
          $this->middleware('permission:role-delete', ['only' => ['destroy']]);
@@ -35,7 +35,8 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $roles = Role::orderBy('id','DESC')->paginate(5);
-        return view('admin.roles.index',compact('roles'))->with('i', ($request->input('page', 1) - 1) * 5);
+        return view('admin.roles.index',compact('roles'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
 
@@ -69,7 +70,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
 
-        return redirect()->route('admin.roles.index')
+        return redirect()->route('dashboard.roles.index')
                         ->with('success','Role created successfully');
     }
     /**
@@ -132,7 +133,7 @@ class RoleController extends Controller
         $role->syncPermissions($request->input('permission'));
 
 
-        return redirect()->route('admin.roles.index')
+        return redirect()->route('dashboard.roles.index')
                         ->with('success','Role updated successfully');
     }
     /**
@@ -144,7 +145,7 @@ class RoleController extends Controller
     public function destroy($id)
     {
         DB::table("roles")->where('id',$id)->delete();
-        return redirect()->route('admin.roles.index')
+        return redirect()->route('dashboard.roles.index')
                         ->with('success','Role deleted successfully');
     }
 }

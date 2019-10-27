@@ -76,7 +76,7 @@ class ArticleController extends Controller
         $this->uploadIMage($request,self::PATH,self::SUBPATH,self::SIZE,self::NAMEFILE,self::NAMEMERGE);
 
 		//Merge Author And Slug
-        $request  -> merge(['author'=>Auth::guard('managers')->user()->name]); 
+        $request  -> merge(['author'=>Auth::user()->name]); 
         $request  -> merge(['slug'=>$this->make_slug($request->title)]);
 
         // repo store data artical

@@ -9,7 +9,7 @@ show Role
             <h2> Show Role</h2>
         </div>
         <div class="pull-right">
-            <a class="btn btn-primary" href="{{ route('roles.index') }}"> Back</a>
+            <a class="btn btn-primary" href="{{ route('dashboard.roles.index') }}"> Back</a>
         </div>
     </div>
 </div>
@@ -34,5 +34,4 @@ show Role
     </div>
 </div>
 
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
 @endsection
