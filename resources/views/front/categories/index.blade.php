@@ -11,7 +11,7 @@
         	<h1>{{ $categorie->name ? $categorie->name:''}} </h1>
             <div class="bread-crumb">
             	<ul class="clearfix">
-                	<li><a href="{{url('/')}}">Home</a></li>
+                	<li><a href="{{url('/')}}">{{ __('front.home') }}</a></li>
                     <li class="active">{{ $categorie->name ? $categorie->name:''}}</li>
                 </ul>
             </div>
@@ -37,7 +37,7 @@
         							<div class="inner-box">
         								<div class="image">
         									<a href="{{url('/')}}/article/{{$article->slug}}"><img src="{{ explode(".",$article->image)[0] == 'http://lorempixel'? $article->image : url('/')}}/uploads/articles/{{$article->image }}" /></a>
-        									<a href="{{url('/')}}/article/{{$article->slug}}" class="overlay-link"><span class="txt">Read More <span class="icon flaticon-arrows-6"></span></span></a>
+        									<a href="{{url('/')}}/article/{{$article->slug}}" class="overlay-link"><span class="txt">{{ __('front.read_more') }} <span class="icon flaticon-arrows-6"></span></span></a>
         									<div class="post-date">{{$article->created_at->diffForHumans()}}</div>
         								</div>
         								<div class="lower-box">

@@ -36,10 +36,12 @@
                                     <td>{{$commentArticle->id}}</td>
                                     <td>{{$commentArticle->title}}</td>
                                    <td>
+                                    @can('comment-delete')
                                        <div class="col-md-6">
                                            <a class=" btn btn-danger"  onclick='return confirm("Are you sure you want to delete this comment?")' href="{{url('/') }}/dashboard/article/comments/{{$commentArticle->id}}/delete" >Delete
                                            </a>
                                         </div>
+                                      @endcan
                                     </td>
                                 </tr>
                             @endforeach

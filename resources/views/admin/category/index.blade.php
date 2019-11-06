@@ -71,8 +71,13 @@ Categories
             <div class="table-toolbar">
                 <div class="row">
                     <div class="col-md-6">
-                      <button id="delete-delete" class="btn btn-danger">Delete selected</button>
+                      @can('category-delete')
+                        <button id="delete-delete" class="btn btn-danger">Delete selected</button>
+                      @endcan
+
+                      @can('category-create')
                        <button data-toggle="modal" data-target="#exampleModal"  class="btn btn-primary"  type="button">Add a new Categories</button>
+                      @endcan
                     </div>
                 </div>
             </div>
@@ -109,10 +114,12 @@ Categories
                                               <i class="fa fa-angle-down"></i>
                                           </a>
                                           <ul   class="dropdown-menu pull-right">
+                                            @can('category-edit')
                                               <li>
                                                   <a  data-id="{{$category->id}}" data-ty="{{$category->name}}" class="edit-items"  data-toggle="modal" data-target="#exampleModal2">
                                                       <i class="fa fa-pencil"></i> Edit </a>
                                               </li>
+                                            @endcan
                                           </ul>
                                       </div>
                                   </div>

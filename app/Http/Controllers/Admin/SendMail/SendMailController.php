@@ -18,6 +18,7 @@ class SendMailController extends Controller
     function __construct(User $user)
     {
        $this->modelUsers = new UsersRepositories($user);
+       $this->middleware('permission:sendmail',['only' => ['index','mail']]);
     }
     
     public function index()

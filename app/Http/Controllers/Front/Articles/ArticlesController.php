@@ -17,7 +17,7 @@ class ArticlesController extends Controller
 
     function __construct(Article $article,CommentArticle $commentArticle)
     {
-      $this->modelArticles       = new ArticlesRepositories($article);
+      $this->modelArticles       = new ArticlesRepositories($article,$commentArticle);
       $this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
       
     }

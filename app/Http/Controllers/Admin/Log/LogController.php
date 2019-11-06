@@ -8,6 +8,13 @@ use App\Models\LogActivity;
 
 class LogController extends Controller
 {
+
+    public function __construct()
+    {
+      $this->middleware('permission:log-list|log-delete', ['only' => ['index','store']]);
+      $this->middleware('permission:log-delete', ['only' => ['destroy']]);
+    }
+
     public function GetAllLog()
     {
     	$logs = \LogActivity::logActivityLists();
@@ -16,11 +23,10 @@ class LogController extends Controller
 
     public function DeleteLog(Request $request)
     {
-      if(!empty($request->check))
-      {
-		LogActivity::destroy($request->check);
-		session()->flash('success','Data deleted successfully');
-		return back();
+     if(!empty($request->check)) {
+  		LogActivity::destroy($request->check);
+  		session()->flash('success','Data deleted successfully');
+		  return back();
 	  }else{
 	  	session()->flash('warning','Please select a item at least');
 	  	return back();

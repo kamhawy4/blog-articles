@@ -34,7 +34,7 @@ class RoleController extends Controller
      */
     public function index(Request $request)
     {
-        $roles = Role::orderBy('id','DESC')->paginate(5);
+        $roles = Role::orderBy('id','DESC')->get();
         return view('admin.roles.index',compact('roles'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -69,6 +69,8 @@ class RoleController extends Controller
         $role = Role::create(['name' => $request->input('name')]);
         $role->syncPermissions($request->input('permission'));
 
+        // Log Activity
+        \LogActivity::addToLog('Add New Role'.' : '.$role->name);
 
         return redirect()->route('dashboard.roles.index')
                         ->with('success','Role created successfully');
@@ -132,6 +134,8 @@ class RoleController extends Controller
 
         $role->syncPermissions($request->input('permission'));
 
+        // Log Activity
+        \LogActivity::addToLog('Update Role'.' : '.$role->name);
 
         return redirect()->route('dashboard.roles.index')
                         ->with('success','Role updated successfully');
@@ -145,6 +149,10 @@ class RoleController extends Controller
     public function destroy($id)
     {
         DB::table("roles")->where('id',$id)->delete();
+
+        // Log Activity
+        \LogActivity::addToLog('Delete Role');
+
         return redirect()->route('dashboard.roles.index')
                         ->with('success','Role deleted successfully');
     }

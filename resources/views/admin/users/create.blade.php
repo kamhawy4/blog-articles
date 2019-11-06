@@ -47,6 +47,13 @@ Add a new User
                         </div>
                      </div>
 
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Role:</strong>
+                            {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
+                        </div>
+                    </div>
+
                     <div style="margin-bottom: 20px" class="text-center">
                         <div class="row">
                             <div class="col-md-12">

@@ -18,8 +18,13 @@ All Users
             <div class="table-toolbar">
                 <div class="row">
                     <div class="col-md-6">
+                      @can('user-create')
                         <a href="{{url('/')}}/dashboard/users/create" class="btn btn-primary">Add a new User</a>
-                      <button id="delete-delete" class="btn btn-danger">Delete Selected</button>
+                      @endcan
+
+                      @can('user-delete')
+                        <button id="delete-delete" class="btn btn-danger">Delete Selected</button>
+                      @endcan
                     </div>
                 </div>
             </div>
@@ -35,6 +40,7 @@ All Users
                         <th> Name </th>
                         <th> Email </th>
                         <th> Create </th>
+                        <th> Role </th>
                         <th> Options </th>
                     </tr>
                 </thead>
@@ -59,16 +65,25 @@ All Users
 
                         </td>
                         <td>
+                          @if(!empty($user->getRoleNames()))
+                            @foreach($user->getRoleNames() as $v)
+                               <label class="badge badge-success">{{ $v }}</label>
+                            @endforeach
+                          @endif
+                        </td>
+                        <td>
                           <div class="actions">
                                   <div class="btn-group">
                                       <a class="btn btn-sm green dropdown-toggle" href="javascript:;" data-toggle="dropdown"> Options
                                           <i class="fa fa-angle-down"></i>
                                       </a>
                                       <ul   class="dropdown-menu pull-right">
+                                        @can('user-edit')
                                           <li>
                                               <a href="{{url('/')}}/dashboard/users/{{$user->id}}/edit">
                                                   <i class="fa fa-pencil"></i> Edit </a>
                                           </li>
+                                        @endcan
                                       </ul>
 
                                   </div>

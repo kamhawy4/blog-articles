@@ -16,7 +16,12 @@ class CategoriesController extends Controller
 
 	public function __construct(Categories $categories)
 	{
-		$this->modelCategories  = new CategoriesRepositories($categories);	   
+		$this->modelCategories  = new CategoriesRepositories($categories);
+
+		$this->middleware('permission:category-list|category-create|category-edit|category-delete', ['only' => ['index','store']]);
+		$this->middleware('permission:category-create', ['only' => ['create','store']]);
+		$this->middleware('permission:category-edit', ['only' => ['edit','update']]);
+		$this->middleware('permission:category-delete', ['only' => ['destroy']]);
 	}
 
    // Return view page index Categories And Return All Categories

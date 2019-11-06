@@ -16,18 +16,6 @@ Add a new Role
 </div>
 
 
-@if (count($errors) > 0)
-    <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-        <ul>
-        @foreach ($errors->all() as $error)
-            <li>{{ $error }}</li>
-        @endforeach
-        </ul>
-    </div>
-@endif
-
-
 {!! Form::open(array('route' => 'dashboard.roles.store','method'=>'POST')) !!}
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
@@ -40,15 +28,19 @@ Add a new Role
         <div class="form-group">
             <strong>Permission:</strong>
             <br/>
-            @foreach($permission as $value)
-                <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
-                {{ $value->name }}</label>
             <br/>
+            @foreach($permission as $value)
+                <label  class="mt-checkbox mt-checkbox-single mt-checkbox-outline col-md-4" >{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'checkboxes')) }}{{ $value->name }} <span></span>
+            </label>
             @endforeach
         </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
+</div>
+<div style="margin-bottom: 20px;margin-top: 51px;" class="text-center">
+    <div class="row">
+        <div class="col-md-12">
+            <button  class="btn default">Add Role</button>
+        </div>
     </div>
 </div>
 {!! Form::close() !!}

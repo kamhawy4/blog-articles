@@ -11,6 +11,7 @@
     	<h1>{{ $articles->title ? $articles->title:''}}</h1>
         <div class="bread-crumb"> 
         	<ul class="clearfix">
+                <li><a href="{{url('/')}}">{{ __('front.home') }}</a></li>
                 <li class="active">{{ $articles->title ? $articles->title : ''}}</li>
             </ul>
         </div>
@@ -38,10 +39,10 @@
                         		</div>
 
                         		<div class="lower-box">
-                        			<h3>>{{ $articles->title ? $articles->title : '' }}</h3>
+                        			<h3>   {{ __('front.title') }} :  {{ $articles->title ? $articles->title : '' }}</h3>
 
                         			<div class="text">
-                                    	{!! $articles->description ? $articles->description : '' !!}
+                                    	 {{ __('front.description') }} : {!! $articles->description ? $articles->description : '' !!}
                                     </div>
 
                                     <!--Options-->
@@ -49,7 +50,7 @@
                                         <div class="clearfix">
                                             <div class="share-options">
                                                 <ul>
-                                                    <li><strong>Share :</strong></li>
+                                                    <li><strong>{{ __('front.share') }} :</strong></li>
                                                     
                                                     <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{url('/')}}/article/{{ $articles->slug ? $articles->slug : '' }}"><span class="fa fa-facebook-f"></span></a>
                                                     </li>
@@ -70,7 +71,7 @@
                         </div>
                         <!--Comments Area-->
                         <div class="comments-area">
-                        	<div class="group-title"><h2>{{ $commentsArticle->count() }} Comments</h2></div>
+                        	<div class="group-title"><h2>{{ $commentsArticle->count() }}  {{ __('front.comments') }}</h2></div>
                              <div class="comment-box table">
                             	<!--Comment-->
                             @if(!$commentsArticle->isEmpty())
@@ -82,25 +83,25 @@
                         </div>
                         <!-- demo Wait loader image -->
                         <div class="ajax-load2 text-center" style="display:none">
-                          <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif">Wait</p>
+                          <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif"> {{ __('front.wait') }}</p>
                         </div>
                         <!-- Comment Form -->
                         <div class="comment-form">
                             <div class="group-title">
-                            	<h2>Post A Comment</h2>
+                            	<h2>{{ __('front.post_a_comment') }}</h2>
                             </div> 
                             <!--Comment Form-->
                             <form method="post" action="blog.html">
                                 <div class="row clearfix">
                                     <div class="form-group col-md-12 col-sm-12 col-xs-12">
-                                        <input type="text" name="name" placeholder="Name" >
+                                        <input type="text" name="name" placeholder="{{ __('front.name') }}" >
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <textarea name="commet" placeholder="Comments"></textarea>
+                                    <textarea name="commet" placeholder="{{ __('front.comment') }}"></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <button   id="send" class="theme-btn btn-style-two" type="submit" name="submit-form">Post Comment</button>
+                                    <button   id="send" class="theme-btn btn-style-two" type="submit" name="submit-form"> {{ __('front.post_comment') }}</button>
                                 </div>
                             </form>
                         </div><!--End Comment Form -->

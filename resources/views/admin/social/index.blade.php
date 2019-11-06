@@ -77,8 +77,12 @@ Social
             <div class="table-toolbar">
                 <div class="row">
                     <div class="col-md-6">
-                      <button id="delete-delete" class="btn btn-danger">Delete selected</button>
+                      @can('social-delete')
+                        <button id="delete-delete" class="btn btn-danger">Delete selected</button>
+                      @endcan
+                      @can('social-create')
                        <button data-toggle="modal" data-target="#exampleModal"  class="btn btn-primary"  type="button">Add a new Social</button>
+                      @endcan
                     </div>
                 </div>
             </div>
@@ -120,8 +124,10 @@ Social
                                           </a>
                                           <ul   class="dropdown-menu pull-right">
                                               <li>
+                                                @can('social-edit')
                                                   <a  data-id="{{$socialData->id}}" data-name="{{$socialData->name}}" data-url="{{$socialData->url}}" class="edit-items"  data-toggle="modal" data-target="#exampleModal2">
                                                       <i class="fa fa-pencil"></i> Edit </a>
+                                                @endcan
                                               </li>
                                           </ul>
                                       </div>

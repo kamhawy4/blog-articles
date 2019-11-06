@@ -1,5 +1,12 @@
 <?php 
 
+    
+    // language
+    Route::get('locale/{locale}', function ($locale){
+        Session::put('locale', $locale);
+        return redirect()->back();
+    });
+
     //Articles
     Route::group(['namespace' => 'Articles'], function () {
        Route::get('/dashboard/comments','ArticlesController@Comments');

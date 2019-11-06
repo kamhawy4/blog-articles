@@ -17,7 +17,12 @@ class SocialController extends Controller
 
 	public function __construct(SocialLinks $socialLinks)
 	{
-		$this->modelSocialLinks       = new SocialRepositories($socialLinks);	   
+		$this->modelSocialLinks       = new SocialRepositories($socialLinks);
+
+		$this->middleware('permission:social-list|social-create|social-edit|social-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:social-create', ['only' => ['create','store']]);
+         $this->middleware('permission:social-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:social-delete', ['only' => ['destroy']]);   
 	}
 
    // Return view page index SocialLinks And Return All SocialLinks

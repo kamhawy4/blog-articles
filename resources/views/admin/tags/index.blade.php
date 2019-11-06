@@ -71,8 +71,15 @@ Tags
             <div class="table-toolbar">
                 <div class="row">
                     <div class="col-md-6">
-                      <button id="delete-delete" class="btn btn-danger">Delete selected</button>
+
+                      @can('tag-delete')
+                        <button id="delete-delete" class="btn btn-danger">Delete selected</button>
+                      @endcan
+
+                      @can('tag-create')
                        <button data-toggle="modal" data-target="#exampleModal"  class="btn btn-primary"  type="button">Add a new Tags</button>
+                      @endcan
+
                     </div>
                 </div>
             </div>
@@ -110,8 +117,10 @@ Tags
                                           </a>
                                           <ul   class="dropdown-menu pull-right">
                                               <li>
+                                                @can('tag-edit')
                                                   <a  data-id="{{$tag->id}}" data-ty="{{$tag->name}}" class="edit-items"  data-toggle="modal" data-target="#exampleModal2">
                                                       <i class="fa fa-pencil"></i> Edit </a>
+                                                @endcan
                                               </li>
                                           </ul>
                                       </div>

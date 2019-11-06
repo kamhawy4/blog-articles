@@ -44,11 +44,18 @@ Modify the User
 
 
                         <div class="{{$errors->has('phone')?'has-error':''}}" >
-                        <div class="form-group form-md-line-input form-md-floating-label">
-                        {{ Form::text('phone',null,['class'=>'form-control','id'=>'form_control_1']) }}
-                        <label for="form_control_1">Phone</label>
+                            <div class="form-group form-md-line-input form-md-floating-label">
+                            {{ Form::text('phone',null,['class'=>'form-control','id'=>'form_control_1']) }}
+                            <label for="form_control_1">Phone</label>
+                            </div>
+                            <small class="text-danger">{{ $errors->first('phone') }}</small>
                         </div>
-                        <small class="text-danger">{{ $errors->first('phone') }}</small>
+
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="form-group">
+                                <strong>Role:</strong>
+                                {!! Form::select('roles[]', $roles,$userRole, array('class' => 'form-control','multiple')) !!}
+                            </div>
                         </div>
 
 

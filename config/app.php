@@ -175,6 +175,7 @@ return [
          Intervention\Image\ImageServiceProvider::class,
          App\Providers\HelperServiceProvider::class,
          LaravelFCM\FCMServiceProvider::class,
+         Yajra\DataTables\DataTablesServiceProvider::class,
          ////// end my packge
         /*
          * Application Service Providers...
@@ -245,7 +246,9 @@ return [
         'FCM'      => LaravelFCM\Facades\FCM::class,
         'FCMGroup' => LaravelFCM\Facades\FCMGroup::class, // Optional
         'LogActivity' => App\Helpers\LogActivity::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         ///// end My Packge
+
 
 
 

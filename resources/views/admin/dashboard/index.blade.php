@@ -7,33 +7,7 @@ Dashboard
 
 <div class="row">
 
-{{--     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-        <div class="dashboard-stat2 ">
-            <div class="display">
-                <div class="number">
-                    <h3 class="font-purple-soft">
-                        <span data-counter="counterup" data-value="{{isset($mangaers)?$mangaers:0}}"> {{isset($mangaers)?$mangaers:0}}</span>
-                    </h3>
-                    <small>Number of Mangaers</small>
-                </div>
-                <div class="icon">
-                    <i class="fa fa-user"></i>
-                </div>
-            </div>
-            <div class="progress-info">
-                <div class="progress">
-                    <span style="width: 100%;" class="progress-bar progress-bar-success purple-soft">
-                        <span class="sr-only">Number of Mangaers</span>
-                    </span>
-                </div>
-                <div class="status">
-                    <a  style="text-decoration:none;color: #8877a9;" href="{{url('/')}}/dashboard/managers"> More </a>
-                </div>
-            </div>
-        </div>
-    </div>
- --}}
-    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="dashboard-stat2 ">
             <div class="display">
                 <div class="number">
@@ -59,7 +33,7 @@ Dashboard
         </div>
     </div>
 
-    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div class="dashboard-stat2 ">
             <div class="display">
                 <div class="number">

@@ -23,7 +23,7 @@ class ArticleController extends Controller
     const SUBPATH   = '/100x100/';
     const SIZE      = '100,100';
     const NAMEFILE  = 'img';
-	const NAMEMERGE = 'image';
+	  const NAMEMERGE = 'image';
 	
 
 	// space that we can use the repository from
@@ -39,6 +39,12 @@ class ArticleController extends Controller
 	  $this->modelCategories     = new CategoriesRepositories($categories);
 	  $this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
 	  $this->modelTags           = new TagsRepositories($tags);
+
+      $this->middleware('permission:article-list|article-create|article-edit|article-delete', ['only' => ['index','store']]);
+      $this->middleware('permission:article-create', ['only' => ['create','store']]);
+      $this->middleware('permission:article-edit', ['only' => ['edit','update']]);
+      $this->middleware('permission:article-delete', ['only' => ['destroy']]);
+
 	}
 
 	// Return view page index articles And Return All Articles	 

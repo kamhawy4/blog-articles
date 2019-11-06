@@ -21,7 +21,9 @@ All Logs
             <div class="table-toolbar">
                 <div class="row">
                     <div class="col-md-6">
-                      <button id="delete-delete" class="btn btn-danger">Delete Selected</button>
+                      @can('log-delete')
+                        <button id="delete-delete" class="btn btn-danger">Delete Selected</button>
+                      @endcan
                     </div>
                 </div>
             </div>

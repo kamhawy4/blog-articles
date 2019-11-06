@@ -21,8 +21,13 @@ All Articles
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
+                          @can('article-create')
                         	<a href="{{url('/')}}/dashboard/articles/create" class="btn btn-primary">Add a new Article</a>
-                            <button id="delete-delete" class="btn btn-danger">Delete selected</button>
+                          @endcan
+
+                          @can('article-delete')
+                              <button id="delete-delete" class="btn btn-danger">Delete selected</button>
+                          @endcan
                         </div>
                     </div>
                 </div>
@@ -63,14 +68,18 @@ All Articles
                                     <td> {{$article->GetNameCategorie->name}} </td>
 
                                     <td>
+                                    @can('comment-list')
                                         <div class="col-md-4">
                                            <a class=" btn btn-info"  href="{{url('/') }}/dashboard/article/comments/{{$article->id}}" >Comments
                                            </a>
                                         </div> 
+                                    @endcan
 
+                                     @can('article-edit')
                                         <div class="col-md-4">
                                             <a  href="{{url('/')}}/dashboard/articles/{{$article->id}}/edit"><li class="btn btn-primary">Edit</li></a>
                                         </div>
+                                      @endcan
                                     </td>
                                 </tr>
                             @endforeach

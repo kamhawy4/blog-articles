@@ -16,7 +16,12 @@ class TagsController extends Controller
 
 	public function __construct(Tags $tags)
 	{
-		$this->modelTags       = new TagsRepositories($tags);	   
+		$this->modelTags       = new TagsRepositories($tags);
+
+		$this->middleware('permission:tag-list|tag-create|tag-edit|tag-delete', ['only' => ['index','store']]);
+         $this->middleware('permission:tag-create', ['only' => ['create','store']]);
+         $this->middleware('permission:tag-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:tag-delete', ['only' => ['destroy']]);
 	}
 
    // Return view page index tags And Return All tags

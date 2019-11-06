@@ -33,6 +33,7 @@ class SettingsController extends Controller
   function __construct(Settings $settings)
   {
     $this->modelSettings     = new SettingsRepositories($settings);
+    $this->middleware('permission:settings',['only' => ['index','store','update']]);
   }
 
   // Return view page settings And Return first Settings
