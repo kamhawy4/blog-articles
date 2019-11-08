@@ -16,13 +16,14 @@ class HomeController extends Controller
      *
      * @return void
      */
-    /*public function __construct()
+    public function __construct()
     {
         $this->middleware('auth');
-    }*/
+    }
 
-    public function testEvent(){
-		try {	
+    public function testEvent()
+    {
+	    try {	
 			Log::info('=== Hello  ========');
 			event(new EventTest());
 		    return 'hello';
@@ -30,6 +31,16 @@ class HomeController extends Controller
 			 Log::info('Error'. $e->getMessage());
 			 return $ex;
 		  }
+    }
+
+    public function testEventQueue(){
+      try {
+         event(new EventTest());
+         return 'hello Queue';
+      } catch(Exception $ex) {
+         Log::info('Error'. $e->getMessage());
+         return $ex;
+      }
     }
 
 }

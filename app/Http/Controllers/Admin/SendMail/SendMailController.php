@@ -12,7 +12,6 @@ use App\Http\Requests\SendMail\SendMailRequest;
 
 class SendMailController extends Controller
 {
-
     protected $modelUsers;
 
     function __construct(User $user)
