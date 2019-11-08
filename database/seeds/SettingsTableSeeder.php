@@ -15,7 +15,7 @@ class SettingsTableSeeder extends Seeder
             'name_site'  => 'admin',
             'email'      => 'admin@admin.com',
             'phone'      =>  mt_rand(100000000,999999999),
-            'address'    =>  bcrypt('123456'),
+            'address'    =>  'cairo',
             'logo'       => 'http://lorempixel.com/g/200/100/',
             'fav'        => 'http://lorempixel.com/g/200/100/',
 

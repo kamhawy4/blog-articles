@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app()->getLocale() }}" >
+
 <head>
 <meta charset="utf-8">
-<title>{{ app('setting') ? app('setting')->name_site:''}}</title>
+<title>{{ app('setting') ? app('setting')->name_site:''}} </title>
 <!-- Stylesheets -->
 
-{{style('front/css/responsive.css') }}
-{{style('front/css/style.css') }}
-{{style('front/css/bootstrap.css') }}
+  {{style('front/css/responsive.css') }}
+  {{style('front/css/style.css') }}
+  {{style('front/css/bootstrap.css') }}
+
+  @if((\Session::get('locale')  == 'ar'))
+    {{style('front/css/bootstrap-rtl.css') }}
+  @endif
 
 
-@if(app('setting') != null)
-  <link rel="shortcut icon" href="{{ explode(".",app('setting')->fav)[0] == 'http://lorempixel' ?  app('setting') ? app('setting')->fav:'' : url('/')}}/uploads/fav/{{app('setting')->fav }}" type="image/x-icon">
-@endif
+  @if(app('setting') != null)
+    <link rel="shortcut icon" href="{{ explode(".",app('setting')->fav)[0] == 'http://lorempixel' ?  app('setting') ? app('setting')->fav:'' : url('/')}}/uploads/fav/{{app('setting')->fav }}" type="image/x-icon">
+  @endif
 
 <!-- Responsive -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,6 +28,29 @@
 
 <!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
 <!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyCHmU5v5xonxaLZJHryXVyqQbtXF0f4E2U",
+    authDomain: "test-3efc9.firebaseapp.com",
+    databaseURL: "https://test-3efc9.firebaseio.com",
+    projectId: "test-3efc9",
+    storageBucket: "test-3efc9.appspot.com",
+    messagingSenderId: "1013908535553",
+    appId: "1:1013908535553:web:83e95fc8ea4acef633c300"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+
 </head>
 
 <body>
@@ -34,24 +62,39 @@
     
     <!-- Main Header / Header Style Two -->
     <header class="main-header header-style-two">
-        
         <!-- Main Box -->
         <div class="main-box">
             <div class="auto-container">
                 <div class="outer-container clearfix">
                     <!--Logo Box-->
                     <div class="logo-box">
+                      <div>
+
+                          @if((\Session::get('locale')  == 'ar'))
+                           <a  class="btn btn-primary" href="{{ url('locale/en') }}" ><i class="fa fa-language"></i>EN</a>
+                          @endif
+                           
+                           @if((\Session::get('locale')  == 'en'))
+                            <a class="btn btn-primary" {{ (\Session::get('locale')  == 'en') }} href="{{ url('locale/ar') }}" ><i class="fa fa-language"></i> عربي</a>
+                           @endif
+
+                        </div>
+
                         @if(app('setting') != null)
-                          <div class="logo"><a href="{{url('/')}}"><img src="{{ explode(".",app('setting')->logo)[0] == 'http://lorempixel' ?  app('setting') ? app('setting')->logo:'' : url('/')}}/uploads/logo/{{app('setting')->logo }}" alt=""></a></div>
+                          <div class="logo"><a href="{{url('/')}}"><img src="{{ explode(".",app('setting')->logo)[0] == 'http://lorempixel' ?  app('setting') ? app('setting')->logo:'' : url('/')}}/uploads/logo/{{app('setting')->logo }}" alt="">
+            
+                            {{-- <h1>{{ __('home_front.welcome') }}</h1> --}}
+                          </a></div>
                         @endif
                     </div>
                 </div>    
             </div>
         </div>
-    
+        
     </header>
     <!--End Main Header -->
     
+
 
     @yield('content')
 

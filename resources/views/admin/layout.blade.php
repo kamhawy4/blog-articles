@@ -134,13 +134,13 @@ License: You must have a valid license purchased only from themeforest(the above
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                     <img alt="" class="img-circle" src="{{url('/')}}/admin/layouts/layout/img/avatar3_small.jpg" />
                                     <span class="username username-hide-on-mobile">
-                                     {{ Auth::guard('managers')->user()->name }}
+                                     {{ Auth::user()->name }}
                                      </span>
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-default">
                                     <li>
-                                        <a href="{{url('/')}}/dashboard/managers/{{ Auth::guard('managers')->user()->id }}/edit">
+                                        <a href="{{url('/')}}/dashboard/managers/{{ Auth::user()->id }}/edit">
                                             <i class="icon-user"></i> ملفي الشخصي </a>
                                     </li>
                                     <li>
@@ -199,68 +199,95 @@ License: You must have a valid license purchased only from themeforest(the above
                                     <span class="title"> Home </span>
                                 </a>
                             </li>
-
+                            
+                            @can('settings')
                             <li class="nav-item  {{Request::is('dashboard/settings*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/settings" >
                                     <i class="fa fa-cogs"></i>
                                     <span class="title"> Settings </span>
                                 </a>
                             </li>
+                            @endcan
 
-
+                            @can('social-list')
                             <li class="nav-item  {{Request::is('dashboard/social*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/social" >
                                     <i class="fa fa-link"></i>
                                     <span class="title"> Social Links </span>
                                 </a>
                             </li>
+                            @endcan
 
-
+                           @can('user-list')
                             <li class="nav-item  {{ Request::is('dashboard/users*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/users" >
                                     <i class="fa fa-user"></i>
                                     <span class="title"> Users </span>
                                 </a>
                             </li>
+                            @endcan
+
+                            @can('role-list')
+                            <li class="nav-item  {{ Request::is('dashboard/roles*')?'active':''}}" >
+                                <a href="{{url('/')}}/dashboard/roles" >
+                                    <i class="fa fa-tasks"></i>
+                                    <span class="title"> Roles </span>
+                                </a>
+                            </li>
+                            @endcan
                           
-                            <li class="nav-item  {{Request::is('dashboard/managers*')?'active':''}}" >
+                            {{-- <li class="nav-item  {{Request::is('dashboard/managers*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/managers" >
                                     <i class="fa fa-users"></i>
                                     <span class="title"> Managers </span>
                                 </a>
-                            </li>
-
+                            </li> --}}
+                            
+                            @can('category-list')
                             <li class="nav-item  {{Request::is('dashboard/categorys*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/categorys" >
                                     <i class="fa fa-tag"></i>
                                     <span class="title"> Categories </span>
                                 </a>
                             </li> 
+                            @endcan
 
-
+                            @can('tag-list')
                             <li class="nav-item  {{Request::is('dashboard/tags*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/tags" >
                                     <i class="fa fa-tags"></i>
                                     <span class="title"> Tags </span>
                                 </a>
-                            </li> 
-
-
-                             <li class="nav-item  {{Request::is('dashboard/articles*')?'active':''}} {{Request::is('dashboard/article*')?'active':''}}" >
+                            </li>
+                            @endcan
+ 
+                           @can('article-list')
+                            <li class="nav-item  {{Request::is('dashboard/articles*')?'active':''}} {{Request::is('dashboard/article*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/articles" >
                                     <i class="fa fa-newspaper-o"></i>
                                     <span class="title"> Articles </span>
                                 </a>
-                            </li> 
+                            </li>
+                            @endcan
 
 
+                            @can('sendmail')
                              <li class="nav-item  {{Request::is('dashboard/sendmail*')?'active':''}} {{Request::is('dashboard/sendmail*')?'active':''}}" >
                                 <a href="{{url('/')}}/dashboard/sendmail" >
                                     <i class="fa fa-paper-plane"></i>
                                     <span class="title"> Send Mails </span>
                                 </a>
                             </li> 
+                            @endcan
   
+                           @can('log-list')
+                            <li class="nav-item {{Request::is('dashboard/log*')?'active':''}}" >
+                                <a href="{{url('/')}}/dashboard/log" >
+                                    <i    class="fa fa-info"></i>
+                                    <span class="title"> Log </span>
+                                </a>
+                            </li>
+                           @endcan
 
                         </ul>
                         <!-- END SIDEBAR MENU -->
@@ -317,7 +344,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <!-- END CONTENT -->
             <div class="page-footer">
                 <div class="page-footer-inner"> Copyright &copy;
-                    <a target="_blank" href="http://glowapps.com.eg">Abdo</a> &nbsp;|&nbsp; {{ date("Y") }}
+                    <a target="_blank" href="#">Abdo</a> &nbsp;|&nbsp; {{ date("Y") }}
                 </div>
                 <div class="scroll-to-top">
                     <i class="icon-arrow-up"></i>

@@ -8,12 +8,18 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Input;
 use Session,Image,Auth,DB,File;
+// Laravel-FCM
+use LaravelFCM\Message\OptionsBuilder;
+use LaravelFCM\Message\PayloadDataBuilder;
+use LaravelFCM\Message\PayloadNotificationBuilder;
+use FCM;
+
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    // upload Image 
+    // upload Image
     public function uploadIMage($data,$path,$subPath,$size,$nameFile,$nameMerge)
     {
         $explode =  explode(',',$size);
@@ -64,6 +70,7 @@ class Controller extends BaseController
             $big        =  $path.'/'.$update->$nameMerge;
             File::delete($big);
         }
+
     }
 
 
@@ -94,5 +101,44 @@ class Controller extends BaseController
         $string = preg_replace("/[\s_]/", $separator, $string);
 
         return str_limit($string, 100, '');
+    }
+
+
+    public function SendNotification()
+    {
+        $optionBuilder = new OptionsBuilder();
+        $optionBuilder->setTimeToLive(60*20);
+
+        $notificationBuilder = new PayloadNotificationBuilder('my title');
+        $notificationBuilder->setBody('Hello world')
+            ->setSound('default');
+
+        $dataBuilder = new PayloadDataBuilder();
+        $dataBuilder->addData(['a_data' => 'my_data']);
+
+        $option = $optionBuilder->build();
+        $notification = $notificationBuilder->build();
+        $data = $dataBuilder->build();
+
+        $token = "fNvvyrB2QDc:APA91bGDP3ouPsFVDpBI_Oqz7uZprIhPuJeMFcPmS_FBdte6ZLwXqGTAJsY5I1srOLEC6fEdnrZzQxog9bqj6jgNUOiSyfCJNpLMxnX6fcwBxt6Pj8r19Q7ULJQrWXRrvAA9z0X89UZ-";
+        
+
+        $downstreamResponse = FCM::sendTo($token, $option, $notification, $data);
+
+        $downstreamResponse->numberSuccess();
+        $downstreamResponse->numberFailure();
+        $downstreamResponse->numberModification();
+
+        // return Array - you must remove all this tokens in your database
+        $downstreamResponse->tokensToDelete();
+
+        // return Array (key : oldToken, value : new token - you must change the token in your database)
+        $downstreamResponse->tokensToModify();
+
+        // return Array - you should try to resend the message to the tokens in the array
+        $downstreamResponse->tokensToRetry();
+
+        // return Array (key:token, value:error) - in production you should remove from your database the tokens
+        $downstreamResponse->tokensWithError();
     }
 }

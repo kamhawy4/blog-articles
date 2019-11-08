@@ -5,7 +5,7 @@ namespace App\Repositories\Users;
 use Illuminate\Database\Eloquent\Model;
 use App\Repositories\RepositoryInterface;
 use Auth;
-
+use DB;
 class UsersRepositories implements RepositoryInterface
 {	
   // model property on class instances
@@ -23,13 +23,16 @@ class UsersRepositories implements RepositoryInterface
 
   public function store($data)
   {
-    return $this->model->create($data->all());
+    $user = $this->model->create($data->all());
+    return $user->assignRole($data->input('roles'));
   }
 
   public function update($data,$id)
   {
     $update = $this->show($id);
-    return $update->update($data->all());
+    $update->update($data->all());
+    DB::table('model_has_roles')->where('model_id',$id)->delete();
+    return $update->assignRole($data->input('roles'));
   }
 
   public function delete($id)

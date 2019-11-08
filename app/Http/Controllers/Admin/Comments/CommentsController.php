@@ -18,6 +18,9 @@ class CommentsController extends Controller
 	function __construct(CommentArticle $commentArticle)
 	{
 	  $this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
+
+	  $this->middleware('permission:comment-list|comment-delete', ['only' => ['index','store']]);
+	  $this->middleware('permission:comment-delete', ['only' => ['destroy']]);
 	}
 
     // return  Comments by article_id

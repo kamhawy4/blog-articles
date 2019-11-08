@@ -5,7 +5,7 @@
 
         <!-- Categories -->
         <div class="sidebar-widget categories">
-            <div class="sidebar-title"><h3>Categories</h3></div>
+            <div class="sidebar-title"><h3>{{ __('front.categories') }}</h3></div>
             <ul class="archive-list">
                 @if(!$categories->isEmpty())
                     @foreach($categories as $categorie)
@@ -18,7 +18,7 @@
 
         <!-- Recent Posts -->
         <div class="sidebar-widget popular-posts">
-            <div class="sidebar-title"><h3>Recent News</h3></div>
+            <div class="sidebar-title"><h3>  {{ __('front.recent') }}</h3></div>
                 @if(!$articlesSidbar->isEmpty())
                  @foreach($articlesSidbar as $articleSidbar)
                     <article class="post">

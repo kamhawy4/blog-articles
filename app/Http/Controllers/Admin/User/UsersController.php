@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Users\StoreUsersRequest;
 use App\Http\Requests\Users\UpdateUsersRequest;
 use App\Repositories\Users\UsersRepositories;
+use Spatie\Permission\Models\Role;
+use DB;
 use App\Models\User;
 
 class UsersController extends Controller
@@ -15,7 +17,14 @@ class UsersController extends Controller
 
     function __construct(User $user)
     {
+    	
        $this->modelUsers = new UsersRepositories($user);
+
+       $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
+       $this->middleware('permission:user-create', ['only' => ['create','store']]);
+       $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+       $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+
 	}
 	
     // Return view page index Users And Return All Users 
@@ -28,14 +37,17 @@ class UsersController extends Controller
 	// Return view page create Users 
     public function create()
     {
-    	return view('admin.users.create');
+        $roles = Role::pluck('name','name')->all();
+    	return view('admin.users.create',compact('roles'));
     }
 
 	// Return view page Edit User And Return User by id
     public function edit($id)
     {
 		$update    =  $this->modelUsers->show($id);		
-    	return view('admin.users.edit',compact('update'));
+		$roles     =  Role::pluck('name','name')->all();
+        $userRole  =  $update->roles->pluck('name','name')->all();
+    	return view('admin.users.edit',compact('update','roles','userRole'));
     }
 
 	// Store Users
@@ -44,7 +56,10 @@ class UsersController extends Controller
         // Merge password and Users Create   
 		$request   ->  merge(['password' => bcrypt($request->password)]); 
 		
-        $this->modelUsers->store($request);		
+        $user = $this->modelUsers->store($request);
+
+        // Log Activity
+        \LogActivity::addToLog('Add New User'.' : '.$request->name);
 
 	    session()->flash('save','The Users has been successfully added');
 	    return redirect()->to(url('dashboard/users'));
@@ -65,6 +80,9 @@ class UsersController extends Controller
 
 		$this->modelUsers->update($request,$id);
 
+		// Log Activity
+        \LogActivity::addToLog('Update User'.' : '.$update->name);
+
 		session()->flash('success','Data modified successfully');
 		return redirect()->to(url('dashboard/users'));
 	}
@@ -83,7 +101,12 @@ class UsersController extends Controller
 	  if(!empty($request->check))
       {
 		$this->modelUsers->deleteUsersCheck($request->check);
+
 		session()->flash('success','Data deleted successfully');
+
+		// Log Activity
+        \LogActivity::addToLog('Delete Users');
+
 		return back();
 	  }else{
 	  	session()->flash('warning','Please select a manager at least');

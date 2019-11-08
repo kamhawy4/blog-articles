@@ -19,7 +19,7 @@ Add a new User
                         <div class="form-group form-md-line-input form-md-floating-label">
                             <input type="text" value="{{old('name')}}" class="form-control" name="name" id="form_control_1">
                             <label for="form_control_1">Name</label>
-                        <small class="text-danger">{{ $errors->first('name') }}</small>
+                           <small class="text-danger">{{ $errors->first('name') }}</small>
                         </div>
                      </div>
 
@@ -46,6 +46,13 @@ Add a new User
                         <small class="text-danger">{{ $errors->first('phone') }}</small>
                         </div>
                      </div>
+
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Role:</strong>
+                            {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
+                        </div>
+                    </div>
 
                     <div style="margin-bottom: 20px" class="text-center">
                         <div class="row">

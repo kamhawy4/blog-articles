@@ -32,13 +32,13 @@
                                     <div class="image">
                                         <a href="{{url('/')}}/article/{{$article->slug}}"><img src="{{ explode(".",$article->image)[0] == 'http://lorempixel'? $article->image : url('/')}}/uploads/articles/{{$article->image }}" alt="{{$article->title}}" /></a>
 
-                                        <a href="{{url('/')}}/article/{{$article->slug}}" class="overlay-link"><span class="txt">Read More <span class="icon flaticon-arrows-6"></span></span></a>
+                                        <a href="{{url('/')}}/article/{{$article->slug}}" class="overlay-link"><span class="txt">{{ __('front.read_more') }} <span class="icon flaticon-arrows-6"></span></span></a>
 
                                         <div class="post-date">{{$article->created_at->diffForHumans()}}</div>
                                     </div>
 
                                     <div class="lower-box">
-                                        <h5 style="float:right" > Author :  {{$article->author}}</h5>
+                                        <h5 style="float:right" > {{ __('front.author') }} :  {{$article->author}}</h5>
 
                                         <h3><a href="{{url('/')}}/article/{{$article->slug}}">{{$article->title}}</a></h3>
 

@@ -174,6 +174,8 @@ return [
          Collective\Html\HtmlServiceProvider::class,
          Intervention\Image\ImageServiceProvider::class,
          App\Providers\HelperServiceProvider::class,
+         LaravelFCM\FCMServiceProvider::class,
+         Yajra\DataTables\DataTablesServiceProvider::class,
          ////// end my packge
         /*
          * Application Service Providers...
@@ -183,6 +185,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+
 
     ],
 
@@ -239,10 +243,14 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
-
-
-
+        'FCM'      => LaravelFCM\Facades\FCM::class,
+        'FCMGroup' => LaravelFCM\Facades\FCMGroup::class, // Optional
+        'LogActivity' => App\Helpers\LogActivity::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
         ///// end My Packge
+
+
+
 
 
     ],

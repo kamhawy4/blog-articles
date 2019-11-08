@@ -18,7 +18,7 @@ For Laravel 5.8.0 [here](https://laravel.com/docs/5.8/).
 ### Features ###
 
 * Authentication (registration, login, logout, password reset)
-* Managers dashboard create users, Managers ,Articles , Categories , comments ,Settings
+* Managers dashboard create users, Managers ,Articles , Categories , Tags , Comments , Settings , Send Mails
 
 ### Packages included ###
 

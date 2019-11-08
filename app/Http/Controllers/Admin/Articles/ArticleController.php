@@ -23,7 +23,7 @@ class ArticleController extends Controller
     const SUBPATH   = '/100x100/';
     const SIZE      = '100,100';
     const NAMEFILE  = 'img';
-	const NAMEMERGE = 'image';
+	  const NAMEMERGE = 'image';
 	
 
 	// space that we can use the repository from
@@ -39,6 +39,12 @@ class ArticleController extends Controller
 	  $this->modelCategories     = new CategoriesRepositories($categories);
 	  $this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
 	  $this->modelTags           = new TagsRepositories($tags);
+
+      $this->middleware('permission:article-list|article-create|article-edit|article-delete', ['only' => ['index','store']]);
+      $this->middleware('permission:article-create', ['only' => ['create','store']]);
+      $this->middleware('permission:article-edit', ['only' => ['edit','update']]);
+      $this->middleware('permission:article-delete', ['only' => ['destroy']]);
+
 	}
 
 	// Return view page index articles And Return All Articles	 
@@ -76,9 +82,8 @@ class ArticleController extends Controller
         $this->uploadIMage($request,self::PATH,self::SUBPATH,self::SIZE,self::NAMEFILE,self::NAMEMERGE);
 
 		//Merge Author And Slug
-        $request  -> merge(['author'=>Auth::guard('managers')->user()->name]); 
+        $request  -> merge(['author'=>Auth::user()->name]); 
         $request  -> merge(['slug'=>$this->make_slug($request->title)]);
-
 
         // repo store data artical
         $data =  $this->modelArticles->store($request);
@@ -86,6 +91,11 @@ class ArticleController extends Controller
         // repo store data tags  
         $this->modelArticles->storeTgas($request->tags,$data->id);
 
+        // Log Activity
+        \LogActivity::addToLog('Add New Artical'.' : '.$data->title);
+
+
+        // Message success After Add
 	    session()->flash('success','Article added successfully');
 	    return redirect()->to(url('dashboard/articles'));
 	}
@@ -107,13 +117,16 @@ class ArticleController extends Controller
         // repo Update data tags
         $this->modelArticles->updateTgasArticles($request->tags,$id);
 
+        // Log Activity
+        \LogActivity::addToLog('Update Artical'.' : '.$request->title);
+
         // Message success After Update
 		session()  -> flash('success','Modified successfully');
 		return redirect()->to(url('dashboard/articles'));
 	}
 
     
-    // destroy Article by id 
+    // destroy Article by id
 	public function destroy($id)
 	{
 		$this->modelArticles->delete($id);
@@ -127,7 +140,11 @@ class ArticleController extends Controller
 	{
         if(!empty($request->check))
         {
-		   $this->modelArticles->deleteArticalCheck($request->check);
+		  $data = $this->modelArticles->deleteArticalCheck($request->check);
+
+           // Log Activity
+           \LogActivity::addToLog('Delete Articals');
+
 		   session()->flash('success','Successfully deleted');
 		   return back();
             }else{

@@ -74,7 +74,7 @@ class ArticlesRepositories implements RepositoryInterface
       return $delete->delete();
     }
 
-    public function deleteCategoriesCheck($data)
+    public function deleteArticalCheck($data)
     {
 		 return $this->model->destroy($data);        
     }

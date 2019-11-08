@@ -1,7 +1,7 @@
 <?php
 
 // All route names are prefixed with 'dashboard'.
-Route::group(['middleware' => 'admin:managers'  ],function () {
+Route::group(['middleware' => 'admin'  ],function () {
 
     // Dashboard
     Route::group(['namespace' => 'Dashboard'], function () {
@@ -13,6 +13,17 @@ Route::group(['middleware' => 'admin:managers'  ],function () {
          Route::resource('settings'  ,'SettingsController'); //Settings 
     });
 
+    // roles
+    Route::group(['namespace' => 'Role'], function () {
+      Route::resource('roles','RoleController'); 
+    });
+
+    
+    // log
+    Route::group(['namespace' => 'Log'], function () {
+         Route::get('log'  ,'LogController@GetAllLog'); //log
+         Route::post('delete/log' , 'LogController@DeleteLog')->name('users.DeleteMuiltLog'); // Delete log
+    });
 
     // Send mail
     Route::group(['namespace' => 'SendMail'], function () {
@@ -55,7 +66,6 @@ Route::group(['middleware' => 'admin:managers'  ],function () {
     });
 
 
-
     // categorys Management
     Route::group(['namespace' => 'Categories'], function () {
         Route::get('categorys'         , 'CategoriesController@index')->name('categorys.index');
@@ -71,7 +81,6 @@ Route::group(['middleware' => 'admin:managers'  ],function () {
             Route::delete('/'          , 'CategoriesController@destroy')->name('categorys.destroy');
         });
     });
-
 
 
     // tags Management
