@@ -36,8 +36,6 @@ class ArticleController extends Controller
 
 	function __construct(ArticleTranslation $articleTranslation,Tags $tags,Categories $categories,CommentArticle $commentArticle,ArticleTags $articleTags,Articles $articles)
 	{
-
-
 	  $this->modelArticles       = new ArticlesRepositories($articleTranslation,$articleTags,$articles);
 	  $this->modelCategories     = new CategoriesRepositories($categories);
 	  $this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
@@ -53,7 +51,6 @@ class ArticleController extends Controller
 	// Return view page index articles And Return All Articles	 
     public function index()
     {
-      
       $articles = $this->modelArticles->all();
       return view('admin.articles.index',compact('articles'));
     }
@@ -70,7 +67,7 @@ class ArticleController extends Controller
 	// Return view page Edit Article And Return article by id and All Categories
     public function edit($id)
     {
-	   $update       =  $this->modelArticles->show($id);
+	     $update       =  $this->modelArticles->show($id);
        $categorys    =  $this->modelCategories->all();
        $tags         =  $this->modelTags->all();
        $tagsArticle  =  $this->modelArticles->whereTagsArticalId($id);

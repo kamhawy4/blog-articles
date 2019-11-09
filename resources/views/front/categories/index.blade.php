@@ -36,13 +36,14 @@
         						<div class="news-block-two">
         							<div class="inner-box">
         								<div class="image">
-        									<a href="{{url('/')}}/article/{{$article->slug}}"><img src="{{ explode(".",$article->image)[0] == 'http://lorempixel'? $article->image : url('/')}}/uploads/articles/{{$article->image }}" /></a>
-        									<a href="{{url('/')}}/article/{{$article->slug}}" class="overlay-link"><span class="txt">{{ __('front.read_more') }} <span class="icon flaticon-arrows-6"></span></span></a>
-        									<div class="post-date">{{$article->created_at->diffForHumans()}}</div>
+        									<a href="{{url('/')}}/article/{{$article->translation()->first()->slug}}"><img src="{{ explode(".",$article->image)[0] == 'http://lorempixel'? $article->image : url('/')}}/uploads/articles/{{$article->image }}" /></a>
+
+        									<a href="{{url('/')}}/article/{{$article->translation()->first()->slug}}" class="overlay-link"><span class="txt">{{ __('front.read_more') }} <span class="icon flaticon-arrows-6"></span></span></a>
+        									<div class="post-date">{{$article->translation()->first()->created_at->diffForHumans()}}</div>
         								</div>
         								<div class="lower-box">
-        									<h3><a href="{{url('/')}}/article/{{$article->slug}}">{{$article->title}}</a></h3>
-        									<div class="text"> {{ strip_tags(substr($article->description,6)) }}</div>
+        									<h3><a href="{{url('/')}}/article/{{$article->translation()->first()->slug}}">{{$article->translation()->first()->title}}</a></h3>
+        									<div class="text"> {{ strip_tags(substr($article->translation()->first()->description,6)) }}</div>
         								</div>
         							</div>
         						</div>

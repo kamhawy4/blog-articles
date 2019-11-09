@@ -86,11 +86,7 @@
                             @endif 
                             </div>
                         </div>
-                        <!-- demo Wait loader image -->
-                        <div class="ajax-load2 text-center" style="display:none">
-                          <p><img src="http://demo.itsolutionstuff.com/plugin/loader.gif"> {{ __('front.wait') }}</p>
-                        </div>
-                        <!-- Comment Form -->
+                        
                         <div class="comment-form">
                             <div class="group-title">
                             	<h2>{{ __('front.post_a_comment') }}</h2>

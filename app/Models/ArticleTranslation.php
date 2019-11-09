@@ -9,15 +9,11 @@ class ArticleTranslation extends Model
 {
     protected  $table   = 'articles_translations';
 
-    protected $fillable = ['title','description','slug','author','image','type','categorie_id','articles_id'];
+    protected $fillable = ['title','description','slug','articles_id'];
 
     /**
     * @return Categorie Name with categorie_id
     */
-    public function GetNameCategorie()
-    {
-    	return $this->belongsTo('App\Models\Categories','categorie_id');
-    }
 
     public function GetTags()
     {

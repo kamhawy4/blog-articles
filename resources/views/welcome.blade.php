@@ -31,7 +31,7 @@
                                 <div class="inner-box">
                                     <div class="image">
                                         <a href="{{url('/')}}/article/{{$article->translation()->first()->slug}}">
-                                            <img src="{{ explode(".",$article->translation()->first()->image)[0] == 'http://lorempixel'? $article->translation()->first()->image : url('/')}}/uploads/articles/{{$article->translation()->first()->image }}" alt="{{$article->translation()->first()->title}}" /></a>
+                                            <img src="{{ explode(".",$article->image)[0] == 'http://lorempixel'? $article->image : url('/')}}/uploads/articles/{{$article->image }}" alt="{{$article->translation()->first()->title}}" /></a>
 
                                         <a href="{{url('/')}}/article/{{$article->translation()->first()->slug}}" class="overlay-link"><span class="txt">{{ __('front.read_more') }} <span class="icon flaticon-arrows-6"></span></span></a>
 
@@ -39,7 +39,7 @@
                                        </div>
 
                                     <div class="lower-box">
-                                        <h5 style="float:right" > {{ __('front.author') }} :  {{$article->translation()->first()->author}}</h5>
+                                        <h5 style="float:right" > {{ __('front.author') }} :  {{$article->author}}</h5>
 
                                         <h3><a href="{{url('/')}}/article/{{$article->translation()->first()->slug}}">{{$article->translation()->first()->title}}</a></h3>
 

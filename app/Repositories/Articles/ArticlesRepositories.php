@@ -22,17 +22,17 @@ class ArticlesRepositories implements RepositoryInterface
 
   	public function all()
   	{
-         return $this->model->all();
+         return $this->articles->all();
   	}
 
     public function pagination($count)
     {   
-       return $this->model->paginate($count);
+       return $this->articles->paginate($count);
     }
 
     public function store($data)
     {
-        return $this->model->create($data->all());
+        return $this->articles->create($data->all());
     }
 
     public function storeTgas($tags_id,$article_id)
@@ -61,33 +61,34 @@ class ArticlesRepositories implements RepositoryInterface
 
     public function updateTgasArticles($tags_id,$article_id)
     {
-      $article = $this->model->findOrFail($article_id);
+      $article = $this->articles->findOrFail($article_id);
       $article->GetTags()->sync($tags_id);
     }
 
     public function show($id)
     {
-      return  $this->model->findOrFail($id);
+      return  $this->articles->findOrFail($id);
     }
 
     public function delete($id)
     {
-      $delete = $this->model->findOrFail($id);
+      $delete = $this->articles->findOrFail($id);
       return $delete->delete();
     }
 
     public function deleteArticalCheck($data)
     {
-		 return $this->model->destroy($data);        
+		 return $this->articles->destroy($data);        
     }
 
     public function count()
     {
-        return $this->model->count();
+        return $this->articles->count();
     }
 
     public function orderByDesc($coleman)
     {
+
         return $this->articles->orderBy('created_at',$coleman);
     }
 
@@ -98,7 +99,7 @@ class ArticlesRepositories implements RepositoryInterface
 
     public function ArticleWhereCategorieId($categorieId)
     {
-        return $this->model->where('categorie_id',$categorieId);
+        return $this->articles->where('categorie_id',$categorieId);
     }
 
     public function ArticleWhereTagId($tagId)
@@ -108,7 +109,7 @@ class ArticlesRepositories implements RepositoryInterface
       foreach ($tags as $tag) {
         $allTagsId[] = $tag->article_id;
       }
-      return $this->model->whereIn('id',$allTagsId)->paginate(10);
+      return $this->articles->whereIn('id',$allTagsId)->paginate(10);
     }
     
 }

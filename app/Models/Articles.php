@@ -12,7 +12,7 @@ class Articles extends Model
 
     protected  $table   = 'articles';
 
-    protected $fillable = ['published'];
+    protected $fillable = ['author','image','type','categorie_id'];
 
      public function translation($language = null)
     {
@@ -20,6 +20,11 @@ class Articles extends Model
             $language = App::getLocale();
         }
         return $this->hasMany('App\Models\ArticleTranslation')->where('language', '=', $language);
+    }
+
+    public function GetNameCategorie()
+    {
+        return $this->belongsTo('App\Models\Categories','categorie_id');
     }
 
 }
