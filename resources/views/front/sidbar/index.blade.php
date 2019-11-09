@@ -22,8 +22,8 @@
                 @if(!$articlesSidbar->isEmpty())
                  @foreach($articlesSidbar as $articleSidbar)
                     <article class="post">
-                        <h3 class="text"><a href="{{url('/')}}/article/{{$articleSidbar->slug}}">{{$articleSidbar->title}}</a></h3>
-                        <div class="date">{{$articleSidbar->created_at->diffForHumans()}}</div>
+                        <h3 class="text"><a href="{{url('/')}}/article/{{$articleSidbar->translation()->first()->slug}}">{{$articleSidbar->translation()->first()->title}}</a></h3>
+                        <div class="date">{{$articleSidbar->translation()->first()->created_at->diffForHumans()}}</div>
                     </article>
                 @endforeach
                 @endif

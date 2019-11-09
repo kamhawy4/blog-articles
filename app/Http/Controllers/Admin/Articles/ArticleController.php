@@ -12,12 +12,13 @@ use App\Repositories\Articles\ArticlesRepositories;
 use App\Repositories\CommentArticle\CommentArticleRepositories;
 use App\Repositories\Categories\CategoriesRepositories;
 use App\Repositories\Tags\TagsRepositories;
-use App\Models\Categories,App\Models\Article,App\Models\CommentArticle,App\Models\Tags,App\Models\ArticleTags;
+use App\Models\Categories,App\Models\ArticleTranslation,App\Models\CommentArticle,App\Models\Tags,App\Models\ArticleTags;
 use Storage,Session,Image,Auth,DB,File;
-
+use App\Models\Articles;
 
 class ArticleController extends Controller
 {
+
 	//PROPRTE Upload
     const PATH      = '/uploads/articles';
     const SUBPATH   = '/100x100/';
@@ -33,9 +34,11 @@ class ArticleController extends Controller
     protected $modelCommentArticle;
     
 
-	function __construct(Article $article,Tags $tags,Categories $categories,CommentArticle $commentArticle,ArticleTags $articleTags)
+	function __construct(ArticleTranslation $articleTranslation,Tags $tags,Categories $categories,CommentArticle $commentArticle,ArticleTags $articleTags,Articles $articles)
 	{
-	  $this->modelArticles       = new ArticlesRepositories($article,$articleTags);
+
+
+	  $this->modelArticles       = new ArticlesRepositories($articleTranslation,$articleTags,$articles);
 	  $this->modelCategories     = new CategoriesRepositories($categories);
 	  $this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
 	  $this->modelTags           = new TagsRepositories($tags);
@@ -50,6 +53,7 @@ class ArticleController extends Controller
 	// Return view page index articles And Return All Articles	 
     public function index()
     {
+      
       $articles = $this->modelArticles->all();
       return view('admin.articles.index',compact('articles'));
     }
@@ -77,7 +81,7 @@ class ArticleController extends Controller
  
 	// Store Article 
 	public function store(StoreArticlesRequest $request)
-	{
+	{    
 		//uploade image
         $this->uploadIMage($request,self::PATH,self::SUBPATH,self::SIZE,self::NAMEFILE,self::NAMEMERGE);
 

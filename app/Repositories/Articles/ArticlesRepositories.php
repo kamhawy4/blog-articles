@@ -11,9 +11,11 @@ class ArticlesRepositories implements RepositoryInterface
 	// model property on class instances
     protected $model;
     protected $articleTags;
+    protected $articles;
 
-  	function __construct(Model $model,Model $articleTags)
+  	function __construct(Model $model,Model $articleTags,Model $articles)
   	{
+      $this->articles     = $articles;
       $this->model        = $model;
   		$this->articleTags  = $articleTags;
   	}
@@ -86,12 +88,12 @@ class ArticlesRepositories implements RepositoryInterface
 
     public function orderByDesc($coleman)
     {
-        return $this->model->orderBy('created_at',$coleman);
+        return $this->articles->orderBy('created_at',$coleman);
     }
 
-    public function whereSlug($slug)
+    public function whereSlug($article)
     {
-        return $this->model->where('slug',$slug)->first();
+      return $this->articles->where('id',$article->articles_id)->first();
     }
 
     public function ArticleWhereCategorieId($categorieId)

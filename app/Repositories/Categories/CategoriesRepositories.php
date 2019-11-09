@@ -12,6 +12,7 @@ class CategoriesRepositories implements RepositoryInterface
 
 	function __construct(Model $model)
 	{
+    
 		$this->model = $model;
 	}
 

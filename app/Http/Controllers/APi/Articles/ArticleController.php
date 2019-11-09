@@ -7,14 +7,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use App\Repositories\Articles\ArticlesRepositories;
-use App\Models\Article,App\Models\ArticleTags;
+use App\Models\ArticleTranslation,App\Models\ArticleTags;
 
 class ArticleController extends Controller
 {
 	// space that we can use the repository from
     protected $modelArticles;
 
-	function __construct(Article $article,ArticleTags $articleTags)
+	function __construct(ArticleTranslation $article,ArticleTags $articleTags)
 	{
 
 	  $this->modelArticles       = new ArticlesRepositories($article,$articleTags);

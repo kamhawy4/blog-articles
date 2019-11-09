@@ -14,7 +14,7 @@ class CommentArticleRepositories implements RepositoryInterface
     protected $model;
 
 	function __construct(Model $model)
-	{
+	{            
 		$this->model = $model;
 	}
 

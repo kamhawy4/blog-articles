@@ -5,7 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Auth;
-use App\Models\Settings,App\Models\Article,App\Models\Categories,App\Models\User;
+use App\Models\Settings,App\Models\Articles,App\Models\Categories,App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
 
       app()->singleton('sidbar',function()
       {
-        $articlesSidbar   = Article::orderBy('created_at','desc')->paginate(4);
+        $articlesSidbar   = Articles::orderBy('created_at','desc')->paginate(4);
         $categories       = Categories::get();
         return view('front.sidbar.index',compact('articlesSidbar','categories'));
       });

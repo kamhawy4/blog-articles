@@ -1,5 +1,6 @@
 <?php
 
+
 // All route names are prefixed with 'dashboard'.
 Route::group(['middleware' => 'admin'  ],function () {
 
@@ -117,7 +118,7 @@ Route::group(['middleware' => 'admin'  ],function () {
     });
 
 
-    // Articles Managementdashboard
+    // Articles Management
     Route::group(['namespace' => 'Articles'], function () {
         Route::get('articles'         , 'ArticleController@index')->name('articles.index');
         Route::get('articles/create'  , 'ArticleController@create')->name('articles.create');

@@ -1,18 +1,19 @@
 @extends('layouts.app')
 @section('title')
-  {{ app('setting') ? app('setting')->name_site:''}} - {{ $articles->title ? $articles->title:''}}
+  {{ app('setting') ? app('setting')->name_site:''}} - {{ $articles->translation()->first()->title ? $articles->translation()->first()->title:''}}
 @endsection
 @section('content')
+
 
 
 <!--Page Banner-->
 <section class="page-banner" style="background-image:url({{url('/')}}/front/images/background/bg-banner.jpg);">
 	<div class="auto-container">
-    	<h1>{{ $articles->title ? $articles->title:''}}</h1>
+    	<h1>{{ $articles->translation()->first()->title ? $articles->translation()->first()->title:''}}</h1>
         <div class="bread-crumb"> 
         	<ul class="clearfix">
                 <li><a href="{{url('/')}}">{{ __('front.home') }}</a></li>
-                <li class="active">{{ $articles->title ? $articles->title : ''}}</li>
+                <li class="active">{{ $articles->translation()->first()->title ? $articles->translation()->first()->title : ''}}</li>
             </ul>
         </div>
     </div>
@@ -39,10 +40,10 @@
                         		</div>
 
                         		<div class="lower-box">
-                        			<h3>   {{ __('front.title') }} :  {{ $articles->title ? $articles->title : '' }}</h3>
+                        			<h3>   {{ __('front.title') }} :  {{ $articles->translation()->first()->title ? $articles->translation()->first()->title : '' }}</h3>
 
                         			<div class="text">
-                                    	 {{ __('front.description') }} : {!! $articles->description ? $articles->description : '' !!}
+                                    	 {{ __('front.description') }} : {!! $articles->translation()->first()->description ? $articles->translation()->first()->description : '' !!}
                                     </div>
 
                                     <!--Options-->
@@ -52,14 +53,14 @@
                                                 <ul>
                                                     <li><strong>{{ __('front.share') }} :</strong></li>
                                                     
-                                                    <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{url('/')}}/article/{{ $articles->slug ? $articles->slug : '' }}"><span class="fa fa-facebook-f"></span></a>
+                                                    <li><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{url('/')}}/article/{{ $articles->translation()->first()->slug ? $articles->translation()->first()->slug : '' }}"><span class="fa fa-facebook-f"></span></a>
                                                     </li>
                                                     
-                                                    <li><a target="_blank"   href="https://twitter.com/intent/tweet?text={{url('/')}}/article/{{ $articles->slug ? $articles->slug : '' }}"><span class="fa fa-twitter"></span></a></li>
+                                                    <li><a target="_blank"   href="https://twitter.com/intent/tweet?text={{url('/')}}/article/{{ $articles->translation()->first()->slug ? $articles->translation()->first()->slug : '' }}"><span class="fa fa-twitter"></span></a></li>
                                                     
-                                                    <li><a target="_blank"  href="https://plus.google.com/share?app=110&url={{url('/')}}/article/{{ $articles->slug ? $articles->slug : '' }}"><span class="fa fa-google-plus"></span></a></li>
+                                                    <li><a target="_blank"  href="https://plus.google.com/share?app=110&url={{url('/')}}/article/{{ $articles->translation()->first()->slug ? $articles->translation()->first()->slug : '' }}"><span class="fa fa-google-plus"></span></a></li>
                                                     
-                                                     <li><a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{url('/')}}/article/{{ $articles->slug ? $articles->slug : '' }}
+                                                     <li><a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url={{url('/')}}/article/{{ $articles->translation()->first()->slug ? $articles->translation()->first()->slug : '' }}
                                                     "><span class="fa fa-linkedin"></span></a></li>
                                                     
                                                 </ul>
@@ -69,6 +70,10 @@
                         		</div>
                         	</div>
                         </div>
+
+
+
+                        
                         <!--Comments Area-->
                         <div class="comments-area">
                         	<div class="group-title"><h2>{{ $commentsArticle->count() }}  {{ __('front.comments') }}</h2></div>

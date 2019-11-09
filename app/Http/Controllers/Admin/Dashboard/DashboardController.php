@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Dashboard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\Mangaers,App\Models\Article,App\Models\Categories;
+use App\Models\Mangaers,App\Models\ArticleTranslation,App\Models\Categories;
 
 use App\Repositories\Articles\ArticlesRepositories;
 use App\Repositories\Managers\ManagersRepositories;
@@ -15,15 +15,18 @@ use App\Models\ArticleTags;
 use App\Charts\UsersChart;
 use App\Charts\ArticlesChart;
 use App\Models\User;
+use App\Models\Articles;
+
+
 class DashboardController extends Controller
 {
     protected $modelArticles;
     protected $modelCategories;
     protected $modelCommentArticle;
 
-    function __construct(Article $article,Categories $categories,Mangaers $mangaers,ArticleTags $articleTags)
+    function __construct(ArticleTranslation $articleTranslation,Categories $categories,Mangaers $mangaers,ArticleTags $articleTags,Articles $articles)
     {
-        $this->modelArticles       = new ArticlesRepositories($article,$articleTags);
+        $this->modelArticles       = new ArticlesRepositories($articleTranslation,$articleTags,$articles);
         $this->modelCategories     = new CategoriesRepositories($categories);
         $this->modelManagers       = new ManagersRepositories($mangaers);
     }
@@ -43,9 +46,9 @@ class DashboardController extends Controller
 
 
         //Chart Articles
-        $today_article      = Article::whereDate('created_at', today())->count();
-        $yesterday_article  = Article::whereDate('created_at', today()->subDays(1))->count();
-        $article_2_days_ago = Article::whereDate('created_at', today()->subDays(2))->count();
+        $today_article      = ArticleTranslation::whereDate('created_at', today())->count();
+        $yesterday_article  = ArticleTranslation::whereDate('created_at', today()->subDays(1))->count();
+        $article_2_days_ago = ArticleTranslation::whereDate('created_at', today()->subDays(2))->count();
         $articlesChart      = new ArticlesChart;
         $articlesChart->labels(['2 days ago', 'Yesterday', 'Today']);
         $articlesChart->dataset('Article', 'bar', [$article_2_days_ago, $yesterday_article, $today_article]);

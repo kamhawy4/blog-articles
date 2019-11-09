@@ -4,11 +4,12 @@ namespace  App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use File;
-class Article extends Model
-{
-    protected  $table   = 'articles';
 
-    protected $fillable = ['title','description','slug','author','image','type','categorie_id'];
+class ArticleTranslation extends Model
+{
+    protected  $table   = 'articles_translations';
+
+    protected $fillable = ['title','description','slug','author','image','type','categorie_id','articles_id'];
 
     /**
     * @return Categorie Name with categorie_id
@@ -22,6 +23,12 @@ class Article extends Model
     {
     // We have already created pivot table for articles and tags
     return $this->belongsToMany(ArticleTags::class,'article_tags','article_id','tag_id');
+    }
+
+
+    public function Article()
+    {
+        return $this->belongsTo('App\Models\Article');
     }
     
 

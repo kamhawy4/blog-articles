@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class ArticlesTableSeeder extends Seeder
+class ArticlesTranslationsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,7 +11,7 @@ class ArticlesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Articles::class,6)->create()->each(function ($u) {
+        factory(App\Models\ArticleTranslation::class,6)->create()->each(function ($u) {
             $u->save();
         });
     }

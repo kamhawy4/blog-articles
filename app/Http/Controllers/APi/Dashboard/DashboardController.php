@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api\Dashboard;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Models\Mangaers,App\Models\Article,App\Models\Categories;
+use App\Models\Mangaers,App\Models\ArticleTranslation,App\Models\Categories;
 
 use App\Repositories\Articles\ArticlesRepositories;
 use App\Repositories\Managers\ManagersRepositories;
@@ -19,7 +19,7 @@ class DashboardController extends Controller
     protected $modelCategories;
     protected $modelCommentArticle;
 
-    function __construct(Article $article,Categories $categories,Mangaers $mangaers,ArticleTags $articleTags)
+    function __construct(ArticleTranslation $article,Categories $categories,Mangaers $mangaers,ArticleTags $articleTags)
     {
         $this->modelArticles       = new ArticlesRepositories($article,$articleTags);
         $this->modelCategories     = new CategoriesRepositories($categories);
