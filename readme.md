@@ -4,7 +4,7 @@ For Laravel 5.8.0 [here](https://laravel.com/docs/5.8/).
 
 ### Installation ###
 
-* `git clone https://github.com/kamhawy4/blog-articles.git`
+* `git clone https://github.com/kamhawy4/blog-articles-laravel-boilerplate.git`
 * `cd blog-articles`
 * `composer install`
 * `php artisan key:generate`
