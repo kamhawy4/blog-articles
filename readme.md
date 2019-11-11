@@ -18,7 +18,7 @@ For Laravel 5.8.0 [here](https://laravel.com/docs/5.8/).
 ### Features ###
 
 * Authentication (registration, login, logout, password reset)
-* Managers dashboard create [ Users ,  Roles and Permissions ,  Managers , Articles , Categories , Tags 
+* Managers dashboard create [ Users ,  Roles and Permissions , Articles , Categories , Tags 
   , Comments , Settings , Send Mails , Log , Social Links ]
 * Front End Support Multi Language [Arabic and English] Just Articles Support Multi Language
 * Categray and Tags Not Support  Multi Language
