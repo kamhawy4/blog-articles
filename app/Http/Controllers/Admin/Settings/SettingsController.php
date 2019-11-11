@@ -11,8 +11,7 @@ use App\Models\Settings;
 use Storage,Session,Image,File;
 
 
-class SettingsController extends Controller
-{
+class SettingsController extends Controller {
 
   //PROPRTE Upload
   const PATHLOGO      = '/uploads/logo';
@@ -30,8 +29,7 @@ class SettingsController extends Controller
 
   protected $modelSettings;
 
-  function __construct(Settings $settings)
-  {
+  function __construct(Settings $settings){
     $this->modelSettings     = new SettingsRepositories($settings);
     $this->middleware('permission:settings',['only' => ['index','store','update']]);
   }

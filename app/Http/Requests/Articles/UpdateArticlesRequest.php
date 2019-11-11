@@ -24,10 +24,12 @@ class UpdateArticlesRequest extends FormRequest
     public function rules()
     {
         return [
-          'title'        =>'required|max:255',
-          'description'  =>'required',
-          'categorie_id' =>'required',
-          'img'          =>'image|mimes:jpg,jpeg,png,gif|max:22400',
+          'en_title'        =>'required|max:255',
+          'ar_title'        =>'required|max:255',
+          'en_description'  =>'required',
+          'ar_description'  =>'required',
+          'categorie_id'    =>'required',
+          'img'             =>'image|mimes:jpg,jpeg,png,gif|max:22400',
         ];
     }
 }

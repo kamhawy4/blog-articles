@@ -4,9 +4,12 @@ namespace App\Repositories\Articles;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Repositories\RepositoryInterface;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Config;
+use DB;
 use Auth;
 
-class ArticlesRepositories implements RepositoryInterface
+class ArticlesRepositories extends Controller implements RepositoryInterface  
 {	
 	// model property on class instances
     protected $model;
@@ -32,7 +35,21 @@ class ArticlesRepositories implements RepositoryInterface
 
     public function store($data)
     {
-        return $this->articles->create($data->all());
+
+     $articles =  $this->articles->create($data->all());
+
+     $languages = Config::get('languages.supported');
+      for ($i=0; $i < count($languages) ; $i++){
+        $data    -> merge(['language'=>$languages[$i]]);
+        $data    -> merge(['articles_id'=>$articles->id]);
+        $data    -> merge(['title'=>$data->input('title')]);
+        $data    -> merge(['description'=>$data->input('description')]);
+        $data    -> merge(['slug'=>$this->make_slug($data->input('title'))]);
+        $this->model->create($data->all());        
+      }
+
+      return  $articles;
+
     }
 
     public function storeTgas($tags_id,$article_id)
@@ -56,7 +73,16 @@ class ArticlesRepositories implements RepositoryInterface
     public function update($data,$id)
     {
       $update = $this->show($id);
-      $update->update($data->all());
+
+      $languages = Config::get('languages.supported');
+      for ($i=0; $i < count($languages) ; $i++){
+        $data    -> merge(['title'=>$data->input($languages[$i].'_title')]);
+        $data    -> merge(['description'=>$data->input($languages[$i].'_description')]);
+        $data    -> merge(['slug'=>$this->make_slug($data->input($languages[$i].'_title'))]);
+        $update->translation($languages[$i])->first()->update($data->all());        
+        $update->update($data->all());        
+      }
+      return;
     }
 
     public function updateTgasArticles($tags_id,$article_id)

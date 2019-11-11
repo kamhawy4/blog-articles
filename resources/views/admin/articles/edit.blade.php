@@ -17,11 +17,19 @@ Edit Article
                 <!-- BEGIN FORM-->
                 {!!  Form::model($update,['method'=>'PATCH','action'=>['Admin\Articles\ArticleController@update',$update->id],'novalidate'=>'novalidate','files'=>'true']) !!}
           
-                      <div class="{{$errors->has('title')?'has-error':''}}" >
+                      <div class="{{$errors->has('en_title')?'has-error':''}}" >
                         <div class="form-group form-md-line-input form-md-floating-label">
-                             {{ Form::text('title',null,['class'=>'form-control','id'=>'form_control_1']) }}
-                            <label for="form_control_1">Article Title</label>
-                        <small class="text-danger">{{ $errors->first('title') }}</small>
+                             {{ Form::text('en_title',$update->translation('en')->first()->title,['class'=>'form-control','id'=>'form_control_1']) }}
+                            <label for="form_control_1">Article Title English</label>
+                        <small class="text-danger">{{ $errors->first('en_title') }}</small>
+                        </div>
+                      </div>
+
+                      <div class="{{$errors->has('ar_title')?'has-error':''}}" >
+                        <div class="form-group form-md-line-input form-md-floating-label">
+                             {{ Form::text('ar_title',$update->translation('ar')->first()->title,['class'=>'form-control','id'=>'form_control_1']) }}
+                            <label for="form_control_1">Article Title Arabic</label>
+                        <small class="text-danger">{{ $errors->first('ar_title') }}</small>
                         </div>
                       </div>
 
@@ -54,24 +62,43 @@ Edit Article
                        </select>
                      </div>
 
-                      <div class="{{$errors->has('description')?'has-error':''}}" >
+                      <div class="{{$errors->has('en_description')?'has-error':''}}" >
                           <div class="form-group form-md-line-input form-md-floating-label">
-                              {{ Form::textarea('description',null,['class'=>'form-control','id'=>'editor']) }}
+                              {{ Form::textarea('en_description',$update->translation('en')->first()->description,['class'=>'form-control','id'=>'editor_en']) }}
                               <script>
                               // extraPlugins needs to be set too.
-                               CKEDITOR.replace('editor' );
+                               CKEDITOR.replace('editor_en' );
                               </script>
-                              <label for="form_control_1">Description</label>
-                          <small class="text-danger">{{ $errors->first('description') }}</small>
+                              <label for="form_control_1">Description English</label>
+                          <small class="text-danger">{{ $errors->first('en_description') }}</small>
                           </div>
                       </div>
+
+
+
+                       <div class="{{$errors->has('ar_description')?'has-error':''}}" >
+                          <div class="form-group form-md-line-input form-md-floating-label">
+                              {{ Form::textarea('ar_description',$update->translation('ar')->first()->description,['class'=>'form-control','id'=>'editor_ar']) }}
+                              <script>
+                              // extraPlugins needs to be set too.
+                               CKEDITOR.replace('editor_ar' );
+                              </script>
+                              <label for="form_control_1">Description Arabic</label>
+                          <small class="text-danger">{{ $errors->first('ar_description') }}</small>
+                          </div>
+                      </div>
+
+                      @php
+                        $explodeImg =  explode(".",$update->image);
+                        $pathImg =  '/uploads/articles/'.$update->image;
+                      @endphp
 
                    
                       @if($update->count() != 0 && $update->image != '')
                         <div class="col-md-12" >
                           <div class="box box-success">
                             <div class="box-body text-center">
-                             <img style="max-width: 80%; border:1px solid #cecece" src="{{ explode(".",$update->image)[0] == 'http://lorempixel'? $update->image : url('/')}}/uploads/articles/{{$update->image }}">
+                             <img style="max-width: 80%; border:1px solid #cecece" src="{{ $explodeImg[0] == 'http://lorempixel' ? $update->image : $pathImg }}">
                             </div>
                           </div>
                         </div>

@@ -11,8 +11,8 @@ use App\Http\Requests\Social\StoreSocialRequest;
 use App\Http\Requests\Social\UpdateSocialRequest;
 use App\Repositories\Social\SocialRepositories;
 
-class SocialController extends Controller
-{
+class SocialController extends Controller {
+	
     protected $modelSocialLinks;
 
 	public function __construct(SocialLinks $socialLinks)

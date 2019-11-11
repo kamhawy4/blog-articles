@@ -36,7 +36,12 @@
         						<div class="news-block-two">
         							<div class="inner-box">
         								<div class="image">
-        									<a href="{{url('/')}}/article/{{$article->translation()->first()->slug}}"><img src="{{ explode(".",$article->image)[0] == 'http://lorempixel'? $article->image : url('/')}}/uploads/articles/{{$article->image }}" /></a>
+
+                                            @php
+                                             $explodeImg =  explode(".",$article->image);
+                                             $pathImg =  '/uploads/articles/'.$article->image;
+                                            @endphp
+        									<a href="{{url('/')}}/article/{{$article->translation()->first()->slug}}"><img src="{{ $explodeImg[0] == 'http://lorempixel' ? $article->image : $pathImg }}" /></a>
 
         									<a href="{{url('/')}}/article/{{$article->translation()->first()->slug}}" class="overlay-link"><span class="txt">{{ __('front.read_more') }} <span class="icon flaticon-arrows-6"></span></span></a>
         									<div class="post-date">{{$article->translation()->first()->created_at->diffForHumans()}}</div>

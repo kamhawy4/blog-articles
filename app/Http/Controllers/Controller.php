@@ -47,7 +47,6 @@ class Controller extends BaseController
         $explode =  explode(',',$size);
         if($data->hasFile($nameFile))
         {
-
             $img        =  Input::file($nameFile);
             $ext        =  $img->getClientOriginalExtension();
             $path       =  public_path().$path;

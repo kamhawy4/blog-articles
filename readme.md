@@ -18,12 +18,23 @@ For Laravel 5.8.0 [here](https://laravel.com/docs/5.8/).
 ### Features ###
 
 * Authentication (registration, login, logout, password reset)
-* Managers dashboard create users, Managers ,Articles , Categories , Tags , Comments , Settings , Send Mails
+* Managers dashboard create [ Users ,  Roles and Permissions ,  Managers , Articles , Categories , Tags 
+  , Comments , Settings , Send Mails , Log , Social Links ]
+* Front End Support Multi Language [Arabic and English] Just Articles Support Multi Language
+* Categray and Tags Not Support  Multi Language
+
+### Working now on ###
+
+* Api For Blog
+* Make Section categray and Tags Support Arabic and English
+* Add Datatable Plugin to Make Pagination in Table Data in Backend
 
 ### Packages included ###
 
 * laravelcollective/html
 * Intervention/Image
+* spatie/laravel-permission
+* consoletvs/charts
 
 ### Tricks ###
 

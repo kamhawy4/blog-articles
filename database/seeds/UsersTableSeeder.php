@@ -16,12 +16,12 @@ class UsersTableSeeder extends Seeder
     {
         $user = User::create([
             'name' => 'Hardik Savani', 
-            'email' => 'admin2@gmail.com',
+            'email' => 'admin@admin.com',
             'phone'      => mt_rand(100000000,999999999),
             'password' => bcrypt('123456')
         ]);
   
-        $role = Role::create(['name' => 'Admin2']);
+        $role = Role::create(['name' => 'Admin']);
    
         $permissions = Permission::pluck('id','id')->all();
   

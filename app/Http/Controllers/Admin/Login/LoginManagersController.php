@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin\Login;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
-class LoginManagersController extends Controller
-{
+
+class LoginManagersController extends Controller {
+
     // return page login Manager
     public function index()
     {
-    	return view('admin.loginManagers.login');
+       return view('admin.loginManagers.login');
     }
 
     // Function login Manager
@@ -24,7 +25,6 @@ class LoginManagersController extends Controller
           return back();
         }
     }
-
 
     public function Logout()
     {

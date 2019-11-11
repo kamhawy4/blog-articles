@@ -15,8 +15,7 @@ class CommentsController extends Controller
 	// space that we can use the repository From
     protected $modelCommentArticle;    
 
-	function __construct(CommentArticle $commentArticle)
-	{
+	function __construct(CommentArticle $commentArticle){
 	  $this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
 
 	  $this->middleware('permission:comment-list|comment-delete', ['only' => ['index','store']]);

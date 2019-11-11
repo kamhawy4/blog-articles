@@ -34,19 +34,17 @@ class ArticleController extends Controller
     protected $modelCommentArticle;
     
 
-	function __construct(ArticleTranslation $articleTranslation,Tags $tags,Categories $categories,CommentArticle $commentArticle,ArticleTags $articleTags,Articles $articles)
-	{
-	  $this->modelArticles       = new ArticlesRepositories($articleTranslation,$articleTags,$articles);
-	  $this->modelCategories     = new CategoriesRepositories($categories);
-	  $this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
-	  $this->modelTags           = new TagsRepositories($tags);
+    function __construct(ArticleTranslation $articleTranslation,Tags $tags,Categories $categories,CommentArticle $commentArticle,ArticleTags $articleTags,Articles $articles){
+      $this->modelArticles       = new ArticlesRepositories($articleTranslation,$articleTags,$articles);
+      $this->modelCategories     = new CategoriesRepositories($categories);
+      $this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
+      $this->modelTags           = new TagsRepositories($tags);
 
       $this->middleware('permission:article-list|article-create|article-edit|article-delete', ['only' => ['index','store']]);
       $this->middleware('permission:article-create', ['only' => ['create','store']]);
       $this->middleware('permission:article-edit', ['only' => ['edit','update']]);
       $this->middleware('permission:article-delete', ['only' => ['destroy']]);
-
-	}
+    }
 
 	// Return view page index articles And Return All Articles	 
     public function index()
@@ -76,69 +74,68 @@ class ArticleController extends Controller
     }
 
  
-	// Store Article 
-	public function store(StoreArticlesRequest $request)
-	{    
-		//uploade image
-        $this->uploadIMage($request,self::PATH,self::SUBPATH,self::SIZE,self::NAMEFILE,self::NAMEMERGE);
+  	// Store Article 
+  	public function store(StoreArticlesRequest $request)
+  	{    
+      		//uploade image
+          $this->uploadIMage($request,self::PATH,self::SUBPATH,self::SIZE,self::NAMEFILE,self::NAMEMERGE);
 
-		//Merge Author And Slug
-        $request  -> merge(['author'=>Auth::user()->name]); 
-        $request  -> merge(['slug'=>$this->make_slug($request->title)]);
+      		//Merge Author
+          $request  -> merge(['author'=>Auth::user()->name]);
 
-        // repo store data artical
-        $data =  $this->modelArticles->store($request);
+          // repo store data artical
+          $data =  $this->modelArticles->store($request);
 
-        // repo store data tags  
-        $this->modelArticles->storeTgas($request->tags,$data->id);
+          // repo store data tags  
+          $this->modelArticles->storeTgas($request->tags,$data->id);
 
-        // Log Activity
-        \LogActivity::addToLog('Add New Artical'.' : '.$data->title);
-
-
-        // Message success After Add
-	    session()->flash('success','Article added successfully');
-	    return redirect()->to(url('dashboard/articles'));
-	}
+          // Log Activity
+          \LogActivity::addToLog('Add New Artical'.' : '.$data->title);
 
 
-	// update Article 
-	public function update($id,UpdateArticlesRequest $request)
-	{  
-		// Get Article by id And Merge Slug  
-	    $update    =  $this->modelArticles->show($id);
-		$request  ->  merge(['slug'=>$this->make_slug($request->title)]);
-         
-        //upload image  
-        $this->updateImage($update,$request,self::PATH,self::SUBPATH,self::SIZE,self::NAMEFILE,self::NAMEMERGE);
-        
-        //update data
-        $this->modelArticles->update($request,$id);
+          // Message success After Add
+  	    session()->flash('success','Article added successfully');
+  	    return redirect()->to(url('dashboard/articles'));
+  	}
 
-        // repo Update data tags
-        $this->modelArticles->updateTgasArticles($request->tags,$id);
 
-        // Log Activity
-        \LogActivity::addToLog('Update Artical'.' : '.$request->title);
+  	// update Article 
+  	public function update($id,UpdateArticlesRequest $request)
+  	{ 
+    		  // Get Article by id And Merge Slug  
+    	    $update    =  $this->modelArticles->show($id);
+             
+          //upload image  
+          $this->updateImage($update,$request,self::PATH,self::SUBPATH,self::SIZE,self::NAMEFILE,self::NAMEMERGE);
+          
+          //update data
+          $this->modelArticles->update($request,$id);
 
-        // Message success After Update
-		session()  -> flash('success','Modified successfully');
-		return redirect()->to(url('dashboard/articles'));
-	}
+
+          // repo Update data tags
+          $this->modelArticles->updateTgasArticles($request->tags,$id);
+
+          // Log Activity
+          \LogActivity::addToLog('Update Artical'.' : '.$request->title);
+
+          // Message success After Update
+  		session()  -> flash('success','Modified successfully');
+  		return redirect()->to(url('dashboard/articles'));
+  	}
 
     
     // destroy Article by id
-	public function destroy($id)
-	{
-		$this->modelArticles->delete($id);
-		session()->flash('success','Successfully deleted');
-		return redirect()->to(url('dashboard/articles'));
-	}
+  	public function destroy($id)
+  	{
+  		$this->modelArticles->delete($id);
+  		session()->flash('success','Successfully deleted');
+  		return redirect()->to(url('dashboard/articles'));
+  	}
 
 
-    // destroy Multi Article by id 
-	public function DeleteArticle(Request $request)
-	{
+      // destroy Multi Article by id 
+  	public function DeleteArticle(Request $request)
+  	{
         if(!empty($request->check))
         {
 		  $data = $this->modelArticles->deleteArticalCheck($request->check);
@@ -151,7 +148,7 @@ class ArticleController extends Controller
             }else{
 		   session()->flash('warning','Please select at least one article');
 		   return back();
-        } 
+        }
     }
 
 }

@@ -21,7 +21,7 @@ Add Article
                     <div class="{{$errors->has('title')?'has-error':''}}" >
                         <div class="form-group form-md-line-input form-md-floating-label">
                             <input value="{{old('title')}}" type="text" class="form-control" name="title" id="form_control_1">
-                            <label for="form_control_1">Article Title</label>
+                            <label for="form_control_1">Article Title English</label>
                         <small class="text-danger">{{ $errors->first('title') }}</small>
                         </div>
                     </div>
@@ -64,7 +64,7 @@ Add Article
                             // extraPlugins needs to be set too.
                              CKEDITOR.replace( 'editor' );
                             </script>
-                            <label for="form_control_1">Description</label>
+                            <label for="form_control_1">Description English</label>
                         <small class="text-danger">{{ $errors->first('description') }}</small>
                         </div>
                     </div>

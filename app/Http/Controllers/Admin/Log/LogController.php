@@ -23,14 +23,14 @@ class LogController extends Controller
 
     public function DeleteLog(Request $request)
     {
-     if(!empty($request->check)) {
-  		LogActivity::destroy($request->check);
-  		session()->flash('success','Data deleted successfully');
-		  return back();
-	  }else{
-	  	session()->flash('warning','Please select a item at least');
-	  	return back();
-	  }	
+      if(!empty($request->check)) {
+    		LogActivity::destroy($request->check);
+    		session()->flash('success','Data deleted successfully');
+  		  return back();
+  	  }else{
+  	  	session()->flash('warning','Please select a item at least');
+  	  	return back();
+  	  }	
     }
 
 }

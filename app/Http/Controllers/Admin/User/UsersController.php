@@ -11,13 +11,12 @@ use Spatie\Permission\Models\Role;
 use DB;
 use App\Models\User;
 
-class UsersController extends Controller
-{
+class UsersController extends Controller {
+	
 	protected $modelUsers;
 
-    function __construct(User $user)
-    {
-    	
+    function __construct(User $user) {
+
        $this->modelUsers = new UsersRepositories($user);
 
        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);

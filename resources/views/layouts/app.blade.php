@@ -14,9 +14,13 @@
     {{style('front/css/bootstrap-rtl.css') }}
   @endif
 
+  @php
+    $explodeFav =  explode(".",app('setting')->fav);
+    $pathFav =  '/uploads/fav/'.app('setting')->fav;
+  @endphp
 
   @if(app('setting') != null)
-    <link rel="shortcut icon" href="{{ explode(".",app('setting')->fav)[0] == 'http://lorempixel' ?  app('setting') ? app('setting')->fav:'' : url('/')}}/uploads/fav/{{app('setting')->fav }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ $explodeFav[0] == 'http://lorempixel' ? app('setting')->fav : $pathFav }}" type="image/x-icon">
   @endif
 
 <!-- Responsive -->
@@ -68,24 +72,29 @@
                 <div class="outer-container clearfix">
                     <!--Logo Box-->
                     <div class="logo-box">
-                      <div>
-
-                          @if((\Session::get('locale')  == 'ar'))
-                           <a  class="btn btn-primary" href="{{ url('locale/en') }}" ><i class="fa fa-language"></i>EN</a>
-                          @endif
-                           
-                           @if((\Session::get('locale')  == 'en'))
-                            <a class="btn btn-primary" {{ (\Session::get('locale')  == 'en') }} href="{{ url('locale/ar') }}" ><i class="fa fa-language"></i> عربي</a>
-                           @endif
-
-                        </div>
+                        @php
+                          $explodeImg =  explode(".",app('setting')->logo);
+                          $pathImg =  '/uploads/logo/'.app('setting')->logo;
+                        @endphp
 
                         @if(app('setting') != null)
-                          <div class="logo"><a href="{{url('/')}}"><img src="{{ explode(".",app('setting')->logo)[0] == 'http://lorempixel' ?  app('setting') ? app('setting')->logo:'' : url('/')}}/uploads/logo/{{app('setting')->logo }}" alt="">
+                          <div class="logo"><a href="{{url('/')}}"> <img style="border-radius: 18px;" src="{{ $explodeImg[0] == 'http://lorempixel' ? app('setting')->logo : $pathImg }}" alt="">
             
                             {{-- <h1>{{ __('home_front.welcome') }}</h1> --}}
                           </a></div>
                         @endif
+
+                    <div style="margin-top: 5%;" >
+                      @if((\Session::get('locale')  == 'ar'))
+                       <a  class="btn btn-primary" href="{{ url('locale/en') }}" ><i class="fa fa-language"></i>EN</a>
+                      @endif
+                       
+                       @if((\Session::get('locale')  == 'en'))
+                        <a class="btn btn-primary" {{ (\Session::get('locale')  == 'en') }} href="{{ url('locale/ar') }}" ><i class="fa fa-language"></i> عربي</a>
+                       @endif
+
+                    </div>
+
                     </div>
                 </div>    
             </div>
@@ -116,7 +125,11 @@
                                 <div class="footer-widget logo-widget">
                                     <div class="logo">
                                       @if(app('setting') != null)
-                                        <a href="{{url('/')}}"><img src="{{ explode(".",app('setting')->logo)[0] == 'http://lorempixel' ?  app('setting') ? app('setting')->logo:'' : url('/')}}/uploads/logo/{{app('setting')->logo }}" alt="" /></a>
+                                      @php
+                                       $explodelogo =  explode(".",app('setting')->logo);
+                                       $pathloho    =  '/uploads/logo/'.app('setting')->logo;
+                                      @endphp
+                                        <a href="{{url('/')}}"><img src="{{ $explodelogo[0] == 'http://lorempixel' ? app('setting')->logo : $pathloho }}" alt="" /></a>
                                       @endif
                                     </div>
                                     <div class="">{{ app('setting') ? app('setting')->brief_site:''}}</div>

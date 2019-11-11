@@ -59,8 +59,13 @@ All Articles
 
                                     <td>{{$article->translation('en')->first()->title}} </td>
 
+                                    @php
+                                        $explodeImg =  explode(".",$article->image);
+                                        $pathImg =  '/uploads/articles/'.$article->image;
+                                    @endphp
+
                                     @if($article->image != '')
-                                        <td class="info product-block"><img src="{{ explode(".",$article->image)[0] == 'http://lorempixel'? $article->image : url('/')}}/uploads/articles/{{$article->image }}" width="100" style="border:1px solid #c4c4c4" height="70"></td>
+                                        <td class="info product-block"><img src="{{ $explodeImg[0] == 'http://lorempixel' ? $article->image : $pathImg }}" width="100" style="border:1px solid #c4c4c4" height="70"></td>
                                     @else
                                         <td class="info"><img src="" width="100" style="border:1px solid #c4c4c4" height="70"></td>
                                     @endif

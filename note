@@ -1,13 +1,6 @@
-## important
 
-1 = make section artical in backend [suppert aribic and english]
-2 = check seed data
-3 = improve file readme.md in github
-4 = Understand how multilingualism works
-
-## Unimportant
-
-4 = make section categray and tags suppert arabic and english
-5 = improve code project write all query in Repositories  Controller
-6 = working the change last for api
-6 = add datatable plugn to make paginate in table data in backend 
+1 = improve file readme.md in github
+2 = make section categray and tags suppert arabic and english
+3 = improve code project write all query in Repositories  Controller [Controler Role]
+4 = working the change last for api
+5 = add datatable plugn to make paginate in table data in backend 

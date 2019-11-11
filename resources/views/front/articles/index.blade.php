@@ -34,7 +34,12 @@
                         	<div class="inner-box">
                         		<div class="image">
 
-                        		<img src="{{ explode(".",$articles->image)[0] == 'http://lorempixel'? $articles->image : url('/')}}/uploads/articles/{{$articles->image }}" alt="" />
+                                @php
+                                $explodeImg =  explode(".",$articles->image);
+                                $pathImg =  '/uploads/articles/'.$articles->image;
+                                @endphp
+
+                        		<img src="{{ $explodeImg[0] == 'http://lorempixel' ? $articles->image : $pathImg }}" alt="" />
 
                         	    <div class="post-date">{{ $articles->created_at ? $articles->created_at->diffForHumans()  : '' }}</div>
                         		</div>

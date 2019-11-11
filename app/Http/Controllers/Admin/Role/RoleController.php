@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Http\Controllers\Admin\Role;
-
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,20 +8,18 @@ use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use DB;
 
-class RoleController extends Controller
-{
+class RoleController extends Controller {
 
-        /**
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    function __construct()
-    {
-         $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
-         $this->middleware('permission:role-create', ['only' => ['create','store']]);
-         $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:role-delete', ['only' => ['destroy']]);
+    function __construct(){
+     $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','store']]);
+     $this->middleware('permission:role-create', ['only' => ['create','store']]);
+     $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
+     $this->middleware('permission:role-delete', ['only' => ['destroy']]);
     }
 
 
@@ -88,7 +84,6 @@ class RoleController extends Controller
             ->where("role_has_permissions.role_id",$id)
             ->get();
 
-
         return view('admin.roles.show',compact('role','rolePermissions'));
     }
 
@@ -107,7 +102,6 @@ class RoleController extends Controller
             ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
             ->all();
 
-
         return view('admin.roles.edit',compact('role','permission','rolePermissions'));
     }
 
@@ -125,7 +119,6 @@ class RoleController extends Controller
             'name' => 'required',
             'permission' => 'required',
         ]);
-
 
         $role = Role::find($id);
         $role->name = $request->input('name');

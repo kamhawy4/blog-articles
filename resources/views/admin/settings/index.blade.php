@@ -100,13 +100,18 @@ Settings
 
 
 
+
+                    @php
+                     $explodeLogo =  explode(".",$setting->logo);
+                     $pathLogo =  '/uploads/logo/'.$setting->logo;
+                    @endphp
                     <div class="form-group {{ ColoringError()->ColoringInput($errors,'logo_main') }}">
                         <label class="control-label col-md-1">Logo Upload #1</label>
                         <div class="col-md-9">
                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                 <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> 
                                        @if(!empty($setting->logo))
-                                        <img src="{{ explode(".",$setting->fav)[0] == 'http://lorempixel'? $setting->logo : url('/')}}/uploads/logo/{{$setting->logo }}" alt="" title="">
+                                        <img src="{{ $explodeLogo[0] == 'http://lorempixel' ? $setting->logo : $pathLogo }}" alt="" title="">
                                        @endif
                                 </div>
                                 <div>
@@ -124,6 +129,10 @@ Settings
                         </div>
                     </div>
 
+                    @php
+                     $explodeFav =  explode(".",$setting->fav);
+                     $pathFav =  '/uploads/fav/'.$setting->fav;
+                    @endphp
 
                     <div class="form-group  {{ ColoringError()->ColoringInput($errors,'fav_main') }}">
                         <label class="control-label col-md-1">Favicon Upload #1</label>
@@ -131,7 +140,7 @@ Settings
                             <div class="fileinput fileinput-new" data-provides="fileinput">
                                 <div class="fileinput-preview thumbnail" data-trigger="fileinput" style="width: 200px; height: 150px;"> 
                                  @if(!empty($setting->fav))
-                                    <img src="{{ explode(".",$setting->fav)[0] == 'http://lorempixel'? $setting->fav : url('/')}}/uploads/fav/{{$setting->fav }}" alt="" title="">
+                                    <img src="{{ $explodeFav[0] == 'http://lorempixel' ? $setting->fav : $pathFav }}" alt="" title="">
                                   @endif
                                 </div>
                                 
