@@ -19,7 +19,7 @@ class CreateArticlesTable extends Migration
             $table->string('image');
             $table->enum('type',['active','unactive']);
             $table->integer('categorie_id')->unsigned();
-            $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('categorie_id')->references('id')->on('categories_translations')->onDelete('cascade');
 
             $table->timestamps();
         });

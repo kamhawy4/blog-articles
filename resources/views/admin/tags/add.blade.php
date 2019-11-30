@@ -3,8 +3,7 @@
 	<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
 		<input  type="checkbox"  name="check[]" class="checkboxes" value="{{$allTags->id}}" /><span></span>
 	</label>
-</td>
-<td>{{$allTags->name}}</td>
+<td>{{$allTags->translation('en')->first()->name}}</td>
 <td>
 	<div class="actions">
 		<div class="btn-group">
@@ -13,8 +12,8 @@
 			</i>
 		</a>
 		<ul class="dropdown-menu pull-right">
-			<li>
-				<a data-id="{{$allTags->id}}" data-ty="{{$allTags->name}}" class="edit-items"  data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-pencil"></i> Edit 
+			<li>				
+				<a data-id="{{$allTags->id}}" data-ty="{{$allTags->translation('en')->first()->name}}" class="edit-items"  data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-pencil"></i> Edit 
 				</a>
 			</li>
 		</ul>

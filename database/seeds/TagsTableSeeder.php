@@ -11,7 +11,9 @@ class TagsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Tags::class,6)->create()->each(function ($u) {
+        factory(App\Models\Tags::class,3)->create()->each(function ($u,$count = 0) {
+            $count++;
+            $u->id = $count;
             $u->save();
         });
     }

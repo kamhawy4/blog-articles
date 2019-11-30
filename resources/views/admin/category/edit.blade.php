@@ -5,7 +5,8 @@
 		<span></span>
 	</label>
 </td>
-<td>{{$update->name}}</td>
+<td>{{$update->translation('en')->first()->name}}</td>
+<td>{{$update->translation('ar')->first()->name}}</td>
 <td>
    <div class="actions">
 	  <div class="btn-group">
@@ -14,7 +15,7 @@
 		  </a>
 		  <ul class="dropdown-menu pull-right">
 		  	<li>
-			  	<a data-id="{{$update->id}}" data-ty='{{$update->name}}'class="edit-items"  data-toggle="modal" data-target="#exampleModal2">
+			  	<a data-id="{{$update->id}}" data-en='{{$update->translation('en')->first()->name}}' data-ar='{{$update->translation('ar')->first()->name}}'class="edit-items"  data-toggle="modal" data-target="#exampleModal2">
 			  		<i class="fa fa-pencil"></i> Edit 
 			  	</a>
 		  	</li>

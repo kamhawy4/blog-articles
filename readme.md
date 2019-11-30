@@ -18,15 +18,13 @@ For Laravel 5.8.0 [here](https://laravel.com/docs/5.8/).
 ### Features ###
 
 * Authentication (registration, login, logout, password reset)
-* Managers dashboard create [ Users ,  Roles and Permissions , Articles , Categories , Tags 
+* Admin dashboard create [ Users ,  Roles and Permissions , Articles , Categories , Tags 
   , Comments , Settings , Send Mails , Log , Social Links ]
-* Front End Support Multi Language [Arabic and English] Just Articles Support Multi Language
-* Categray and Tags Not Support  Multi Language
+* Front End Support Multi Language [Arabic and English] 
 
 ### Working now on ###
 
 * Api For Blog
-* Make Section categray and Tags Support Arabic and English
 * Add Datatable Plugin to Make Pagination in Table Data in Backend
 
 ### Packages included ###
@@ -40,4 +38,4 @@ For Laravel 5.8.0 [here](https://laravel.com/docs/5.8/).
 
 To test application the database is seeding with users :
 * Url BackEnd : http://localhost:8000/dashboard
-* Manager : email = admin@admin.com, password = 123456
+* Admin : email = admin@admin.com, password = 123456

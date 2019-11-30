@@ -11,8 +11,10 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Categories::class,6)->create()->each(function ($u) {
-            $u->save();
-        });
+        factory(App\Models\Categories::class,3)->create()->each(function ($u,$count = 0) {
+             $count++;
+             $u->id =  $count;
+             $u->save();
+        }); 
     }
 }

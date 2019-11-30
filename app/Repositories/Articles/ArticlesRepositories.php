@@ -125,7 +125,7 @@ class ArticlesRepositories extends Controller implements RepositoryInterface
 
     public function ArticleWhereCategorieId($categorieId)
     {
-        return $this->articles->where('categorie_id',$categorieId);
+        return $this->articles->where('id',$categorieId);
     }
 
     public function ArticleWhereTagId($tagId)

@@ -45,7 +45,6 @@ class ArticlesTranslationsTableSeeder extends Seeder
               $u->articles_id = 3;
             }
 
-
             $u->save();
         });
     }

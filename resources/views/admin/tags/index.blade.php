@@ -15,7 +15,10 @@ Tags
       <div class="modal-body">
         {{ Form::open() }}
           <div class="form-group">
-              <input type="text" class="form-control" name="catdit"  id="message-text2">
+              <input type="text" class="form-control" name="catdit"  id="message-textar">
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" name="catdit"  id="message-texten">
           </div>
             <input type="hidden"  name="idedit"  class="form-control"  id="id-id">
         {{ Form::close() }}
@@ -92,7 +95,8 @@ Tags
                                 <span></span>
                             </label>
                         </th>
-                        <th> Tags </th>
+                        <th> Tags En</th>
+                        <th> Tags Ar</th>
                         <th> Options </th>
                     </tr>
                 </thead>
@@ -106,9 +110,8 @@ Tags
                                     <span></span>
                                 </label>
                             </td>
-                            <td> 
-                                {{$tag->name}}
-                            </td>
+                            <td>{{$tag->translation('en')->first()->name}}</td>
+                            <td>{{$tag->translation('ar')->first()->name}}</td>
                             <td>
                               <div class="actions">
                                       <div class="btn-group">
@@ -118,7 +121,7 @@ Tags
                                           <ul   class="dropdown-menu pull-right">
                                               <li>
                                                 @can('tag-edit')
-                                                  <a  data-id="{{$tag->id}}" data-ty="{{$tag->name}}" class="edit-items"  data-toggle="modal" data-target="#exampleModal2">
+                                                  <a  data-id="{{$tag->id}}" data-en="{{$tag->translation('en')->first()->name}}" data-ar="{{$tag->translation('ar')->first()->name}}" class="edit-items"  data-toggle="modal" data-target="#exampleModal2">
                                                       <i class="fa fa-pencil"></i> Edit </a>
                                                 @endcan
                                               </li>
@@ -145,13 +148,14 @@ Tags
 <script type="text/javascript">
      $(document).ready(function(){
           $('#save-edit').click(function(e){ e.preventDefault();
-            var name  =  $('#message-text2').val();
-            var tag_id = $('input[name="idedit"]').val();
+             var ar_name  =  $('#message-textar').val();
+             var en_name  =  $('#message-texten').val();
+             var tag_id   = $('input[name="idedit"]').val();
             $.ajax({
               url:'{{url('/')}}/dashboard/tags/'+tag_id,
               type:'post',
               datatype:'json',
-              data:{name,tag_id,"_token":"{{csrf_token()}}"},
+              data:{ar_name,en_name,tag_id,"_token":"{{csrf_token()}}"},
               success:function(data){
 
                  if(data.status == true){
@@ -181,7 +185,8 @@ Tags
 <script type="text/javascript">
   $(document).ready(function(){
         $('body').on('click','.edit-items',function(){
-        $('#message-text2').val($(this).data('ty'));
+        $('#message-textar').val($(this).data('ar'));
+        $('#message-texten').val($(this).data('en'));
         $('#id-id').val($(this).data('id'));
         });
     });

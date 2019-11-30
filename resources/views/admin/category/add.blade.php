@@ -4,7 +4,7 @@
 		<input  type="checkbox"  name="check[]" class="checkboxes" value="{{$allCategory->id}}" /><span></span>
 	</label>
 </td>
-<td>{{$allCategory->name}}</td>
+<td> {{$allCategory->translation('en')->first()->name}}</td>
 <td>
 	<div class="actions">
 		<div class="btn-group">
@@ -14,7 +14,7 @@
 		</a>
 		<ul class="dropdown-menu pull-right">
 			<li>
-				<a data-id="{{$allCategory->id}}" data-ty="{{$allCategory->name}}" class="edit-items"  data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-pencil"></i> Edit 
+				<a data-id="{{$allCategory->id}}" data-ty="{{$allCategory->translation('en')->first()->name}}" class="edit-items"  data-toggle="modal" data-target="#exampleModal2"><i class="fa fa-pencil"></i> Edit 
 				</a>
 			</li>
 		</ul>

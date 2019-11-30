@@ -8,5 +8,12 @@ class Tags extends Model
 {
     protected  $table   = 'tags';
 
-    protected $fillable = ['name','slug'];
+    public function translation($language = null)
+    {
+        if ($language == null) {
+            $language = App::getLocale();
+        }
+        return $this->hasMany('App\Models\TagsTranslations')->where('language', '=', $language);
+    }
+
 }

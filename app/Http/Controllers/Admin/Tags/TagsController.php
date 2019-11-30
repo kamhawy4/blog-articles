@@ -6,15 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Models\Tags;
+use App\Models\TagsTranslations;
 use App\Repositories\Tags\TagsRepositories;
 use Validator;
 
 class TagsController extends Controller {
+
     protected $modelTags;
 
-	public function __construct(Tags $tags)
+	public function __construct(TagsTranslations $tagsTranslations,Tags $tags)
 	{
-		$this->modelTags       = new TagsRepositories($tags);
+		$this->modelTags       = new TagsRepositories($tagsTranslations,$tags);
 
 		$this->middleware('permission:tag-list|tag-create|tag-edit|tag-delete', ['only' => ['index','store']]);
          $this->middleware('permission:tag-create', ['only' => ['create','store']]);
@@ -47,7 +49,7 @@ class TagsController extends Controller {
 	public function store(Request $request)
 	{
 	   $validator = Validator::make($request->all(), [
-           'name'  =>'required|max:150|unique:tags',
+           'name'  =>'required|max:150|unique:tags_translations',
        ]);   
 
      if ($validator->passes()) {
@@ -71,12 +73,12 @@ class TagsController extends Controller {
 	// update tags 
 	public function update($id,Request $request)
 	{
-		$validator = Validator::make($request->all(),[
-           'name'  =>'required|max:150',
-        ]); 
+		$validator = Validator::make($request->all(), [
+            'ar_name'  =>'required|max:150',
+            'en_name'  =>'required|max:150',
+        ]);
 
 	    if($validator->passes()) {
-			$request   ->  merge(['slug'=>$this->make_slug($request->name)]); 
 			$update    = $this->modelTags->update($request,$id);
 	        //render page  tags edit and returm it
 	        $html      =  view('admin.tags.edit',compact('update'))->render();

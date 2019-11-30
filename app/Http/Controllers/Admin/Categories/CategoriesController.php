@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Categories;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
+use App\Models\CategoriesTranslations;
 use App\Models\Categories;
 use App\Repositories\Categories\CategoriesRepositories;
 use Validator;
@@ -13,10 +14,8 @@ class CategoriesController extends Controller
 {
     protected $modelCategories;
 
-	public function __construct(Categories $categories)
-	{
-		$this->modelCategories  = new CategoriesRepositories($categories);
-
+	public function __construct(CategoriesTranslations $categoriesTranslations,Categories $categories){
+		$this->modelCategories  = new CategoriesRepositories($categoriesTranslations,$categories);
 		$this->middleware('permission:category-list|category-create|category-edit|category-delete', ['only' => ['index','store']]);
 		$this->middleware('permission:category-create', ['only' => ['create','store']]);
 		$this->middleware('permission:category-edit', ['only' => ['edit','update']]);
@@ -38,7 +37,7 @@ class CategoriesController extends Controller
 
 	// Return view page Edit Categorie And Return categorie by id
     public function edit($id)
-    {
+    {    		
 		$update =  $this->modelCategories->show($id);		
         return view('admin.category.edit',compact('update'));
     }
@@ -48,12 +47,13 @@ class CategoriesController extends Controller
 	public function store(Request $request)
 	{
 		$validator = Validator::make($request->all(), [
-            'name'  =>'required|max:150|unique:categories',
+            'name'  =>'required|max:150|unique:categories_translations',
         ]);
 
 		if ($validator->passes()) {
 	        // Merge Slug and Categories Create  
 	        $request      -> merge(['slug'=>$this->make_slug($request->name)]); 
+
 	        $allCategory  =  $this->modelCategories->store($request);
 
 	        // render page  category create and returm it
@@ -73,18 +73,19 @@ class CategoriesController extends Controller
 	public function update($id,Request $request)
 	{
 		$validator = Validator::make($request->all(), [
-            'name'  =>'required|max:150',
+            'ar_name'  =>'required|max:150',
+            'en_name'  =>'required|max:150',
         ]);
 
 		if ($validator->passes()) {
-			$request   ->  merge(['slug'=>$this->make_slug($request->name)]); 
 			$update    = $this->modelCategories->update($request,$id);
 	        //render page  category edit and returm it
+	        
+	        $html      =  view('admin.category.edit',compact('update'))->render();
 
 	        // Log Activity
             \LogActivity::addToLog('Update Categorie'.' : '.$request->name);
 
-	        $html      =  view('admin.category.edit',compact('update'))->render();
 			return response()->json(['status'=>true,'code'=>200,'result'=>$html]);
         }
 

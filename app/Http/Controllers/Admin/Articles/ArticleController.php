@@ -12,20 +12,18 @@ use App\Repositories\Articles\ArticlesRepositories;
 use App\Repositories\CommentArticle\CommentArticleRepositories;
 use App\Repositories\Categories\CategoriesRepositories;
 use App\Repositories\Tags\TagsRepositories;
-use App\Models\Categories,App\Models\ArticleTranslation,App\Models\CommentArticle,App\Models\Tags,App\Models\ArticleTags;
+use App\Models\Categories,App\Models\ArticleTranslation,App\Models\CommentArticle,App\Models\Tags,App\Models\ArticleTags,App\Models\CategoriesTranslations;;
 use Storage,Session,Image,Auth,DB,File;
 use App\Models\Articles;
 
 class ArticleController extends Controller
 {
-
 	//PROPRTE Upload
     const PATH      = '/uploads/articles';
     const SUBPATH   = '/100x100/';
     const SIZE      = '100,100';
     const NAMEFILE  = 'img';
 	  const NAMEMERGE = 'image';
-	
 
 	// space that we can use the repository from
     protected $modelArticles;
@@ -34,11 +32,11 @@ class ArticleController extends Controller
     protected $modelCommentArticle;
     
 
-    function __construct(ArticleTranslation $articleTranslation,Tags $tags,Categories $categories,CommentArticle $commentArticle,ArticleTags $articleTags,Articles $articles){
+    function __construct(ArticleTranslation $articleTranslation,Tags $tags,Categories $categories,CommentArticle $commentArticle,ArticleTags $articleTags,Articles $articles,CategoriesTranslations $categoriesTranslations){
       $this->modelArticles       = new ArticlesRepositories($articleTranslation,$articleTags,$articles);
-      $this->modelCategories     = new CategoriesRepositories($categories);
+      $this->modelCategories     = new CategoriesRepositories($categoriesTranslations,$categories);
       $this->modelCommentArticle = new CommentArticleRepositories($commentArticle);
-      $this->modelTags           = new TagsRepositories($tags);
+      $this->modelTags           = new TagsRepositories($articleTranslation,$tags);
 
       $this->middleware('permission:article-list|article-create|article-edit|article-delete', ['only' => ['index','store']]);
       $this->middleware('permission:article-create', ['only' => ['create','store']]);

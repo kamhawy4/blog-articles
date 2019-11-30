@@ -9,7 +9,7 @@
             <ul class="archive-list">
                 @if(!$categories->isEmpty())
                     @foreach($categories as $categorie)
-                     <li><a href="{{url('/')}}/categorie/{{$categorie->slug}}" class="clearfix"><span class="pull-left"> {{$categorie->name}} </span> <span class="pull-right">({{$categorie->getArticls->count()}})</span></a></li>
+                     <li><a href="{{url('/')}}/categorie/{{$categorie->translation()->first()->slug}}" class="clearfix"><span class="pull-left"> {{$categorie->translation()->first()->name}} </span> <span class="pull-right">({{$categorie->getArticls->count()}})</span></a></li>
                     @endforeach
                 @endif
             </ul>

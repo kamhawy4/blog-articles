@@ -15,7 +15,10 @@ Categories
       <div class="modal-body">
         {{ Form::open() }}
           <div class="form-group">
-              <input type="text" class="form-control" name="catdit"  id="message-text2">
+              <input type="text" class="form-control" name="catdit"  id="message-textar">
+          </div>
+          <div class="form-group">
+              <input type="text" class="form-control" name="catdit"  id="message-texten">
           </div>
             <input type="hidden"  name="idedit"  class="form-control"  id="id-id">
         {{ Form::close() }}
@@ -90,7 +93,8 @@ Categories
                                 <span></span>
                             </label>
                         </th>
-                        <th> Categorys </th>
+                        <th> Categorys En </th>
+                        <th> Categorys Ar </th>
                         <th> Options </th>
                     </tr>
                 </thead>
@@ -104,9 +108,9 @@ Categories
                                     <span></span>
                                 </label>
                             </td>
-                            <td> 
-                                {{$category->name}}
-                            </td>
+                            <td>{{$category->translation('en')->first()->name}}</td>
+                            <td>{{$category->translation('ar')->first()->name}}</td>
+
                             <td>
                               <div class="actions">
                                       <div class="btn-group">
@@ -116,7 +120,7 @@ Categories
                                           <ul   class="dropdown-menu pull-right">
                                             @can('category-edit')
                                               <li>
-                                                  <a  data-id="{{$category->id}}" data-ty="{{$category->name}}" class="edit-items"  data-toggle="modal" data-target="#exampleModal2">
+                                                  <a  data-id="{{$category->id}}" data-ar="{{$category->translation('en')->first()->name}}"  data-en="{{$category->translation('ar')->first()->name}}" class="edit-items"  data-toggle="modal" data-target="#exampleModal2">
                                                       <i class="fa fa-pencil"></i> Edit </a>
                                               </li>
                                             @endcan
@@ -143,13 +147,14 @@ Categories
 <script type="text/javascript">
      $(document).ready(function(){
           $('#save-edit').click(function(e){ e.preventDefault();
-            var name  =  $('#message-text2').val();
+            var ar_name  =  $('#message-textar').val();
+            var en_name  =  $('#message-texten').val();
             var category_id = $('input[name="idedit"]').val();
             $.ajax({
               url:'{{url('/')}}/dashboard/categorys/'+category_id,
               type:'post',
               datatype:'json',
-              data:{name,category_id,"_token":"{{csrf_token()}}"},
+              data:{ar_name,en_name,category_id,"_token":"{{csrf_token()}}"},
               success:function(data){
 
                  if(data.status == true){
@@ -180,7 +185,8 @@ Categories
 <script type="text/javascript">
   $(document).ready(function(){
         $('body').on('click','.edit-items',function(){
-        $('#message-text2').val($(this).data('ty'));
+        $('#message-textar').val($(this).data('ar'));
+        $('#message-texten').val($(this).data('en'));
         $('#id-id').val($(this).data('id'));
         });
     });
