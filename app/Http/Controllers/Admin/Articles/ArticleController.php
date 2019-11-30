@@ -12,7 +12,7 @@ use App\Repositories\Articles\ArticlesRepositories;
 use App\Repositories\CommentArticle\CommentArticleRepositories;
 use App\Repositories\Categories\CategoriesRepositories;
 use App\Repositories\Tags\TagsRepositories;
-use App\Models\Categories,App\Models\ArticleTranslation,App\Models\CommentArticle,App\Models\Tags,App\Models\ArticleTags,App\Models\CategoriesTranslations;;
+use App\Models\Categories,App\Models\ArticleTranslation,App\Models\CommentArticle,App\Models\Tags,App\Models\ArticleTags,App\Models\CategoriesTranslations;
 use Storage,Session,Image,Auth,DB,File;
 use App\Models\Articles;
 

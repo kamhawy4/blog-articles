@@ -13,6 +13,7 @@ use App\Charts\UsersChart;
 use App\Charts\ArticlesChart;
 use App\Models\User;
 use App\Models\Articles;
+use App\Models\CategoriesTranslations;
 
 
 class DashboardController extends Controller
@@ -21,9 +22,9 @@ class DashboardController extends Controller
     protected $modelCategories;
     protected $modelCommentArticle;
 
-    function __construct(ArticleTranslation $articleTranslation,Categories $categories,Mangaers $mangaers,ArticleTags $articleTags,Articles $articles){
+    function __construct(ArticleTranslation $articleTranslation,Categories $categories,Mangaers $mangaers,ArticleTags $articleTags,Articles $articles,CategoriesTranslations $categoriesTranslations){
         $this->modelArticles       = new ArticlesRepositories($articleTranslation,$articleTags,$articles);
-        $this->modelCategories     = new CategoriesRepositories($categories);
+        $this->modelCategories     = new CategoriesRepositories($categoriesTranslations,$categories);
         $this->modelManagers       = new ManagersRepositories($mangaers);
     }
 
