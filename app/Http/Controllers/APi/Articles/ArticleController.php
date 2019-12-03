@@ -7,23 +7,26 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Input;
 use App\Repositories\Articles\ArticlesRepositories;
-use App\Models\ArticleTranslation,App\Models\ArticleTags;
+use App\Models\ArticleTranslation,App\Models\ArticleTags,App\Models\Articles;
 
 class ArticleController extends Controller
 {
 	// space that we can use the repository from
     protected $modelArticles;
 
-	function __construct(ArticleTranslation $article,ArticleTags $articleTags)
+	function __construct(ArticleTranslation $articleTranslation,ArticleTags $articleTags,Articles $articles)
 	{
-
-	  $this->modelArticles       = new ArticlesRepositories($article,$articleTags);
+	  $this->modelArticles       = new ArticlesRepositories($articleTranslation,$articleTags,$articles);
 	}
 
 	// Return 10 Articles
     public function index()
     {
       $articles = $this->modelArticles->pagination(10);
+       $this->modelArticles->object_push($articles,['title','description']);
+      /*foreach ($articles as $key => $article) {
+            $article->title =  $article->translation()->first()->title;
+      }*/
       return response()->json(['status'=>true,'code'=>200,'response'=>$articles]);
     }
 

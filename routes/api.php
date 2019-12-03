@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 
-Route::group(['namespace' => 'APi', 'prefix' => 'v1/dashboard/', 'as' => 'dashboard.'], function () {
+Route::group(['namespace' => 'APi', 'prefix' => 'v1/app/', 'as' => 'app.'], function () {
     /*
      * These routes need view-backend permission
      * (good if you want to allow more than one group in the backend,
