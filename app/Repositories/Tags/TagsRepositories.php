@@ -70,6 +70,11 @@ class TagsRepositories   extends Controller  implements RepositoryInterface
      return $this->model->findOrFail($id);
     }
 
+    public function whereSlug($slug)
+    {
+     return $this->model->where('slug',$slug)->first();
+    }
+
 
 }
 

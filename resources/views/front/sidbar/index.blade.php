@@ -29,6 +29,17 @@
                 @endif
         </div>
 
+
+         <!-- Tags -->
+        <div class="sidebar-widget popular-tags">
+            <div class="sidebar-title"><h3>Tags</h3></div>
+                @if(count($tags) > 0)
+                 @foreach($tags as $tag)
+                      <a href="{{url('/')}}/tag/{{$tag->translation()->first()->slug}}">{{$tag->translation()->first()->name}}</a>
+                @endforeach
+                @endif
+        </div>
+
     </aside>
 </div>
 <!--Sidebar-->
