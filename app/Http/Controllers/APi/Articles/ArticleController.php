@@ -11,22 +11,19 @@ use App\Models\ArticleTranslation,App\Models\ArticleTags,App\Models\Articles;
 
 class ArticleController extends Controller
 {
-	// space that we can use the repository from
+  	// space that we can use the repository from
     protected $modelArticles;
 
-	function __construct(ArticleTranslation $articleTranslation,ArticleTags $articleTags,Articles $articles)
-	{
-	  $this->modelArticles       = new ArticlesRepositories($articleTranslation,$articleTags,$articles);
-	}
+  	function __construct(ArticleTranslation $articleTranslation,ArticleTags $articleTags,Articles $articles)
+  	{
+  	  $this->modelArticles       = new ArticlesRepositories($articleTranslation,$articleTags,$articles);
+  	}
 
 	// Return 10 Articles
     public function index()
     {
       $articles = $this->modelArticles->pagination(10);
-       $this->modelArticles->object_push($articles,['title','description']);
-      /*foreach ($articles as $key => $article) {
-            $article->title =  $article->translation()->first()->title;
-      }*/
+      $this->object_push($articles,['title','description']);
       return response()->json(['status'=>true,'code'=>200,'response'=>$articles]);
     }
 
@@ -34,6 +31,7 @@ class ArticleController extends Controller
     public function ArticlesByCategroy($categorieId)
     {
       $articles  = $this->modelArticles->ArticleWhereCategorieId($categorieId)->paginate(10);
+      $this->object_push($articles,['title','description']);
       return response()->json(['status'=>true,'code'=>200,'response'=>$articles]);
     }
 
@@ -41,24 +39,28 @@ class ArticleController extends Controller
     public function ArticlesByTag($tagId)
     {
       $tags = $this->modelArticles->ArticleWhereTagId($tagId);
+      $this->object_push($tags,['title','description']);
       return response()->json(['status'=>true,'code'=>200,'response'=>$tags]);
     }
-
 
     // Return single Article by id
     public function ArticleById($id)
     {
       $article       = $this->modelArticles->show($id);
+      $article->title =  $article->translation()->first()->title;
+      $article->description =  $article->translation()->first()->description;
+
       $tagsArtical   = $this->modelArticles->whereTagsArticalId($id);
       $article->tags = $tagsArtical;
       return response()->json(['status'=>true,'code'=>200,'response'=>$article]);      
     }
 
 
-	// Return 5  Recent Articles
+	  // Return 5  Recent Articles
     public function RecentArtical()
     {
       $articles = $this->modelArticles->pagination(5);
+      $this->object_push($articles,['title','description']);
       return response()->json(['status'=>true,'code'=>200,'response'=>$articles]);
     }
 

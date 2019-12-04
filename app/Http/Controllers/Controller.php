@@ -72,6 +72,18 @@ class Controller extends BaseController
 
     }
 
+    /**
+    * push object item
+    */
+    public function object_push($object,$items)
+    {
+      foreach($object as $data){
+          for ($i=0; $i < count($items) ; $i++) {
+              $item = $items[$i];
+              $data[$items[$i]] =  $data->translation()->first()->$item;
+          }
+      }
+    }
 
     /**
     * @return slug 

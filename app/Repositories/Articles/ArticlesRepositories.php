@@ -114,8 +114,7 @@ class ArticlesRepositories extends Controller implements RepositoryInterface
 
     public function orderByDesc($coleman)
     {
-
-        return $this->articles->orderBy('created_at',$coleman);
+       return $this->articles->orderBy('created_at',$coleman);
     }
 
     public function whereSlug($article)
@@ -137,17 +136,7 @@ class ArticlesRepositories extends Controller implements RepositoryInterface
       }
       return $this->articles->whereIn('id',$allTagsId)->paginate(10);
     }
-
-    public function object_push($object,$items)
-    {
-      foreach($object as $data){
-          for ($i=0; $i < count($items) ; $i++) { 
-             $data->$items[$i] =  'ddd';
-          }
-      }
-    }
     
 }
-
 
 ?>
