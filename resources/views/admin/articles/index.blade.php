@@ -31,64 +31,18 @@ All Articles
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
+                <table class="table table-bordered data-table" >
                     <thead>
                         <tr>
-                            <th>
-                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                    <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
-                                    <span></span>
-                                </label>
-                            </th>
+                            <th> Check </th>
                             <th> Title </th>
                             <th> Image </th>
                             <th> Categorie </th>
-                            <th> Options </th>
+                            <th> Edit </th>
+                            <th> Comments </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @if(!$articles->isEmpty())
-                           @foreach($articles as $article) 
-                                <tr class="odd gradeX">
-                                    <td>
-                                        <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                            <input  type="checkbox"  name='check[]'  class="checkboxes" value="{{$article->id}}" />
-                                            <span></span>
-                                        </label>
-                                    </td>
-
-                                    <td>{{$article->translation('en')->first()->title}} </td>
-
-                                    @php
-                                        $explodeImg =  explode(".",$article->image);
-                                        $pathImg =  '/uploads/articles/'.$article->image;
-                                    @endphp
-
-                                    @if($article->image != '')
-                                        <td class="info product-block"><img src="{{ $explodeImg[0] == 'http://lorempixel' ? $article->image : $pathImg }}" width="100" style="border:1px solid #c4c4c4" height="70"></td>
-                                    @else
-                                        <td class="info"><img src="" width="100" style="border:1px solid #c4c4c4" height="70"></td>
-                                    @endif
-
-                                    <td> {{$article->GetNameCategorie->name}} </td>
-
-                                    <td>
-                                    @can('comment-list')
-                                        <div class="col-md-4">
-                                           <a class=" btn btn-info"  href="{{url('/') }}/dashboard/article/comments/{{$article->id}}" >Comments
-                                           </a>
-                                        </div> 
-                                    @endcan
-
-                                     @can('article-edit')
-                                        <div class="col-md-4">
-                                            <a  href="{{url('/')}}/dashboard/articles/{{$article->id}}/edit"><li class="btn btn-primary">Edit</li></a>
-                                        </div>
-                                      @endcan
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @endif
                     </tbody>
                 </table>
             </div>
@@ -99,3 +53,46 @@ All Articles
 </div>
 
 @endsection
+ <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+<link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+
+<script type="text/javascript">
+     $(function () {
+        var table = $('.data-table').DataTable({
+
+            processing: true,
+
+            serverSide: true,
+
+            ajax:'{{url('/')}}/dashboard/articles',
+
+
+            columns: [
+
+                {data: 'check', name: 'check'},
+
+                {data: 'title', name: 'title'},
+
+                {data: 'image', name: 'image'},
+
+                {data: 'name', name: 'name'},
+
+                @can('article-edit')
+                  {data: 'edit', name: 'edit'},
+                @endcan
+
+                @can('comment-list')
+                  {data: 'comments', name: 'comments', orderable: false, searchable: false},
+                @endcan
+
+            ]
+
+        });
+
+     });
+</script>

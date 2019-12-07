@@ -23,16 +23,13 @@ For Laravel 5.8.0 [here](https://laravel.com/docs/5.8/).
 * Front End Support Multi Language [Arabic and English] 
 * Api -  https://www.getpostman.com/collections/b6bed25db68e7da695a7
 
-### Working now on ###
-
-* Add Datatable Plugin to Make Pagination in Table Data in Backend
-
 ### Packages included ###
 
 * laravelcollective/html
 * Intervention/Image
 * spatie/laravel-permission
 * consoletvs/charts
+* laravel-datatables
 
 ### Tricks ###
 

@@ -19,14 +19,10 @@
                 <table class="table table-striped table-bordered table-hover table-checkable order-column" id="sample_1">
                     <thead>
                         <tr>
-                            <th>
-                                <label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-                                    <input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" />
-                                    <span></span>
-                                </label>
-                            </th>
-                            <th> Number </th>
-                            <th> Comments </th>
+                            <th>Number</th>
+                            <th>name</th>
+                            <th>title</th>
+                            <th>Comments </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -34,6 +30,7 @@
                            @foreach($commentArticles as  $commentArticle) 
                                 <tr class="odd gradeX">
                                     <td>{{$commentArticle->id}}</td>
+                                    <td>{{$commentArticle->name}}</td>
                                     <td>{{$commentArticle->title}}</td>
                                    <td>
                                     @can('comment-delete')

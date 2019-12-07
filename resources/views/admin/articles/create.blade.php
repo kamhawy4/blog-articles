@@ -34,7 +34,7 @@ Add Article
                                 <option value="" >Select Category</option>
                                   @if($categorys->count() > 0)
                                      @foreach($categorys as $category)
-                                        <option value="{{$category->id}}" >{{$category->name}}</option>
+                                        <option value="{{$category->id}}" >{{$category->translation('en')->first()->name}}</option>
                                      @endforeach
                                   @endif
                                </select>
@@ -49,7 +49,7 @@ Add Article
                             <optgroup label="All Tags">
                                 @if($tags->count() > 0)
                                      @foreach($tags as $tag)
-                                        <option value="{{$tag->id}}" >{{$tag->name}}</option>
+                                        <option value="{{$tag->id}}" >{{$tag->translation('en')->first()->name}}</option>
                                      @endforeach
                                   @endif
                             </optgroup>

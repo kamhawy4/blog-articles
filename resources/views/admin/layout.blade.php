@@ -34,7 +34,7 @@ License: You must have a valid license purchased only from themeforest(the above
         <link href="{{url('/')}}/admin/global/plugins/bootstrap-switch/css/bootstrap-switch-rtl.min.css" rel="stylesheet" type="text/css" />
         <link href="{{url('/')}}/admin/global/plugins/icheck/skins/all.css" rel="stylesheet" type="text/css" />
 
-  <link href="{{url('/')}}/admin/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.css" rel="stylesheet" type="text/css" />
+         <link href="{{url('/')}}/admin/global/plugins/bootstrap-tagsinput/bootstrap-tagsinput-typeahead.css" rel="stylesheet" type="text/css" />
 
         <link href="{{url('/')}}/admin/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
         <link href="{{url('/')}}/admin/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
@@ -91,6 +91,9 @@ License: You must have a valid license purchased only from themeforest(the above
         <link href="{{url('/')}}/style/style.css" rel="stylesheet"> 
         <link href="{{url('/')}}/style/content_style.css" rel="stylesheet"> 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
+
+
+        {{-- datatables --}}
 
         <link rel="shortcut icon" href="favicon.ico" /> </head>
         <!-- END HEAD -->

@@ -18,7 +18,8 @@
         "laravel/passport": "^7.3",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.4.0",
-        "spatie/laravel-permission": "^3.2"
+        "spatie/laravel-permission": "^3.2",
+        "yajra/laravel-datatables-oracle": "^9.7"
     },
     "require-dev": {
         "filp/whoops": "~2.0",

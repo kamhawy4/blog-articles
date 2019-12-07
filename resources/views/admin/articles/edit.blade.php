@@ -40,7 +40,7 @@ Edit Article
                                <option  value="" >Select Category</option>
                                 @if($categorys->count() > 0)
                                  @foreach($categorys as $category)
-                                       <option  {{($category->id == $update->categorie_id)?'selected':''}} value="{{$category->id}}" >{{$category->name}}</option>
+                                       <option  {{($category->id == $update->categorie_id)?'selected':''}} value="{{$category->id}}" >{{$category->translation('en')->first()->name}}</option>
                                  @endforeach
                                 @endif
                            </select>
@@ -55,7 +55,7 @@ Edit Article
                             <optgroup label="All Tags">
                                 @if($tags->count() > 0)
                                      @foreach($tags as $tag)
-                                        <option  {{(in_array($tag->id,$tagsArticle))?'selected':''}} value="{{$tag->id}}" >{{$tag->name}}</option>
+                                        <option  {{(in_array($tag->id,$tagsArticle))?'selected':''}} value="{{$tag->id}}" >{{$tag->translation('en')->first()->name}}</option>
                                      @endforeach
                                   @endif
                             </optgroup>

@@ -1,6 +1,5 @@
 <?php
 
-
 // All route names are prefixed with 'dashboard'.
 Route::group(['middleware' => 'admin'  ],function () {
 

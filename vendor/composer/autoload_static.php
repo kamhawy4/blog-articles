@@ -35,6 +35,7 @@ class ComposerStaticInit185c63e858feb130c744bbf67439d711
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
         '377b22b161c09ed6e5152de788ca020a' => __DIR__ . '/..' . '/spatie/laravel-permission/src/helpers.php',
+        '0b47d6d4a00ca9112ba3953b49e7c9a4' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/helper.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -46,6 +47,10 @@ class ComposerStaticInit185c63e858feb130c744bbf67439d711
         'Z' => 
         array (
             'Zend\\Diactoros\\' => 15,
+        ),
+        'Y' => 
+        array (
+            'Yajra\\DataTables\\' => 17,
         ),
         'X' => 
         array (
@@ -188,6 +193,10 @@ class ComposerStaticInit185c63e858feb130c744bbf67439d711
         'Zend\\Diactoros\\' => 
         array (
             0 => __DIR__ . '/..' . '/zendframework/zend-diactoros/src',
+        ),
+        'Yajra\\DataTables\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src',
         ),
         'XdgBaseDir\\' => 
         array (
@@ -527,6 +536,7 @@ class ComposerStaticInit185c63e858feb130c744bbf67439d711
         'App\\Http\\Controllers\\Api\\Categories\\CategoriesController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Categories/CategoriesController.php',
         'App\\Http\\Controllers\\Api\\Comments\\CommentsController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Comments/CommentsController.php',
         'App\\Http\\Controllers\\Api\\Dashboard\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Dashboard/DashboardController.php',
+        'App\\Http\\Controllers\\Api\\Lang\\LangController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Lang/LangController.php',
         'App\\Http\\Controllers\\Api\\Login\\AuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Login/AuthController.php',
         'App\\Http\\Controllers\\Api\\Settings\\SettingsController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Settings/SettingsController.php',
         'App\\Http\\Controllers\\Api\\Social\\SocialController' => __DIR__ . '/../..' . '/app/Http/Controllers/APi/Social/SocialController.php',
@@ -547,6 +557,7 @@ class ComposerStaticInit185c63e858feb130c744bbf67439d711
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Middleware\\localizationApp' => __DIR__ . '/../..' . '/app/Http/Middleware/localizationApp.php',
         'App\\Http\\Requests\\Articles\\StoreArticlesRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Articles/StoreArticlesRequest.php',
         'App\\Http\\Requests\\Articles\\UpdateArticlesRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Articles/UpdateArticlesRequest.php',
         'App\\Http\\Requests\\SendMail\\SendMailRequest' => __DIR__ . '/../..' . '/app/Http/Requests/SendMail/SendMailRequest.php',
@@ -4576,6 +4587,21 @@ class ComposerStaticInit185c63e858feb130c744bbf67439d711
         'Whoops\\Util\\SystemFacade' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/SystemFacade.php',
         'Whoops\\Util\\TemplateHelper' => __DIR__ . '/..' . '/filp/whoops/src/Whoops/Util/TemplateHelper.php',
         'XdgBaseDir\\Xdg' => __DIR__ . '/..' . '/dnoegel/php-xdg-base-dir/src/Xdg.php',
+        'Yajra\\DataTables\\ApiResourceDataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/ApiResourceDataTable.php',
+        'Yajra\\DataTables\\CollectionDataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/CollectionDataTable.php',
+        'Yajra\\DataTables\\Contracts\\DataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Contracts/DataTable.php',
+        'Yajra\\DataTables\\DataTableAbstract' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/DataTableAbstract.php',
+        'Yajra\\DataTables\\DataTables' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/DataTables.php',
+        'Yajra\\DataTables\\DataTablesServiceProvider' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/DataTablesServiceProvider.php',
+        'Yajra\\DataTables\\EloquentDataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/EloquentDataTable.php',
+        'Yajra\\DataTables\\Exceptions\\Exception' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Exceptions/Exception.php',
+        'Yajra\\DataTables\\Facades\\DataTables' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Facades/DataTables.php',
+        'Yajra\\DataTables\\Processors\\DataProcessor' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Processors/DataProcessor.php',
+        'Yajra\\DataTables\\Processors\\RowProcessor' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Processors/RowProcessor.php',
+        'Yajra\\DataTables\\QueryDataTable' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/QueryDataTable.php',
+        'Yajra\\DataTables\\Utilities\\Config' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Utilities/Config.php',
+        'Yajra\\DataTables\\Utilities\\Helper' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Utilities/Helper.php',
+        'Yajra\\DataTables\\Utilities\\Request' => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src/Utilities/Request.php',
         'Zend\\Diactoros\\AbstractSerializer' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/AbstractSerializer.php',
         'Zend\\Diactoros\\CallbackStream' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/CallbackStream.php',
         'Zend\\Diactoros\\Exception\\DeserializationException' => __DIR__ . '/..' . '/zendframework/zend-diactoros/src/Exception/DeserializationException.php',
